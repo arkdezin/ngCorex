@@ -1,0 +1,36 @@
+# Node / npm
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# TypeScript
+dist/
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.local
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+
+# Logs
+logs/
+*.log
+
+# Temporary / scratch
+tmp/
+temp/
+
+# Coverage
+coverage/
+
+# Optional (if you generate later)
+examples/dist/
+dist
+.ngcorex

@@ -1,0 +1,25 @@
+{
+    "name": "ngcorex",
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
+    "version": "0.1.0",
+    "type": "module",
+    "scripts": {
+        "build": "npm run build -w packages/css && npm run build -w packages/cli"
+    },
+    "main": "index.js",
+    "directories": {
+        "example": "examples"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "devDependencies": {
+        "@types/node": "^25.0.9",
+        "esbuild": "^0.27.2",
+        "typescript": "^5.9.3"
+    }
+}
