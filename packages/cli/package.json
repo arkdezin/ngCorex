@@ -1,6 +1,6 @@
 {
   "name": "@ngcorex/cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CLI for ngCorex - Angular-native design token engine",
   "license": "MIT",
   "type": "module",
@@ -8,7 +8,8 @@
     "ngcorex": "dist/bin.js"
   },
   "dependencies": {
-    "@ngcorex/css": "^0.1.0"
+    "@ngcorex/css": "^0.1.0",
+    "esbuild": "^0.20.0"
   },
   "files": [
     "dist",

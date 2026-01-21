@@ -1,0 +1,42 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+This project follows semantic versioning:
+- MAJOR version when breaking changes are introduced
+- MINOR version when new features are added
+- PATCH version for bug fixes
+
+---
+
+## v0.1.1 – 2026-01-21
+
+### Fixed
+- Fixed CLI runtime crash caused by missing `esbuild` dependency
+- Moved `esbuild` to runtime `dependencies` for `@ngcorex/cli`
+- Ensured `npx ngcorex version` works in fresh installs
+
+### Notes
+- This is a patch release for the CLI only
+- No changes to `@ngcorex/css`
+
+---
+
+## v0.1.0 – 2026-01-21
+
+### Added
+- Initial release of `@ngcorex/css`
+  - Design token normalization
+  - Constraint system (spacing, colors)
+  - CSS variable generation
+- Initial release of `@ngcorex/cli`
+  - `ngcorex build`
+  - `ngcorex build --watch`
+  - `ngcorex build --dry-run`
+  - `ngcorex version`
+- ESM + TypeScript setup
+- Scoped npm packages under `@ngcorex`
+- MIT license
+
+### Notes
+- First public release of ngCorex
