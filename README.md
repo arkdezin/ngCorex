@@ -353,9 +353,3 @@ No Angular integration is planned **until the core engine is stable**.
 * ✅ Constraints implemented
 * 🧪 npm install / publish flow under validation
 * 🚧 Angular integration planned later
-
----
-
-## License
-
-Open-core (license to be finalized).

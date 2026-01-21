@@ -13,10 +13,17 @@
     "directories": {
         "example": "examples"
     },
-    "keywords": [],
+    "keywords": [
+        "angular",
+        "css",
+        "design-tokens",
+        "utility-css",
+        "css-engine",
+        "css-variables"
+    ],
     "author": "",
-    "license": "ISC",
-    "description": "",
+    "license": "MIT",
+    "description": "Angular-native design token and utility CSS engine",
     "devDependencies": {
         "@types/node": "^25.0.9",
         "esbuild": "^0.27.2",
