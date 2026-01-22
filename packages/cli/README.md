@@ -89,7 +89,7 @@ Prints the CLI version.
 
 The CLI expects a file named:
 
-```
+```file
 ngcorex.config.ts
 ```
 
@@ -101,8 +101,8 @@ import { defineNgCorexConfig } from '@ngcorex/css';
 export default defineNgCorexConfig({
   tokens: {
     spacing: {
-      1: 4,
-      2: 8
+      1: '4',
+      2: '8'
     }
   }
 });

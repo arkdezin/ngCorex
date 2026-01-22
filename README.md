@@ -37,7 +37,7 @@ All work happens **at build time**.
 
 ## Repository Structure
 
-```
+```txt
 ngcorex/
 ├─ packages/
 │  ├─ css/        → Core engine (@ngcorex/css)
