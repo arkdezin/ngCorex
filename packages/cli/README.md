@@ -25,15 +25,62 @@ All work happens **at build time**.
 
 ---
 
-## Installation
+## Getting Started
+
+### Installation
 
 Install the CLI as a dev dependency:
 
 ```bash
-npm install --save-dev @ngcorex/cli
-````
+npm install -D @ngcorex/cli
+```
 
 > The CLI depends on `@ngcorex/css`, which will be installed automatically.
+
+### Create tokens.json
+
+Create a `tokens.json` file at your project root:
+
+```json
+{
+  "spacing": {
+    "1": "1rem",
+    "2": "2rem"
+  },
+  "colors": {
+    "gray": {
+      "100": "#f3f4f6",
+      "900": "#111827"
+    }
+  }
+}
+```
+
+If `tokens.json` is present, it is used automatically.
+
+## Configuration File
+
+The CLI expects a file named:
+
+### Create ngcorex.config.ts
+
+Create a `ngcorex.config.ts` file at your project root:
+
+```ts
+import { defineNgCorexConfig } from '@ngcorex/css';
+
+export default defineNgCorexConfig({
+  output: {
+    file: 'src/styles/ngcorex.css'
+  }
+});
+```
+
+### Important Rules
+
+- The config file **must import from npm packages only**
+- Relative imports are **not allowed**
+- The config is transpiled internally using esbuild
 
 ---
 
@@ -45,9 +92,9 @@ npm install --save-dev @ngcorex/cli
 npx ngcorex build
 ```
 
-* Loads `ngcorex.config.ts`
-* Generates CSS output
-* Writes the output file
+- Loads `ngcorex.config.ts`
+- Generates CSS output
+- Writes the output file
 
 ---
 
@@ -57,9 +104,9 @@ npx ngcorex build
 npx ngcorex build --watch
 ```
 
-* Watches `ngcorex.config.ts`
-* Rebuilds on change
-* Does not exit on errors
+- Watches `ngcorex.config.ts`
+- Rebuilds on change
+- Does not exit on errors
 
 ---
 
@@ -69,9 +116,9 @@ npx ngcorex build --watch
 npx ngcorex build --dry-run
 ```
 
-* Runs the full pipeline
-* Does NOT write any files
-* Useful for testing configuration
+- Runs the full pipeline
+- Does NOT write any files
+- Useful for testing configuration
 
 ---
 
@@ -85,37 +132,6 @@ Prints the CLI version.
 
 ---
 
-## Configuration File
-
-The CLI expects a file named:
-
-```file
-ngcorex.config.ts
-```
-
-### Example
-
-```ts
-import { defineNgCorexConfig } from '@ngcorex/css';
-
-export default defineNgCorexConfig({
-  tokens: {
-    spacing: {
-      1: '4',
-      2: '8'
-    }
-  }
-});
-```
-
-### Important Rules
-
-* The config file **must import from npm packages only**
-* Relative imports are **not allowed**
-* The config is transpiled internally using esbuild
-
----
-
 ## Output
 
 The CLI generates CSS variables based on your tokens and constraints.
@@ -124,8 +140,10 @@ Example output:
 
 ```css
 :root {
-  --spacing-1: 4px;
-  --spacing-2: 8px;
+  --nx-spacing-1: 1rem;
+  --nx-spacing-2: 2rem;
+  --nx-color-gray-100: #f3f4f6;
+  --nx-color-gray-900: #111827;
 }
 ```
 

@@ -1,6 +1,10 @@
 # ngCorex
 
-**ngCorex** is an **Angular-native utility CSS and design token engine**.
+## What is ngCorex?
+
+**ngCorex** is a **design token and utility CSS engine** built for **Angular teams**.
+
+It generates **CSS variables at build time** from structured design tokens, with strong TypeScript guarantees and enterprise-friendly constraints.
 
 It is inspired by ideas from Tailwind, but it is **not a Tailwind clone**, **not a component library**, and **not React-focused**.
 
@@ -10,13 +14,17 @@ ngCorex is built for **Angular teams**, **design systems**, and **enterprise-sca
 
 ## What ngCorex Is
 
+- A design token engine
+- A CLI-driven build tool
+- Framework-agnostic at runtime
+
 ngCorex focuses on:
 
-* 🎨 **Design tokens** (spacing, colors, etc.)
-* 🧭 **Constraints & governance** (rules that enforce consistency)
-* ⚙️ **CLI tooling** (`ngcorex build`, watch mode, dry runs)
-* 🅰️ **Angular-centric workflows**
-* 🏢 **Enterprise readiness** (predictable, auditable CSS output)
+- 🎨 **Design tokens** (spacing, colors, etc.)
+- 🧭 **Constraints & governance** (rules that enforce consistency)
+- ⚙️ **CLI tooling** (`ngcorex build`, watch mode, dry runs)
+- 🅰️ **Angular-centric workflows**
+- 🏢 **Enterprise readiness** (predictable, auditable CSS output)
 
 ngCorex generates **CSS variables**, not components.
 
@@ -26,10 +34,10 @@ ngCorex generates **CSS variables**, not components.
 
 ngCorex is **not**:
 
-* ❌ a component library
-* ❌ a Tailwind replacement
-* ❌ React-oriented
-* ❌ runtime-dependent in the browser
+- ❌ a component library
+- ❌ a Tailwind replacement
+- ❌ React-oriented
+- ❌ runtime-dependent in the browser
 
 All work happens **at build time**.
 
@@ -51,10 +59,10 @@ ngcorex/
 
 ### Important Notes
 
-* `dist/` folders are **gitignored**
-* Source code lives in `src/`
-* Builds happen **before publishing**
-* The repo is designed to be **clean and publishable**
+- `dist/` folders are **gitignored**
+- Source code lives in `src/`
+- Builds happen **before publishing**
+- The repo is designed to be **clean and publishable**
 
 ---
 
@@ -66,11 +74,11 @@ Core engine package.
 
 Responsibilities:
 
-* Design token definitions
-* Token normalization
-* Constraint validation
-* CSS variable generation
-* Optional CSS `@layer` output
+- Design token definitions
+- Token normalization
+- Constraint validation
+- CSS variable generation
+- Optional CSS `@layer` output
 
 Exports:
 
@@ -103,9 +111,9 @@ ngcorex version
 3. Config is loaded from a temporary `.mjs` file
 4. Engine:
 
-   * normalizes tokens
-   * applies constraints
-   * generates CSS variables
+   - normalizes tokens
+   - applies constraints
+   - generates CSS variables
 5. CSS is written to the output file
 
 All of this happens **before your app runs**.
@@ -130,9 +138,9 @@ import { defineNgCorexConfig } from './packages/css/dist';
 
 Why?
 
-* Config is transpiled and loaded dynamically
-* Relative imports break in this environment
-* This rule is **strictly enforced**
+- Config is transpiled and loaded dynamically
+- Relative imports break in this environment
+- This rule is **strictly enforced**
 
 ---
 
@@ -142,8 +150,8 @@ Make sure you have **all of the following installed**:
 
 ### 1. Node.js
 
-* Version: **22.x**
-* Check with:
+- Version: **22.x**
+- Check with:
 
 ```bash
 node -v
@@ -182,9 +190,9 @@ npm install
 
 This installs dependencies for:
 
-* root
-* `@ngcorex/css`
-* `@ngcorex/cli`
+- root
+  - `@ngcorex/css`
+  - `@ngcorex/cli`
 
 ---
 
@@ -199,8 +207,8 @@ npm run build
 
 You should see:
 
-* TypeScript compilation succeed
-* `dist/` folder generated (but ignored by git)
+- TypeScript compilation succeed
+- `dist/` folder generated (but ignored by git)
 
 ---
 
@@ -251,10 +259,10 @@ ngcorex build
 
 What happens:
 
-* `ngcorex.config.ts` is loaded
-* Tokens are validated
-* Constraints are applied
-* CSS is generated and written to output
+- `ngcorex.config.ts` is loaded
+- Tokens are validated
+- Constraints are applied
+- CSS is generated and written to output
 
 ---
 
@@ -264,9 +272,9 @@ What happens:
 ngcorex build --watch
 ```
 
-* Watches `ngcorex.config.ts`
-* Rebuilds on change
-* Errors do **not** crash the process
+- Watches `ngcorex.config.ts`
+- Rebuilds on change
+- Errors do **not** crash the process
 
 ---
 
@@ -276,9 +284,9 @@ ngcorex build --watch
 ngcorex build --dry-run
 ```
 
-* Runs the full pipeline
-* **Does not write files**
-* Useful for debugging configs
+- Runs the full pipeline
+- **Does not write files**
+- Useful for debugging configs
 
 ---
 
@@ -288,22 +296,22 @@ ngcorex build --dry-run
 
 #### Spacing
 
-* Auto-px fallback
-* Configurable severity:
+- Auto-px fallback
+- Configurable severity:
 
-  * `error`
-  * `warning`
-  * `off`
+  - `error`
+  - `warning`
+  - `off`
 
 #### Colors
 
-* Validates:
+- Validates:
 
-  * `hex`
-  * `rgb`
-  * `rgba`
-* Shade keys must be **numeric**
-* No enforced semantic ordering (by design)
+  - `hex`
+  - `rgb`
+  - `rgba`
+- Shade keys must be **numeric**
+- No enforced semantic ordering (by design)
 
 ---
 
@@ -327,19 +335,19 @@ npm publish --dry-run
 
 This verifies:
 
-* package.json correctness
-* files included
-* entry points resolve
+- package.json correctness
+- files included
+- entry points resolve
 
 ---
 
 ## Design Philosophy
 
-* Incremental development
-* Clarity over cleverness
-* Explicit configuration
-* Build-time guarantees
-* Angular-first thinking
+- Incremental development
+- Clarity over cleverness
+- Explicit configuration
+- Build-time guarantees
+- Angular-first thinking
 
 No Angular integration is planned **until the core engine is stable**.
 
@@ -347,9 +355,9 @@ No Angular integration is planned **until the core engine is stable**.
 
 ## Status
 
-* ✅ Engine works
-* ✅ CLI works
-* ✅ Watch mode works
-* ✅ Constraints implemented
-* 🧪 npm install / publish flow under validation
-* 🚧 Angular integration planned later
+- ✅ Engine works
+- ✅ CLI works
+- ✅ Watch mode works
+- ✅ Constraints implemented
+- 🧪 npm install / publish flow under validation
+- 🚧 Angular integration planned later

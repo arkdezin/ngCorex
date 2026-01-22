@@ -2,6 +2,18 @@
     "name": "@ngcorex/css",
     "version": "0.1.0",
     "description": "Angular-native design token and utility CSS engine",
+    "keywords": [
+        "design-tokens",
+        "css-variables",
+        "css-engine",
+        "utility-css",
+        "build-time-css",
+        "token-engine",
+        "theming",
+        "enterprise-css",
+        "typescript",
+        "ngcorex"
+    ],
     "license": "MIT",
     "type": "module",
     "main": "dist/index.js",
