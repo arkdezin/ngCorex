@@ -10,6 +10,14 @@ This project follows semantic versioning:
 
 ---
 
+## 0.1.3 - – 2026-01-23
+
+### Added
+
+- Informational CLI guidance recommending `tokens.json` when inline tokens are used
+
+---
+
 ## 0.1.2 - – 2026-01-22
 
 ### Added

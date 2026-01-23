@@ -1,5 +1,7 @@
 # @ngcorex/css
 
+![NPM Version](https://img.shields.io/npm/v/%40ngcorex%2Fcss?style=flat-square&logo=npm&labelColor=%23D50100&color=%23000) ![NPM License](https://img.shields.io/npm/l/%40ngcorex%2Fcss?style=flat-square) ![Static Badge](https://img.shields.io/badge/Github-Repo-blue?style=flat-square&logo=github) ![NPM Downloads](https://img.shields.io/npm/dm/%40ngcorex%2Fcss?style=flat-square&logo=npm&logoColor=%23ffffff&labelColor=%23D50100&color=%23000)
+
 Core engine for **ngCorex**.
 
 This package provides:

@@ -10,6 +10,8 @@ export interface RunBuildOptions {
   dryRun?: boolean;
 }
 
+let hasShownInlineTokenNotice = false;
+
 export async function runBuild(
   options: RunBuildOptions = {}
 ): Promise<void> {
@@ -184,6 +186,21 @@ export async function runBuild(
       tokens: fileTokens
     }
     : config;
+  
+  if (
+  !fileTokens &&
+  config.tokens &&
+  !hasShownInlineTokenNotice
+) {
+  console.info('');
+  console.info('ℹ️ Inline tokens detected.');
+  console.info(
+    '   Using tokens.json is recommended for larger or shared projects.'
+  );
+  console.info('');
+
+  hasShownInlineTokenNotice = true;
+}
 
   const css = buildCssFromConfig(effectiveConfig);
   console.log('✔ Generated CSS');

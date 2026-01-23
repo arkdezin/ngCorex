@@ -1,5 +1,7 @@
 # ngCorex
 
+![NPM License](https://img.shields.io/npm/l/%40ngcorex%2Fcli?style=flat-square)
+
 ## What is ngCorex?
 
 **ngCorex** is a **design token and utility CSS engine** built for **Angular teams**.
@@ -70,6 +72,8 @@ ngcorex/
 
 ### `@ngcorex/css`
 
+![NPM Downloads](https://img.shields.io/npm/dm/%40ngcorex%2Fcss?style=flat-square&logo=npm&logoColor=%23ffffff&labelColor=%23D50100&color=%23000)
+
 Core engine package.
 
 Responsibilities:
@@ -90,6 +94,8 @@ defineNgCorexConfig(config)
 ---
 
 ### `@ngcorex/cli`
+
+![NPM Downloads](https://img.shields.io/npm/dm/%40ngcorex%2Fcli?style=flat-square&logo=npm&logoColor=%23ffffff&labelColor=%23D50100&color=%23000)
 
 Command-line interface.
 
