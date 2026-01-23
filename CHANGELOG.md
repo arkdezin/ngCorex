@@ -10,15 +10,17 @@ This project follows semantic versioning:
 
 ---
 
-## 0.1.3 - – 2026-01-23
+## 0.1.3 - 2026-01-23
 
 ### Added
 
 - Informational CLI guidance recommending `tokens.json` when inline tokens are used
+- Improved Readme for npm packages and github
+Improved package for npm with github link
 
 ---
 
-## 0.1.2 - – 2026-01-22
+## 0.1.2 - 2026-01-22
 
 ### Added
 
@@ -32,7 +34,7 @@ This project follows semantic versioning:
 
 ---
 
-## v0.1.1 – 2026-01-21
+## v0.1.1 - 2026-01-21
 
 ### Fixed
 
@@ -47,7 +49,7 @@ This project follows semantic versioning:
 
 ---
 
-## v0.1.0 – 2026-01-21
+## v0.1.0 - 2026-01-21
 
 ### Added
 
