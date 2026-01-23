@@ -367,3 +367,8 @@ No Angular integration is planned **until the core engine is stable**.
 - ✅ Constraints implemented
 - 🧪 npm install / publish flow under validation
 - 🚧 Angular integration planned later
+
+## Contributing & Security
+
+- See [CONTRIBUTING.md](./CONTRIBUTING.md) for contribution guidelines
+- See [SECURITY.md](./SECURITY.md) for reporting security issues
