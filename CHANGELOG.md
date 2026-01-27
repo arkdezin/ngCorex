@@ -10,6 +10,14 @@ This project follows semantic versioning:
 
 ---
 
+## 0.1.4  - 2026-01-27
+
+### Added
+
+- `ngcorex init` command to scaffold starter config and tokens
+
+---
+
 ## 0.1.3 - 2026-01-23
 
 ### Added

@@ -1,6 +1,6 @@
 {
     "name": "@ngcorex/css",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "Angular-native design token and utility CSS engine",
     "keywords": [
         "design-tokens",

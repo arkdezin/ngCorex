@@ -1,5 +1,6 @@
 import { buildCommand } from './build.js';
 import { versionCommand } from './version.js';
+import { initCommand } from './init.js';
 
 export async function runCommand(args: string[]): Promise<void> {
   const command = args[0];
@@ -14,6 +15,16 @@ export async function runCommand(args: string[]): Promise<void> {
     case '-v':
       await versionCommand();
       break;
+    
+    case 'init': {
+      await initCommand();
+      return;
+    }
+      
+    case '--help':
+    case '-h':
+      printHelp();
+      return;
 
     default:
       printHelp();
@@ -25,6 +36,7 @@ function printHelp() {
 ngCorex CLI
 
 Usage:
+  ngcorex init         Create starter config and tokens
   ngcorex build        Generate CSS
   ngcorex build --watch
   ngcorex version      Show version

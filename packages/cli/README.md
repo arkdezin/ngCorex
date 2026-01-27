@@ -39,6 +39,23 @@ npm install -D @ngcorex/cli
 
 > The CLI depends on `@ngcorex/css`, which will be installed automatically.
 
+### Initialize ngCorex
+
+To quickly get started, run:
+
+```bash
+ngcorex init
+```
+
+This will create:
+
+- `tokens.json`
+- `ngcorex.config.ts`
+
+If the files already exist, they will not be overwritten.
+
+***Or Create files manually:***
+
 ### Create tokens.json
 
 Create a `tokens.json` file at your project root:
