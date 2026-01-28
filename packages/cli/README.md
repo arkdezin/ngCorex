@@ -103,7 +103,26 @@ export default defineNgCorexConfig({
 
 ---
 
+## Command Overview
+
+The ngCorex CLI supports the following commands:
+
+- `ngcorex init` – create starter config and tokens
+- `ngcorex build` – generate CSS from tokens
+- `ngcorex build --watch` – rebuild on file changes
+- `ngcorex build --dry-run` – validate without writing files
+- `ngcorex version` / `--version` / `-v` – print CLI version
+- `ngcorex --help` / `-h` – show help information
+
 ## Commands
+
+### Initialize
+
+```bash
+npx ngcorex init
+```
+
+---
 
 ### Build CSS
 
@@ -124,8 +143,8 @@ npx ngcorex build --watch
 ```
 
 - Watches `ngcorex.config.ts`
-- Rebuilds on change
-- Does not exit on errors
+- Watches `tokens.json` (if present)
+- Rebuilds CSS when either file changes
 
 ---
 
@@ -148,6 +167,16 @@ npx ngcorex version
 ```
 
 Prints the CLI version.
+
+---
+
+### Help
+
+```bash
+npx ngcorex --help
+```
+
+Prints available commands and usage information.
 
 ---
 

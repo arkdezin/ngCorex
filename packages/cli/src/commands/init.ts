@@ -16,8 +16,8 @@ export async function initCommand() {
       JSON.stringify(
         {
           spacing: {
-            "1": 4,
-            "2": 8
+            "xs": "1rem",
+            "sm": "1.25rem"
           },
           colors: {
             gray: {

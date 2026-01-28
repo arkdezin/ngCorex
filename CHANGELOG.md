@@ -10,7 +10,20 @@ This project follows semantic versioning:
 
 ---
 
-## 0.1.4  - 2026-01-27
+## 0.1.5 - 2026-01-28
+
+### Fixed
+
+- Watch mode now rebuilds when `tokens.json` changes
+- Updated init placeholder with proper `tokens.json` code
+
+### Documentation
+
+- Updated CLI README with complete command overview
+
+---
+
+## 0.1.4 - 2026-01-27
 
 ### Added
 
