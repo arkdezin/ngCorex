@@ -193,9 +193,9 @@ export async function runBuild(
   !hasShownInlineTokenNotice
 ) {
   console.info('');
-  console.info('ℹ️ Inline tokens detected.');
+  console.info('i Inline tokens detected.');
   console.info(
-    '   Using tokens.json is recommended for larger or shared projects.'
+    'Using tokens.json is recommended for larger or shared projects.'
   );
   console.info('');
 

@@ -63,9 +63,9 @@ Create a `tokens.json` file at your project root:
 ```json
 {
   "spacing": {
-    "1": "1rem",
-    "2": "2rem"
-  },
+            "xs": "1rem",
+            "sm": "1.25rem"
+          },
   "colors": {
     "gray": {
       "100": "#f3f4f6",
@@ -95,6 +95,18 @@ export default defineNgCorexConfig({
 });
 ```
 
+In case you want to output in layer
+**add:**
+
+```ts
+export default defineNgCorexConfig({
+  output: {
+    layer: 'layer-name',
+    file: 'src/styles/ngcorex.css'
+  }
+});
+```
+
 ### Important Rules
 
 - The config file **must import from npm packages only**
@@ -107,12 +119,12 @@ export default defineNgCorexConfig({
 
 The ngCorex CLI supports the following commands:
 
-- `ngcorex init` – create starter config and tokens
-- `ngcorex build` – generate CSS from tokens
-- `ngcorex build --watch` – rebuild on file changes
-- `ngcorex build --dry-run` – validate without writing files
-- `ngcorex version` / `--version` / `-v` – print CLI version
-- `ngcorex --help` / `-h` – show help information
+- `ngcorex init` - create starter config and tokens
+- `ngcorex build` - generate CSS from tokens
+- `ngcorex build --watch` - rebuild on file changes
+- `ngcorex build --dry-run` - validate without writing files
+- `ngcorex version` / `--version` / `-v` - print CLI version
+- `ngcorex --help` / `-h` - show help information
 
 ## Commands
 
@@ -188,8 +200,8 @@ Example output:
 
 ```css
 :root {
-  --nx-spacing-1: 1rem;
-  --nx-spacing-2: 2rem;
+  --nx-spacing-xs: 1rem;
+  --nx-spacing-sm: 1.25rem;
   --nx-color-gray-100: #f3f4f6;
   --nx-color-gray-900: #111827;
 }

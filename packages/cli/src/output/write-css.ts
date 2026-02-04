@@ -11,7 +11,7 @@ export function writeCss(
   options: WriteCssOptions = {}
 ): void {
   if (options.dryRun) {
-    console.log(`ℹ Dry run – skipping write to ${filePath}`);
+    console.log(`i Dry run - skipping write to ${filePath}`);
     return;
   }
 

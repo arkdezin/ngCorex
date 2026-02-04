@@ -12,7 +12,12 @@
     "frontend-tooling",
     "ngcorex",
     "typescript",
-    "angular"
+    "angular",
+    "css-variables",
+    "utility-css",
+    "build-time",
+    "design-system",
+    "theming"
   ],
   "license": "MIT",
   "type": "module",
