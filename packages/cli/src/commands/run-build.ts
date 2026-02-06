@@ -132,6 +132,20 @@ export async function runBuild(
       process.exit(1);
     }
   }
+
+  if ('shadows' in tokens) {
+    if (
+      typeof tokens.shadows !== 'object' ||
+      tokens.shadows === null ||
+      Array.isArray(tokens.shadows)
+    ) {
+      console.error('');
+      console.error('❌ Invalid tokens.json');
+      console.error('The "shadows" token must be an object.');
+      console.error('');
+      process.exit(1);
+    }
+  }
 }
 
   // Validate spacing token values
@@ -281,6 +295,27 @@ export async function runBuild(
             console.error('');
             process.exit(1);
           }
+        }
+      }
+    }
+  }
+
+  // Validate shadows token values
+  if (fileTokens !== null) {
+    const tokens = fileTokens as Record<string, unknown>;
+
+    if (tokens.shadows) {
+      const shadows = tokens.shadows as Record<string, unknown>;
+
+      for (const [key, value] of Object.entries(shadows)) {
+        if (typeof value !== 'string') {
+          console.error('');
+          console.error('❌ Invalid tokens.json');
+          console.error(
+            `Invalid shadows value for key "${key}". Expected string.`
+          );
+          console.error('');
+          process.exit(1);
         }
       }
     }

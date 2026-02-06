@@ -110,7 +110,15 @@ if (config.tokens) {
     }
   }
 
-  // 8. Generate CSS
+  // 8. Normalize shadows
+  if (tokens.shadows) {
+    Object.assign(
+      allTokens,
+      normalizeTokenScale('shadows', tokens.shadows)
+    );
+  }
+
+  // 9. Generate CSS
   const css = generateCssVariables(allTokens);
 
   return wrapCss(css, config.output?.layer);

@@ -36,6 +36,10 @@ export interface ConstraintConfig {
       type?: ConstraintLevel;
     };
   };
+  shadows?: {
+    format?: ConstraintLevel;
+    type?: ConstraintLevel;
+  };
 }
 
 
@@ -49,6 +53,7 @@ export interface TokensConfig {
         fontWeight?: TokenScale;
         lineHeight?: TokenScale;
     };
+    shadows?: TokenScale;
 }
 
 export interface UtilitiesConfig {
