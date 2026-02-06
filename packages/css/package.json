@@ -33,10 +33,10 @@
         "build": "tsc -p tsconfig.json"
     },
     "repository": {
-    "type": "git",
-    "url": "https://github.com/arkdezin/ngCorex.git",
-    "directory": "packages/css"
-  },
+        "type": "git",
+        "url": "https://github.com/arkdezin/ngCorex.git",
+        "directory": "packages/css"
+    },
 
   "homepage": "https://github.com/arkdezin/ngCorex/blob/main/README.md"
 }
