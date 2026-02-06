@@ -1,6 +1,6 @@
 # Contributing to ngCorex
 
-Thanks for your interest in contributing to **ngCorex** 🎉  
+Thanks for your interest in contributing to **ngCorex**
 All contributions are welcome - from bug reports to documentation fixes.
 
 ngCorex is still in **early development**, so we value:
@@ -13,7 +13,7 @@ ngCorex is still in **early development**, so we value:
 
 ## How to Contribute
 
-### 🐛 Report Bugs
+### Report Bugs
 
 If you find a bug:
 
@@ -25,7 +25,7 @@ Please search existing issues before opening a new one.
 
 ---
 
-### 💡 Suggest Features
+### Suggest Features
 
 Feature requests are welcome, especially if they:
 
@@ -37,7 +37,7 @@ For larger ideas, open an issue first to discuss direction.
 
 ---
 
-### 🔧 Code Contributions
+### Code Contributions
 
 Before submitting a PR:
 
@@ -70,4 +70,4 @@ If you're unsure about an approach, open an issue first - discussion is encourag
 Be respectful, constructive, and kind.  
 Harassment or abusive behavior will not be tolerated.
 
-Thank you for helping make ngCorex better 🙌
+Thank you for helping make ngCorex better

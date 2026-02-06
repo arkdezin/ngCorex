@@ -102,10 +102,12 @@ Command-line interface.
 Available commands:
 
 ```bash
+ngcorex init
 ngcorex build
 ngcorex build --watch
 ngcorex build --dry-run
-ngcorex version
+ngcorex version / --version / -v
+ngcorex --help / -h
 ```
 
 ---
@@ -372,3 +374,4 @@ No Angular integration is planned **until the core engine is stable**.
 
 - See [CONTRIBUTING.md](./CONTRIBUTING.md) for contribution guidelines
 - See [SECURITY.md](./SECURITY.md) for reporting security issues
+- See [ROADMAP.md](./ROADMAP.md) for immediate roadmap

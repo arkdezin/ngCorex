@@ -8,7 +8,8 @@ If you believe you have found a security vulnerability in **ngCorex**, please re
 
 Instead, please contact:
 
-📧 **ak.likes2nov@gmail.com**  
+📧 **<ak.likes2nov@gmail.com>**
+
 (or, if unavailable, reach out via a private GitHub message to the maintainer)
 
 Include:

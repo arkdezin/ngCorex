@@ -34,8 +34,7 @@ This project follows semantic versioning:
 - No breaking changes to valid configurations
 - CSS output remains fully backward compatible
 
-This release marks a stability milestone for ngCorex,
-establishing a reliable foundation for future expansion.
+This release marks a stability milestone for ngCorex, establishing a reliable foundation for future expansion.
 
 ---
 ## 0.1.7 - 2026-02-06
@@ -106,7 +105,7 @@ establishing a reliable foundation for future expansion.
 
 - Informational CLI guidance recommending `tokens.json` when inline tokens are used
 - Improved Readme for npm packages and github
-Improved package for npm with github link
+- Improved package for npm with github link
 
 ---
 
