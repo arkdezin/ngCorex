@@ -104,6 +104,20 @@ export async function runBuild(
       process.exit(1);
     }
   }
+
+  if ('zIndex' in tokens) {
+    if (
+      typeof tokens.zIndex !== 'object' ||
+      tokens.zIndex === null ||
+      Array.isArray(tokens.zIndex)
+    ) {
+      console.error('');
+      console.error('❌ Invalid tokens.json');
+      console.error('The "zIndex" token must be an object.');
+      console.error('');
+      process.exit(1);
+    }
+  }
 }
 
   // Validate spacing token values
@@ -139,6 +153,27 @@ export async function runBuild(
           console.error('❌ Invalid tokens.json');
           console.error(
             `Invalid radius value for key "${key}". Expected number or string.`
+          );
+          console.error('');
+          process.exit(1);
+        }
+      }
+    }
+  }
+
+  // Validate z-index token values
+  if (fileTokens !== null) {
+    const tokens = fileTokens as Record<string, unknown>;
+
+    if (tokens.zIndex) {
+      const zIndex = tokens.zIndex as Record<string, unknown>;
+
+      for (const [key, value] of Object.entries(zIndex)) {
+        if (typeof value !== 'number' && typeof value !== 'string') {
+          console.error('');
+          console.error('❌ Invalid tokens.json');
+          console.error(
+            `Invalid zIndex value for key "${key}". Expected number or string.`
           );
           console.error('');
           process.exit(1);

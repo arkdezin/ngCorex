@@ -80,7 +80,15 @@ if (config.tokens) {
     );
   }
 
-  // 6. Generate CSS
+  // 6. Normalize z-index
+  if (tokens.zIndex) {
+    Object.assign(
+      allTokens,
+      normalizeTokenScale('zIndex', tokens.zIndex)
+    );
+  }
+
+  // 7. Generate CSS
   const css = generateCssVariables(allTokens);
 
   return wrapCss(css, config.output?.layer);

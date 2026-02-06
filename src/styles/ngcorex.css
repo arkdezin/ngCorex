@@ -1,0 +1,15 @@
+@layer tokens {
+  :root {
+    --nx-spacing-xs: 1rem;
+    --nx-radius-sm: 4px;
+    --nx-color-gray-100: #f3f4f6;
+    --nx-color-gray-900: #111827;
+    --nx-color-gray-950: #000000;
+    --nx-radius-md: 8px;
+    --nx-radius-lg: 16px;
+    --nx-radius-full: 9999px;
+    --nx-zIndex-dropdown: 1000;
+    --nx-zIndex-modal: 2000;
+    --nx-zIndex-toast: 3000;
+  }
+}

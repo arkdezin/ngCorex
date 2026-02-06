@@ -18,6 +18,10 @@ export interface ConstraintConfig {
     format?: ConstraintLevel;
     type?: ConstraintLevel;
   };
+  zIndex?: {
+    format?: ConstraintLevel;
+    type?: ConstraintLevel;
+  };
 }
 
 
@@ -25,6 +29,7 @@ export interface TokensConfig {
     spacing?: TokenScale;
     colors?: NestedTokenScale;
     radius?: TokenScale;
+    zIndex?: TokenScale;
     typography?: {
         fontSize?: TokenScale;
         fontWeight?: TokenScale;
