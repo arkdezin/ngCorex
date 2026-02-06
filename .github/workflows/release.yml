@@ -4,26 +4,31 @@ on:
   push:
     tags:
       - "v*"
+    workflow_dispatch:
 
 permissions:
   contents: read
-  id-token: write # REQUIRED for OIDC
+  id-token: write # required for npm Trusted Publisher (OIDC)
 
 jobs:
   publish:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org/
 
-      - run: npm install
+      - name: Install dependencies
+        run: npm install
 
-      - run: npm run build
+      - name: Build packages
+        run: npm run build
 
       - name: Publish @ngcorex/css
         run: |
