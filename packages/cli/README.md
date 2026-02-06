@@ -63,25 +63,41 @@ Create a `tokens.json` file at your project root:
 ```json
 {
   "spacing": {
-    "xs": "1rem",
-    "sm": "1.25rem"
+    "xs": "0.25rem",
+    "sm": "0.5rem",
+    "md": "1rem",
+    "lg": "1.5rem",
+    "xl": "2rem"
   },
   "colors": {
-    "gray": {
-      "100": "#f3f4f6",
-      "900": "#111827"
+    "neutral": {
+      "0": "#ffffff",
+      "100": "#f5f5f5",
+      "300": "#d4d4d4",
+      "500": "#737373",
+      "700": "#404040",
+      "900": "#171717"
+    },
+    "primary": {
+      "500": "#2563eb"
     }
   },
   "radius": {
-    "sm": "4px",
-    "md": "8px",
-    "lg": "16px",
+    "sm": "0.25rem",
+    "md": "0.5rem",
+    "lg": "0.75rem",
+    "xl": "1rem",
     "full": "9999px"
   },
   "zIndex": {
+    "base": "0",
     "dropdown": "1000",
-    "modal": "2000",
-    "toast": "3000"
+    "sticky": "1020",
+    "fixed": "1030",
+    "modal-backdrop": "1040",
+    "modal": "1050",
+    "popover": "1060",
+    "tooltip": "1070"
   },
   "typography": {
     "fontSize": {
@@ -89,25 +105,35 @@ Create a `tokens.json` file at your project root:
       "sm": "0.875rem",
       "base": "1rem",
       "lg": "1.125rem",
-      "xl": "1.25rem"
+      "xl": "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem"
     },
     "fontWeight": {
+      "light": "300",
       "normal": "400",
       "medium": "500",
       "semibold": "600",
-      "bold": "700"
+      "bold": "700",
+      "extrabold": "800"
     },
     "lineHeight": {
+      "none": "1",
       "tight": "1.25",
+      "snug": "1.375",
       "normal": "1.5",
-      "relaxed": "1.75"
+      "relaxed": "1.625",
+      "loose": "2"
     }
   },
   "shadows": {
-    "sm": "0 1px 2px 0 rgba(0,0,0,0.05)",
-    "md": "0 4px 6px -1px rgba(0,0,0,0.1)",
-    "lg": "0 10px 15px -3px rgba(0,0,0,0.1)",
-    "xl": "0 20px 25px -5px rgba(0,0,0,0.1)"
+    "sm": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+    "base": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+    "md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+    "lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+    "xl": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+    "2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)"
   }
 }
 ```
@@ -200,55 +226,6 @@ export default defineNgCorexConfig({
 });
 ```
 
-```ts
-import { defineNgCorexConfig } from '@ngcorex/css';
-
-export default defineNgCorexConfig({
-  constraints: {
-    spacing: {
-      unit: 'warning',  // Warn about unitless numbers
-      format: 'error',   // Error on invalid formats
-      type: 'error'      // Error on wrong types
-    },
-    colors: {
-      format: 'error',
-      shadeKey: 'error',
-      type: 'error'
-    },
-    radius: {
-      unit: 'warning',
-      format: 'error',
-      type: 'error'
-    },
-    zIndex: {
-      format: 'error',
-      type: 'error'
-    },
-    typography: {
-      fontSize: {
-        format: 'error',
-        type: 'error'
-      },
-      fontWeight: {
-        format: 'error',
-        type: 'error'
-      },
-      lineHeight: {
-        format: 'error',
-        type: 'error'
-      }
-    },
-    shadows: {
-      format: 'error',
-      type: 'error'
-    }
-  }
-});
-```
-
-Available constraint levels: `'error'`, `'warning'`, `'off'`.
-
-If `tokens.json` is present, it is used automatically.
 
 ## Configuration File
 
@@ -374,17 +351,49 @@ Example output:
 ```css
 @layer tokens {
   :root {
-    --nx-spacing-xs: 1rem;
-    --nx-spacing-sm: 1.25rem;
-    --nx-color-gray-100: #f3f4f6;
-    --nx-color-gray-900: #111827;
-    --nx-radius-sm: 4px;
-    --nx-radius-md: 8px;
+    /* Spacing */
+    --nx-spacing-xs: 0.25rem;
+    --nx-spacing-sm: 0.5rem;
+    --nx-spacing-md: 1rem;
+    --nx-spacing-lg: 1.5rem;
+    --nx-spacing-xl: 2rem;
+
+    /* Colors */
+    --nx-color-neutral-0: #ffffff;
+    --nx-color-neutral-100: #f5f5f5;
+    --nx-color-neutral-500: #737373;
+    --nx-color-neutral-900: #171717;
+    --nx-color-primary-500: #2563eb;
+
+    /* Radius */
+    --nx-radius-sm: 0.25rem;
+    --nx-radius-md: 0.5rem;
+    --nx-radius-lg: 0.75rem;
+    --nx-radius-xl: 1rem;
+    --nx-radius-full: 9999px;
+
+    /* Z-Index */
+    --nx-zIndex-base: 0;
     --nx-zIndex-dropdown: 1000;
+    --nx-zIndex-modal: 1050;
+    --nx-zIndex-tooltip: 1070;
+
+    /* Typography */
     --nx-fontSize-xs: 0.75rem;
-    --nx-fontWeight-medium: 500;
+    --nx-fontSize-base: 1rem;
+    --nx-fontSize-xl: 1.25rem;
+    --nx-fontSize-3xl: 1.875rem;
+    --nx-fontWeight-normal: 400;
+    --nx-fontWeight-bold: 700;
     --nx-lineHeight-normal: 1.5;
-    --nx-shadows-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+    --nx-lineHeight-loose: 2;
+
+    /* Shadows */
+    --nx-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --nx-shadow-base: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --nx-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --nx-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --nx-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   }
 }
 ```

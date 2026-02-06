@@ -4,7 +4,7 @@
     "workspaces": [
         "packages/*"
     ],
-    "version": "0.1.6",
+    "version": "0.1.7",
     "type": "module",
     "scripts": {
         "build": "npm run build -w packages/css && npm run build -w packages/cli"

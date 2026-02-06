@@ -10,6 +10,27 @@ This project follows semantic versioning:
 
 ---
 
+## 0.1.7 - 2026-02-06
+
+### Added
+
+- **DX Improvements** - Enhanced `ngcorex init` command with comprehensive starter tokens
+- **Updated Init Tokens** - Now includes all token categories (spacing, colors, radius, zIndex, typography, shadows) with sensible defaults
+- **Validation Implementation** - Full constraint system implementation for all token categories:
+  - Spacing validation (unit, format, type)
+  - Color validation (type, format, shadeKey)
+  - Radius validation (unit, format, type)
+  - Z-Index validation (format, type)
+  - Typography validation (fontSize, fontWeight, lineHeight format and type)
+  - Shadow validation (format, type)
+
+### Changed
+
+- Expanded default token values in init command for better DX
+- Improved token scaffolding with production-ready defaults
+
+---
+
 ## 0.1.6 - 2026-02-06
 
 ### Added
