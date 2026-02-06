@@ -23,12 +23,18 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org/
+          always-auth: true
 
       - name: Install dependencies
         run: npm install
 
       - name: Build packages
         run: npm run build
+
+      - name: Ensure no npm token is present
+        run: |
+          unset NODE_AUTH_TOKEN
+          unset NPM_TOKEN
 
       - name: Publish @ngcorex/css
         run: |
