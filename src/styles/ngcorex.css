@@ -1,15 +1,23 @@
 @layer tokens {
   :root {
-    --nx-spacing-xs: 1rem;
-    --nx-radius-sm: 4px;
+    --nx-fontSize-xs: 0.75rem;
+    --nx-fontSize-sm: 0.875rem;
     --nx-color-gray-100: #f3f4f6;
     --nx-color-gray-900: #111827;
     --nx-color-gray-950: #000000;
     --nx-radius-md: 8px;
-    --nx-radius-lg: 16px;
+    --nx-fontSize-lg: 1.125rem;
     --nx-radius-full: 9999px;
     --nx-zIndex-dropdown: 1000;
     --nx-zIndex-modal: 2000;
     --nx-zIndex-toast: 3000;
+    --nx-fontSize-base: 1rem;
+    --nx-fontSize-xl: 1.25rem;
+    --nx-lineHeight-normal: 1.5;
+    --nx-fontWeight-medium: 500;
+    --nx-fontWeight-semibold: 600;
+    --nx-fontWeight-bold: 700;
+    --nx-lineHeight-tight: 1.25;
+    --nx-lineHeight-relaxed: 1.75;
   }
 }

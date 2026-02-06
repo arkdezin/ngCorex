@@ -88,7 +88,29 @@ if (config.tokens) {
     );
   }
 
-  // 7. Generate CSS
+  // 7. Normalize typography
+  if (tokens.typography) {
+    if (tokens.typography.fontSize) {
+      Object.assign(
+        allTokens,
+        normalizeTokenScale('fontSize', tokens.typography.fontSize)
+      );
+    }
+    if (tokens.typography.fontWeight) {
+      Object.assign(
+        allTokens,
+        normalizeTokenScale('fontWeight', tokens.typography.fontWeight)
+      );
+    }
+    if (tokens.typography.lineHeight) {
+      Object.assign(
+        allTokens,
+        normalizeTokenScale('lineHeight', tokens.typography.lineHeight)
+      );
+    }
+  }
+
+  // 8. Generate CSS
   const css = generateCssVariables(allTokens);
 
   return wrapCss(css, config.output?.layer);

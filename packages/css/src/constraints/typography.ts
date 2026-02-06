@@ -1,6 +1,7 @@
 import { constraintViolation } from './constraint-error.js';
 import { resolveConstraintLevel } from './resolve-level.js';
 import type { ConstraintConfig } from '../config/schema.js';
+import type { ConstraintLevel } from '../config/schema.js';
 
 export interface TypographyTokens {
   fontSize?: Record<string, string>;
@@ -33,7 +34,7 @@ export function validateTypographyConstraints(
  */
 function validateFontSizeConstraints(
   fontSize: Record<string, string>,
-  config?: ConstraintConfig['typography']['fontSize']
+  config?: { format?: ConstraintLevel; type?: ConstraintLevel }
 ): void {
   for (const key in fontSize) {
     const value = fontSize[key];
@@ -66,7 +67,7 @@ function validateFontSizeConstraints(
  */
 function validateFontWeightConstraints(
   fontWeight: Record<string, string>,
-  config?: ConstraintConfig['typography']['fontWeight']
+  config?: { format?: ConstraintLevel; type?: ConstraintLevel }
 ): void {
   for (const key in fontWeight) {
     const value = fontWeight[key];
@@ -99,7 +100,7 @@ function validateFontWeightConstraints(
  */
 function validateLineHeightConstraints(
   lineHeight: Record<string, string>,
-  config?: ConstraintConfig['typography']['lineHeight']
+  config?: { format?: ConstraintLevel; type?: ConstraintLevel }
 ): void {
   for (const key in lineHeight) {
     const value = lineHeight[key];

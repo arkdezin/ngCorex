@@ -22,6 +22,20 @@ export interface ConstraintConfig {
     format?: ConstraintLevel;
     type?: ConstraintLevel;
   };
+  typography?: {
+    fontSize?: {
+      format?: ConstraintLevel;
+      type?: ConstraintLevel;
+    };
+    fontWeight?: {
+      format?: ConstraintLevel;
+      type?: ConstraintLevel;
+    };
+    lineHeight?: {
+      format?: ConstraintLevel;
+      type?: ConstraintLevel;
+    };
+  };
 }
 
 

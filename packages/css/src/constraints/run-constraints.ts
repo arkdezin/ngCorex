@@ -3,6 +3,7 @@ import { validateSpacingConstraints } from './spacing.js';
 import { validateColorConstraints } from './colors.js';
 import { validateRadiusConstraints } from './radius.js';
 import { validateZIndexConstraints } from './z-index.js';
+import { validateTypographyConstraints } from './typography.js';
 
 export function runConstraints(config: NgCorexConfig): void {
   const tokens = config.tokens;
@@ -24,5 +25,9 @@ export function runConstraints(config: NgCorexConfig): void {
 
   if (tokens.zIndex) {
     validateZIndexConstraints(tokens.zIndex, rules?.zIndex);
+  }
+
+  if (tokens.typography) {
+    validateTypographyConstraints(tokens.typography, rules?.typography);
   }
 }

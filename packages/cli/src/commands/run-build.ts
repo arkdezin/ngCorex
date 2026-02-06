@@ -118,6 +118,20 @@ export async function runBuild(
       process.exit(1);
     }
   }
+
+  if ('typography' in tokens) {
+    if (
+      typeof tokens.typography !== 'object' ||
+      tokens.typography === null ||
+      Array.isArray(tokens.typography)
+    ) {
+      console.error('');
+      console.error('❌ Invalid tokens.json');
+      console.error('The "typography" token must be an object.');
+      console.error('');
+      process.exit(1);
+    }
+  }
 }
 
   // Validate spacing token values
@@ -177,6 +191,96 @@ export async function runBuild(
           );
           console.error('');
           process.exit(1);
+        }
+      }
+    }
+  }
+
+  // Validate typography token structure
+  if (fileTokens !== null) {
+    const tokens = fileTokens as Record<string, unknown>;
+
+    if (tokens.typography) {
+      const typography = tokens.typography as Record<string, unknown>;
+
+      if (typography.fontSize) {
+        if (
+          typeof typography.fontSize !== 'object' ||
+          typography.fontSize === null ||
+          Array.isArray(typography.fontSize)
+        ) {
+          console.error('');
+          console.error('❌ Invalid tokens.json');
+          console.error('The "typography.fontSize" token must be an object.');
+          console.error('');
+          process.exit(1);
+        }
+
+        const fontSize = typography.fontSize as Record<string, unknown>;
+        for (const [key, value] of Object.entries(fontSize)) {
+          if (typeof value !== 'number' && typeof value !== 'string') {
+            console.error('');
+            console.error('❌ Invalid tokens.json');
+            console.error(
+              `Invalid typography.fontSize value for key "${key}". Expected number or string.`
+            );
+            console.error('');
+            process.exit(1);
+          }
+        }
+      }
+
+      if (typography.fontWeight) {
+        if (
+          typeof typography.fontWeight !== 'object' ||
+          typography.fontWeight === null ||
+          Array.isArray(typography.fontWeight)
+        ) {
+          console.error('');
+          console.error('❌ Invalid tokens.json');
+          console.error('The "typography.fontWeight" token must be an object.');
+          console.error('');
+          process.exit(1);
+        }
+
+        const fontWeight = typography.fontWeight as Record<string, unknown>;
+        for (const [key, value] of Object.entries(fontWeight)) {
+          if (typeof value !== 'number' && typeof value !== 'string') {
+            console.error('');
+            console.error('❌ Invalid tokens.json');
+            console.error(
+              `Invalid typography.fontWeight value for key "${key}". Expected number or string.`
+            );
+            console.error('');
+            process.exit(1);
+          }
+        }
+      }
+
+      if (typography.lineHeight) {
+        if (
+          typeof typography.lineHeight !== 'object' ||
+          typography.lineHeight === null ||
+          Array.isArray(typography.lineHeight)
+        ) {
+          console.error('');
+          console.error('❌ Invalid tokens.json');
+          console.error('The "typography.lineHeight" token must be an object.');
+          console.error('');
+          process.exit(1);
+        }
+
+        const lineHeight = typography.lineHeight as Record<string, unknown>;
+        for (const [key, value] of Object.entries(lineHeight)) {
+          if (typeof value !== 'number' && typeof value !== 'string') {
+            console.error('');
+            console.error('❌ Invalid tokens.json');
+            console.error(
+              `Invalid typography.lineHeight value for key "${key}". Expected number or string.`
+            );
+            console.error('');
+            process.exit(1);
+          }
         }
       }
     }
