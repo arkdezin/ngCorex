@@ -3,7 +3,7 @@ import path from 'node:path';
 import { resolveConfigPath } from '../config/resolve-path.js';
 import { loadConfig } from '../config/load-config.js';
 import { writeCss } from '../output/write-css.js';
-import { buildCssFromConfig, runValidations, printValidationResults, hasValidationResults, hasValidationErrors, type TokensForValidation } from '@ngcorex/css';
+import { buildCssFromConfig, runValidations, printValidationResults, hasValidationResults, hasValidationErrors, hasValidationWarnings, type TokensForValidation } from '@ngcorex/css';
 import { resolve } from 'node:path';
 import { BuildSummary, success, info, warning, error, section } from '../utils/logger.js';
 
@@ -50,7 +50,7 @@ export async function runBuild(
   if (fileTokens !== null) {
     if (typeof fileTokens !== 'object' || Array.isArray(fileTokens)) {
       error('Invalid tokens.json');
-      console.log('   Details: The file must export a JSON object at the top level.');
+      console.log('   Details: The file must export a JSON object at top level.');
       process.exit(1);
     }
   }
@@ -331,12 +331,17 @@ export async function runBuild(
     if (hasValidationResults(validationReport)) {
       if (hasValidationErrors(validationReport)) {
         error('Blocking validation errors found');
-        console.log('   Details: Please fix the errors below before proceeding.');
+        console.log('   Details: Please fix errors below before proceeding.');
         printValidationResults(validationReport);
         process.exit(1);
-      } else {
+      } else if (hasValidationWarnings(validationReport)) {
         warning('Non-blocking validation warnings found');
-        console.log('   Details: Review the warnings below for potential improvements.');
+        console.log('   Details: Review warnings below for potential improvements.');
+        printValidationResults(validationReport);
+      } else {
+        // Only info messages present
+        info('Validation info messages found');
+        console.log('   Details: Review info messages below for optional improvements.');
         printValidationResults(validationReport);
       }
     } else {

@@ -1,6 +1,7 @@
 /**
  * Duplicate token detection
- * Checks for duplicate token names across different categories
+ * Checks for duplicate token names WITHIN the same category
+ * Cross-category duplicates are allowed (e.g., radius.sm, typography.fontSize.sm)
  */
 
 import type {
@@ -16,12 +17,13 @@ import type {
 const DUPLICATE_TOKEN_CODE = 'DUPLICATE_TOKEN';
 
 /**
- * Find all duplicate tokens across categories
+ * Find all duplicate tokens within each category
+ * Cross-category duplicates are NOT flagged (per spec X1)
  */
 export function findDuplicateTokens(tokens: TokensForValidation, file: string = 'tokens.json'): DuplicateToken[] {
-  const tokenMap = new Map<string, TokenLocation[]>();
+  const duplicates: DuplicateToken[] = [];
 
-  // Collect all tokens from all categories
+  // Process each category separately
   const categories: Array<{ name: keyof TokensForValidation; isNested?: boolean }> = [
     { name: 'spacing' },
     { name: 'radius' },
@@ -38,33 +40,13 @@ export function findDuplicateTokens(tokens: TokensForValidation, file: string = 
     if (isNested) {
       // Handle nested token structures (colors, typography)
       if (typeof category === 'object' && category !== null) {
-        collectNestedTokens(category, name, file, tokenMap);
+        duplicates.push(...findDuplicatesInNested(category, name, file));
       }
     } else {
       // Handle flat token structures (spacing, radius, zIndex, shadows)
       if (typeof category === 'object' && category !== null) {
-        for (const [key, value] of Object.entries(category)) {
-          const location: TokenLocation = {
-            file,
-            category: name,
-            key,
-            path: `${name}.${key}`
-          };
-
-          if (!tokenMap.has(key)) {
-            tokenMap.set(key, []);
-          }
-          tokenMap.get(key)!.push(location);
-        }
+        duplicates.push(...findDuplicatesInFlat(category, name, file));
       }
-    }
-  }
-
-  // Find duplicates (tokens with more than one location)
-  const duplicates: DuplicateToken[] = [];
-  for (const [name, locations] of tokenMap.entries()) {
-    if (locations.length > 1) {
-      duplicates.push({ name, locations });
     }
   }
 
@@ -72,15 +54,15 @@ export function findDuplicateTokens(tokens: TokensForValidation, file: string = 
 }
 
 /**
- * Collect tokens from nested structures
+ * Find duplicates in flat token structures
  */
-function collectNestedTokens(
-  obj: unknown,
+function findDuplicatesInFlat(
+  obj: Record<string, unknown>,
   category: string,
-  file: string,
-  tokenMap: Map<string, TokenLocation[]>
-): void {
-  if (typeof obj !== 'object' || obj === null) return;
+  file: string
+): DuplicateToken[] {
+  const duplicates: DuplicateToken[] = [];
+  const keyMap = new Map<string, TokenLocation[]>();
 
   for (const [key, value] of Object.entries(obj)) {
     const location: TokenLocation = {
@@ -90,16 +72,68 @@ function collectNestedTokens(
       path: `${category}.${key}`
     };
 
-    if (!tokenMap.has(key)) {
-      tokenMap.set(key, []);
+    if (!keyMap.has(key)) {
+      keyMap.set(key, []);
     }
-    tokenMap.get(key)!.push(location);
+    keyMap.get(key)!.push(location);
+  }
 
-    // Recursively collect nested tokens
-    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-      collectNestedTokens(value, `${category}.${key}`, file, tokenMap);
+  // Find duplicates within this category
+  for (const [name, locations] of keyMap.entries()) {
+    if (locations.length > 1) {
+      duplicates.push({ name, locations });
     }
   }
+
+  return duplicates;
+}
+
+/**
+ * Find duplicates in nested token structures
+ * Checks for duplicates at each nesting level separately
+ */
+function findDuplicatesInNested(
+  obj: unknown,
+  category: string,
+  file: string,
+  path: string = category
+): DuplicateToken[] {
+  const duplicates: DuplicateToken[] = [];
+
+  if (typeof obj !== 'object' || obj === null) return duplicates;
+
+  const keyMap = new Map<string, TokenLocation[]>();
+
+  // Check for duplicates at current level
+  for (const [key, value] of Object.entries(obj)) {
+    const location: TokenLocation = {
+      file,
+      category,
+      key,
+      path: `${path}.${key}`
+    };
+
+    if (!keyMap.has(key)) {
+      keyMap.set(key, []);
+    }
+    keyMap.get(key)!.push(location);
+  }
+
+  // Add duplicates found at this level
+  for (const [name, locations] of keyMap.entries()) {
+    if (locations.length > 1) {
+      duplicates.push({ name, locations });
+    }
+  }
+
+  // Recursively check nested levels
+  for (const [key, value] of Object.entries(obj)) {
+    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+      duplicates.push(...findDuplicatesInNested(value, category, file, `${path}.${key}`));
+    }
+  }
+
+  return duplicates;
 }
 
 /**

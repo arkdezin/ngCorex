@@ -10,6 +10,34 @@ This project follows semantic versioning:
 
 ---
 
+## 0.2.0 - 2026-02-07
+
+### Highlights
+
+- Validation and diagnostics stabilized
+- Clear separation between errors, warnings, and informational messages
+- Improved developer experience with predictable, low-noise output
+
+### Validation
+
+- Introduced a strict three-level validation model:
+  - Errors (blocking)
+  - Warnings (non-blocking)
+  - Info messages (advisory)
+- Validation messages now include precise token paths and actionable guidance
+- Common and industry-standard patterns no longer emit warnings
+- Optional scale completeness checks are reported as informational only
+
+### Stability
+
+- Deterministic validation behavior for the same input
+- No breaking changes to valid configurations
+- CSS output remains fully backward compatible
+
+This release marks a stability milestone for ngCorex,
+establishing a reliable foundation for future expansion.
+
+---
 ## 0.1.7 - 2026-02-06
 
 ### Added

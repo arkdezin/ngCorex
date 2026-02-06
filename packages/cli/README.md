@@ -226,7 +226,6 @@ export default defineNgCorexConfig({
 });
 ```
 
-
 ## Configuration File
 
 The CLI expects a file named:

@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  id-token: write # REQUIRED for OIDC
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org/
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Publish @ngcorex/css
+        run: |
+          cd packages/css
+          npm publish --access public
+
+      - name: Publish @ngcorex/cli
+        run: |
+          cd packages/cli
+          npm publish --access public

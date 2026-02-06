@@ -188,7 +188,8 @@ function validateScale(
   // Check for gaps in the scale
   const { hasGaps, gapIndices } = checkForGaps(values, keys, scaleOrder.expectedOrder);
 
-  if (hasGaps) {
+  // Skip "missing keys" info for zIndex - z-index-logic.ts provides more semantic "missing layers" message
+  if (hasGaps && category !== 'zIndex') {
     const missingKeys = gapIndices.map(i => scaleOrder.expectedOrder[i]);
     results.push({
       severity: 'info', // Gaps are less severe than non-monotonic values
