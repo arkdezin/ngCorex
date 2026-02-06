@@ -1,5 +1,5 @@
 import type { TokenScale, NormalizedToken, NormalizedTokenGroup } from './types.ts';
-import { NgCorexError } from '../errors/ngcorex-error.js';
+import { NgCorexError, NgCorexErrorCode } from '../errors/ngcorex-error.js';
 
 
 const CSS_VAR_PREFIX = 'nx';
@@ -19,6 +19,7 @@ export function normalizeTokenScale(
     // Basic validation
     if (typeof value !== 'string') {
       throw new NgCorexError(
+        NgCorexErrorCode.INVALID_TOKEN_STRING,
         `Invalid ${category} token`,
         `Token: ${category}.${key}
       Value: ${String(value)}

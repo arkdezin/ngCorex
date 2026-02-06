@@ -4,7 +4,7 @@ import { normalizeColorTokens } from '../tokens/normalize-colors.js';
 import { generateCssVariables } from '../tokens/generate-css.js';
 import type { NormalizedTokenGroup } from '../tokens/types.js';
 import { presetRegistry } from '../presets/index.js';
-import { NgCorexError } from '../errors/ngcorex-error.js';
+import { NgCorexError, NgCorexErrorCode } from '../errors/ngcorex-error.js';
 import { deepMerge } from '../utils/deep-merge.js';
 import { runConstraints } from '../constraints/run-constraints.js';
 import { wrapCss } from '../output/wrap-css.js';
@@ -26,7 +26,7 @@ if (config.presets) {
 
     if (!preset) {
       throw new NgCorexError(
-        'Unknown preset',
+        NgCorexErrorCode.UNKNOWN_PRESET_STRING,
         `Preset "${presetName}" does not exist.
 
 Available presets:

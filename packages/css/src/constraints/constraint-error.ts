@@ -1,4 +1,4 @@
-import { NgCorexError } from '../errors/ngcorex-error.js';
+import { NgCorexError, NgCorexErrorCode } from '../errors/ngcorex-error.js';
 import type { ConstraintLevel } from '../config/schema.js';
 
 export function constraintViolation(
@@ -13,6 +13,7 @@ export function constraintViolation(
 
   if (level === 'error') {
     throw new NgCorexError(
+      NgCorexErrorCode.CONSTRAINT_VIOLATION_STRING,
       `Constraint violation: ${rule}`,
       `${message}\n\nFix:\n${fix}`
     );

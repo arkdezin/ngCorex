@@ -2,7 +2,7 @@ import type {
   NestedTokenScale,
   NormalizedTokenGroup
 } from './types.js';
-import { NgCorexError } from '../errors/ngcorex-error.js';
+import { NgCorexError, NgCorexErrorCode } from '../errors/ngcorex-error.js';
 
 const CSS_VAR_PREFIX = 'nx';
 
@@ -22,7 +22,7 @@ export function normalizeColorTokens(
 
       if (typeof value !== 'string') {
         throw new NgCorexError(
-          'Invalid color token',
+          NgCorexErrorCode.INVALID_COLOR_TOKEN_STRING,
           `Token: colors.${paletteName}.${shade}
         Value: ${String(value)}
         Expected: string (e.g. "#ffffff")

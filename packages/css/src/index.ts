@@ -28,5 +28,31 @@ export { NgCorexError } from './errors/ngcorex-error.js';
 
 export { runConstraints } from './constraints/run-constraints.js';
 
+// Validation API
+export {
+  runValidations,
+  runValidationsWithoutInfo,
+  getValidationSummary,
+  printValidationResults,
+  hasValidationResults,
+  hasValidationErrors,
+  hasValidationWarnings,
+  hasValidationInfo
+} from './validation/index.js';
+
+export type {
+  ValidationReport,
+  ValidationResult,
+  ValidationConfig,
+  TokensForValidation,
+  TokenLocation,
+  DuplicateToken,
+  ScaleConsistencyIssue,
+  ColorFormatIssue,
+  SpacingFormatIssue,
+  ShadowFormatIssue,
+  ZIndexLogicIssue
+} from './validation/types.js';
+
 export { wrapCss } from './output/wrap-css.js';
 
