@@ -200,7 +200,6 @@ export default defineNgCorexConfig({
 });
 ```
 
-
 ```ts
 import { defineNgCorexConfig } from '@ngcorex/css';
 

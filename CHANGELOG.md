@@ -10,6 +10,26 @@ This project follows semantic versioning:
 
 ---
 
+## 0.1.6 - 2026-02-06
+
+### Added
+
+- **Border Radius Tokens** - New token category for border radius values with validation
+- **Z-Index Tokens** - New token category for z-index layer values with validation
+- **Typography Tokens** - New token category with sub-categories (fontSize, fontWeight, lineHeight) with validation
+- **Shadow Tokens** - New token category for box shadow values with validation
+- **Documentation Updates** - Updated README files with complete token category reference and configuration examples
+
+### Documentation
+
+- Updated CLI README with comprehensive token category reference table
+- Updated CSS package README with token category documentation
+- Added constraint configuration examples in CLI README
+- Added output layer configuration section in CLI README
+- Updated CSS output examples to show all new token types
+
+---
+
 ## 0.1.5 - 2026-01-28
 
 ### Fixed
