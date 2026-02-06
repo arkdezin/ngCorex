@@ -1,7 +1,6 @@
 # ngCorex Public Roadmap
 
-This roadmap outlines the **general direction** of ngCorex development.
-It is not a promise, timeline, or commitment to specific delivery dates.
+This roadmap outlines the **general direction** of ngCorex development. It is not a promise, timeline, or commitment to specific delivery dates.
 
 The project prioritizes:
 

@@ -90,6 +90,20 @@ export async function runBuild(
       process.exit(1);
     }
   }
+
+  if ('radius' in tokens) {
+    if (
+      typeof tokens.radius !== 'object' ||
+      tokens.radius === null ||
+      Array.isArray(tokens.radius)
+    ) {
+      console.error('');
+      console.error('❌ Invalid tokens.json');
+      console.error('The "radius" token must be an object.');
+      console.error('');
+      process.exit(1);
+    }
+  }
 }
 
   // Validate spacing token values
@@ -111,9 +125,30 @@ export async function runBuild(
       }
     }
   }
+
+  // Validate radius token values
+  if (fileTokens !== null) {
+    const tokens = fileTokens as Record<string, unknown>;
+
+    if (tokens.radius) {
+      const radius = tokens.radius as Record<string, unknown>;
+
+      for (const [key, value] of Object.entries(radius)) {
+        if (typeof value !== 'number' && typeof value !== 'string') {
+          console.error('');
+          console.error('❌ Invalid tokens.json');
+          console.error(
+            `Invalid radius value for key "${key}". Expected number or string.`
+          );
+          console.error('');
+          process.exit(1);
+        }
+      }
+    }
+  }
 }
 
-  // Validate color token structure & values
+// Validate color token structure & values
   if (fileTokens !== null) {
   const tokens = fileTokens as Record<string, unknown>;
 

@@ -72,7 +72,15 @@ if (config.tokens) {
     );
   }
 
-  // 5. Generate CSS
+  // 5. Normalize radius
+  if (tokens.radius) {
+    Object.assign(
+      allTokens,
+      normalizeTokenScale('radius', tokens.radius)
+    );
+  }
+
+  // 6. Generate CSS
   const css = generateCssVariables(allTokens);
 
   return wrapCss(css, config.output?.layer);

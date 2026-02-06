@@ -13,6 +13,11 @@ export interface ConstraintConfig {
     format?: ConstraintLevel;
     shadeKey?: ConstraintLevel;
   };
+  radius?: {
+    unit?: ConstraintLevel;
+    format?: ConstraintLevel;
+    type?: ConstraintLevel;
+  };
 }
 
 
