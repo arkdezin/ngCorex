@@ -31,8 +31,8 @@ jobs:
 
       - name: Publish packages
         run: |
-          npm publish -w packages/css --access public --provenance
-          npm publish -w packages/cli --access public --provenance
+          npm publish -w packages/css --access public --provenance --tag next
+          npm publish -w packages/cli --access public --provenance --tag next
 
   validate:
     if: github.event_name == 'workflow_dispatch'
