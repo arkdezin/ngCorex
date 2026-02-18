@@ -2,6 +2,9 @@
   "name": "@ngcorex/cli",
   "version": "0.2.1-rc.0",
   "description": "CLI for ngCorex - Angular-native design token engine",
+  "publishConfig": {
+        "access": "public"
+    },
   "keywords": [
     "design-tokens",
     "css-cli",

@@ -2,6 +2,9 @@
     "name": "@ngcorex/css",
     "version": "0.2.1-rc.0",
     "description": "Angular-native design token and utility CSS engine",
+    "publishConfig": {
+        "access": "public"
+    },
     "keywords": [
         "design-tokens",
         "css-variables",
