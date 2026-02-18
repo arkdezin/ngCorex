@@ -31,7 +31,7 @@ jobs:
 
       - name: Publish packages
         env:
-          NPM_CONFIG_PROVENANCE: true
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npm publish -w packages/css --access public --tag next
           npm publish -w packages/cli --access public --tag next
