@@ -1,0 +1,177 @@
+# Token Validation
+
+ngCorex validates all design tokens before generating CSS.
+
+Validation exists to prevent accidental design drift, catch mistakes early, and keep design systems consistent as projects grow.
+
+It is designed to be predictable, low-noise, and actionable.
+
+---
+
+## When does validation run?
+
+Validation runs automatically whenever you execute:
+
+```bash
+npx ngcorex build
+```
+
+or when running in watch mode.
+
+Tokens are validated **before** any CSS is generated.
+If validation fails, no output is produced.
+
+---
+
+## Validation levels
+
+ngCorex uses a three-level validation system:
+
+1. Errors
+2. Warnings
+3. Informational messages
+
+Each level has a specific purpose.
+
+---
+
+## Errors (blocking)
+
+Errors indicate invalid or unsupported token values.
+
+When an error occurs:
+
+- the build stops
+- no CSS is generated
+- the error must be fixed before continuing
+
+Examples of errors:
+
+- unsupported value formats
+- invalid units
+- incorrect data types
+- structurally invalid token definitions
+
+Errors exist to protect the integrity of the output.
+
+---
+
+## Warnings (non-blocking)
+
+Warnings highlight potentially problematic or unusual patterns.
+
+When a warning occurs:
+
+- the build continues
+- CSS is generated
+- a message is displayed for awareness
+
+Examples of warnings:
+
+- inconsistent scales
+- uncommon or risky patterns
+- values that may cause unintended results
+
+Warnings are meant to inform, not interrupt.
+
+Common and industry-standard patterns do not emit warnings.
+
+---
+
+## Informational messages
+
+Informational messages provide guidance and context.
+
+When an info message occurs:
+
+- the build continues
+- no action is required
+- the message can be safely ignored
+
+Examples:
+
+- optional scale completeness suggestions
+- best-practice guidance
+- explanatory notes about token structure
+
+Info messages exist to help users learn the system over time.
+
+---
+
+## Actionable diagnostics
+
+All validation messages include:
+
+- the exact token path involved
+- a clear description of the issue
+- guidance on how to resolve or improve it
+
+This allows issues to be fixed quickly without guessing.
+
+---
+
+## Deterministic behavior
+
+Validation in ngCorex is deterministic.
+
+This means:
+
+- the same tokens always produce the same messages
+- message order does not change between runs
+- builds are predictable and repeatable
+
+Determinism is critical for CI environments and team workflows.
+
+---
+
+## Stability guarantees
+
+Validation rules are designed to be stable.
+
+- Valid configurations remain valid across minor releases
+- New rules do not break existing valid tokens
+- CSS output remains backward compatible
+
+This allows teams to upgrade ngCorex with confidence.
+
+---
+
+## Why validation is strict
+
+ngCorex intentionally prioritizes correctness over flexibility.
+
+Allowing arbitrary values everywhere makes it easy for design systems to drift silently.
+
+Validation ensures:
+
+- mistakes are caught early
+- design intent stays centralized
+- scaling across teams remains manageable
+
+Strictness is a feature, not a limitation.
+
+---
+
+## Common questions
+
+### “Why is this a warning and not an error?”
+
+Warnings indicate patterns that may be acceptable but deserve attention.
+Errors are reserved for cases where output correctness cannot be guaranteed.
+
+### “Can I disable validation?”
+
+No.
+
+Validation is a core part of the engine and cannot be disabled.
+This ensures consistent behavior across environments and teams.
+
+---
+
+## Next steps
+
+To continue learning:
+
+- [**Engine Pipeline**](./engine-pipeline.mdx) - how validation fits into the build process
+- [**CLI Reference**](./cli.mdx) - understanding build options and flags
+- [**Versioning & Stability**](./versioning-stability.mdx) - how ngCorex evolves safely over time

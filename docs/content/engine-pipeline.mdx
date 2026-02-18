@@ -1,0 +1,166 @@
+# Engine Pipeline
+
+ngCorex follows a clear, deterministic pipeline to transform design tokens into CSS.
+
+Each stage has a single responsibility.  
+Each stage produces predictable results.
+
+This document explains how the pipeline works and why it is structured this way.
+
+---
+
+## High-level flow
+
+At a high level, ngCorex processes tokens in the following order:
+
+```graph
+tokens.json
+↓
+Normalization
+↓
+Validation
+↓
+CSS Variable Generation
+```
+
+All work is performed at build time.
+
+---
+
+## Stage 1: Token input
+
+The pipeline begins with `tokens.json`.
+
+This file contains the raw design tokens defined by the user.
+
+At this stage:
+
+- values are read as-is
+- no assumptions are made
+- no transformations are applied
+
+The goal of this stage is to capture design intent, not enforce correctness.
+
+---
+
+## Stage 2: Normalization
+
+Normalization converts raw token values into a consistent internal format.
+
+Normalization exists to:
+
+- standardize value shapes
+- remove ambiguity
+- prepare tokens for validation and output
+
+Examples of normalization:
+
+- ensuring consistent units and value types
+- flattening nested structures where needed
+- aligning token categories to a common internal model
+
+Normalization does **not** change the meaning of a token.
+
+---
+
+## Stage 3: Validation
+
+After normalization, tokens are validated against defined constraints.
+
+Validation ensures:
+
+- values are structurally correct
+- formats and units are supported
+- token categories follow expected patterns
+
+Validation produces three kinds of diagnostics:
+
+- errors (blocking)
+- warnings (non-blocking)
+- informational messages
+
+If errors are present, the pipeline stops here.
+
+---
+
+## Stage 4: CSS variable generation
+
+Once tokens are validated, ngCorex generates CSS variables.
+
+At this stage:
+
+- token names are converted into CSS-safe identifiers
+- values are emitted as `--css-variables`
+- output is deterministic and stable
+
+Generated CSS is treated as build output and should not be edited manually.
+
+---
+
+## Determinism and predictability
+
+The ngCorex pipeline is deterministic by design.
+
+This means:
+
+- the same input always produces the same output
+- the same validation messages appear in the same order
+- builds are reproducible across environments
+
+This is critical for:
+
+- CI pipelines
+- team-based workflows
+- long-lived projects
+
+---
+
+## Why this pipeline matters
+
+Separating the pipeline into clear stages allows ngCorex to:
+
+- catch errors early
+- keep output stable
+- evolve individual stages without breaking others
+- remain understandable as the system grows
+
+Each stage builds on the guarantees of the previous one.
+
+---
+
+## No runtime cost
+
+All processing happens at build time.
+
+ngCorex does not:
+
+- inject runtime JavaScript
+- compute styles dynamically
+- add client-side overhead
+
+The output is plain CSS.
+
+---
+
+## Extensibility (conceptual)
+
+The pipeline is designed to support future expansion without changing its core structure.
+
+Additional stages or outputs can be added while preserving:
+
+- token input
+- normalization guarantees
+- validation behavior
+- backward compatibility
+
+These extensions are incremental and opt-in.
+
+---
+
+## Next steps
+
+To continue learning:
+
+- [**CLI Reference**](./cli.mdx) - commands and build options
+- [**Versioning & Stability**](./versioning-stability.mdx) - how ngCorex evolves safely
+- [**Roadmap**](./roadmap.mdx) - planned features and direction

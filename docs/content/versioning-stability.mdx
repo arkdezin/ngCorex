@@ -1,0 +1,139 @@
+# Versioning and Stability
+
+ngCorex follows semantic versioning and is designed to evolve without surprising its users.
+
+This document explains what you can expect when upgrading and which parts of the system are considered stable.
+
+---
+
+## Semantic versioning
+
+ngCorex uses the following versioning scheme:
+
+```text
+MAJOR.
+MINOR.
+PATCH.
+```
+
+- **MAJOR** - breaking changes
+- **MINOR** - new features without breaking existing valid configurations
+- **PATCH** - bug fixes and internal improvements
+
+Even while the major version is `0`, ngCorex treats stability seriously.
+
+---
+
+## What is considered stable
+
+The following behaviors are considered stable across minor releases:
+
+- Valid token structures remain valid
+- CSS output remains backward compatible
+- Deterministic validation behavior
+- CLI command names and core flags
+
+If a configuration works in one minor version, it is expected to work in the next.
+
+---
+
+## Validation stability
+
+Validation rules are designed to evolve carefully.
+
+- New validation rules do not break existing valid tokens
+- Industry-standard patterns are treated as safe
+- Optional checks are surfaced as informational messages
+
+This ensures that upgrades improve safety without introducing friction.
+
+---
+
+## Changes in minor releases
+
+Minor releases may include:
+
+- New token categories
+- Additional validation rules
+- Improved diagnostics and messaging
+- DX improvements in the CLI
+
+These changes are additive and do not require changes to existing valid setups.
+
+---
+
+## Breaking changes
+
+Breaking changes are avoided whenever possible.
+
+If a breaking change is necessary:
+
+- it will be documented clearly
+- it will only occur in a major version bump
+- migration guidance will be provided
+
+Breaking changes will never be introduced silently.
+
+---
+
+## Patch releases
+
+Patch releases focus on correctness and stability.
+
+They may include:
+
+- bug fixes
+- performance improvements
+- internal refactors
+- documentation updates
+
+Patch releases do not change behavior for valid inputs.
+
+---
+
+## Stability milestones
+
+Certain releases mark explicit stability improvements.
+
+For example:
+
+- v0.2.0 establishes stable validation behavior
+- diagnostics are categorized and deterministic
+- CSS output remains fully backward compatible
+
+These milestones are documented in the changelog.
+
+---
+
+## Upgrading safely
+
+To upgrade ngCorex safely:
+
+1. Review the changelog
+2. Upgrade dependencies
+3. Run a build (or dry run)
+4. Review any new diagnostics
+
+Warnings and informational messages are intended to guide, not block.
+
+---
+
+## Long-term goals
+
+ngCorex aims to provide:
+
+- a stable core engine
+- predictable upgrades
+- clear migration paths
+- confidence for long-lived projects
+
+Stability is a first-class concern, not an afterthought.
+
+---
+
+## Next steps
+
+To see where ngCorex is heading:
+
+- [**Roadmap**](./roadmap.mdx) - upcoming features and direction
+- [**Engine Pipeline**](./engine-pipeline.mdx) - architectural guarantees

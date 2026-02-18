@@ -1,0 +1,114 @@
+# Introduction
+
+ngCorex is a design-token-driven utility CSS engine built with long-term scale, consistency, and governance in mind.
+
+Instead of generating styles directly from arbitrary utility classes, ngCorex treats **design tokens as the single source of truth**. Spacing, colors, typography, and other design decisions are defined once, validated consistently, and then compiled into predictable CSS output.
+
+ngCorex is designed to be simple to adopt, but strict where it matters.
+
+---
+
+## What problem does ngCorex solve?
+
+As applications grow, styling systems tend to drift:
+
+- spacing values multiply
+- colors diverge subtly
+- typography rules are applied inconsistently
+- design decisions live in many places
+
+Utility-first CSS helps with speed, but it often trades away **governance** and **long-term consistency**.
+
+ngCorex solves this by:
+
+- enforcing a shared design vocabulary through tokens
+- validating token values early and deterministically
+- generating stable CSS variables that scale across teams and projects
+
+The result is a styling system that is flexible for developers, but controlled enough for large and long-lived codebases.
+
+---
+
+## What ngCorex is (and is not)
+
+### ngCorex **_is_**
+
+- a design token engine
+- a CSS variable generator
+- a validation and constraint system for design values
+- a CLI-driven build tool
+
+### ngCorex **_is not_**
+
+- a general-purpose CSS framework
+- a drop-in replacement for Tailwind CSS
+- a runtime styling solution
+- a collection of pre-designed components
+
+ngCorex focuses on **infrastructure**, not aesthetics.
+
+---
+
+## Design philosophy
+
+ngCorex follows a few core principles:
+
+### Tokens first
+
+All styling decisions originate from `tokens.json`.  
+Configuration files and CLI options exist to support the token system, not replace it.
+
+### Governance over freedom
+
+Not every value should be allowed everywhere.  
+ngCorex intentionally applies constraints and validation to prevent accidental design drift.
+
+### Low-noise developer experience
+
+Errors block builds.  
+Warnings highlight potential issues.  
+Informational messages provide guidance without interrupting workflow.
+
+If the same input is provided, ngCorex will always produce the same output and the same diagnostics.
+
+### Incremental adoption
+
+You do not need to understand the entire system to get started.
+Most users interact with only one file: `tokens.json`.
+
+---
+
+## How ngCorex works (high level)
+
+At a high level, ngCorex follows a simple pipeline:
+
+1. Read design tokens from `tokens.json`
+2. Normalize token values into a consistent internal format
+3. Validate tokens against defined constraints
+4. Generate CSS variables from validated tokens
+
+Each step is explicit and deterministic, making the output predictable and easy to reason about.
+
+The engine performs all work at build time. There is no runtime cost.
+
+---
+
+## Project status
+
+ngCorex is in early development, but core behaviors are stable.
+
+- Token normalization is stable
+- Validation rules are deterministic
+- CSS output is backward compatible across minor releases
+
+New features are added incrementally, with a strong focus on maintaining predictable behavior.
+
+---
+
+## Next steps
+
+If you are new to ngCorex, continue with:
+
+- [**Getting Started**](./getting-started.mdx) – installing and running your first build
+- [**Design Tokens**](./design-tokens.mdx) – understanding token categories and structure
+- [**Engine Pipeline**](./engine-pipeline.mdx) – a deeper look at how tokens become CSS

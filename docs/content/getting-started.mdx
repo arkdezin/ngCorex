@@ -1,0 +1,160 @@
+# Getting Started
+
+This guide walks you through setting up ngCorex in a new or existing project.
+
+You do not need prior knowledge of design tokens or CSS frameworks to get started.
+
+---
+
+## Prerequisites
+
+Before installing ngCorex, make sure you have:
+
+- Node.js installed (v18 or newer recommended)
+- npm available in your project
+- A JavaScript or TypeScript project
+
+ngCorex performs all work at build time and does not require any runtime dependencies.
+
+---
+
+## Installation
+
+Install both the CLI and the CSS engine:
+
+```bash
+npm install -D @ngcorex/cli
+```
+
+The CLI is used to scaffold files and run builds.
+The CSS package contains the token engine and CSS output logic.
+
+---
+
+## Initialize ngCorex
+
+Run the init command:
+
+```bash
+npx ngcorex init
+```
+
+This command scaffolds a minimal, production-ready setup.
+
+After running it, you will see new files in your project.
+
+---
+
+## Generated files
+
+The init command creates the following files:
+
+### `tokens.json`
+
+This is the **primary file you will edit**.
+
+It contains your design tokens:
+
+- spacing
+- colors
+- typography
+- radius
+- zIndex
+- shadows
+
+All styling decisions originate from this file.
+
+---
+
+### `ngcorex.config.ts`
+
+This file connects the engine together.
+
+In most cases, you do not need to modify it.
+It exists to:
+
+- define token input sources
+- configure output locations
+- enable future extensibility
+
+For most users, this file can be left untouched.
+
+---
+
+## Build your CSS
+
+To generate CSS from your tokens, run:
+
+```bash
+npx ngcorex build
+```
+
+ngCorex will:
+
+1. Read `tokens.json`
+2. Normalize token values
+3. Validate tokens
+4. Generate CSS variables
+
+If validation errors are found, the build will stop and display actionable messages.
+
+Warnings and informational messages do not block the build.
+
+---
+
+## Watch mode
+
+During development, you can enable watch mode:
+
+```bash
+npx ngcorex build --watch
+```
+
+The build will re-run automatically when `tokens.json` changes.
+
+---
+
+## Where is the output?
+
+By default, ngCorex generates CSS variables into a compiled output file.
+
+The exact output path can be found in `ngcorex.config.ts`.
+
+You can import this generated CSS file into your application like any other stylesheet.
+
+---
+
+## What to edit (and what not to)
+
+**You should edit:**
+
+- `tokens.json`
+
+**You usually should not edit:**
+
+- `ngcorex.config.ts`
+- generated CSS output files
+
+This separation helps keep styling decisions centralized and predictable.
+
+---
+
+## Common first steps
+
+After your first successful build, try:
+
+- Adjusting spacing or color values in `tokens.json`
+- Running the build again to see updated output
+- Exploring additional token categories
+
+ngCorex will guide you with clear validation messages as you experiment.
+
+---
+
+## Next steps
+
+To learn more, continue with:
+
+- [**Design Tokens**](./design-tokens.mdx) - understanding token categories and structure
+- [**Token Validation**](./token-validation.mdx) - how errors, warnings, and info messages work
+- [**Engine Pipeline**](./engine-pipeline.mdx) - how tokens become normalized and compiled CSS

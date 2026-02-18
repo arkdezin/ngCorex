@@ -1,0 +1,184 @@
+# CLI Reference
+
+The ngCorex CLI is used to initialize projects and run token builds.
+
+All commands are designed to be explicit, predictable, and safe to run repeatedly.
+
+---
+
+## Using the CLI
+
+ngCorex is typically executed using `npx`:
+
+```bash
+npx ngcorex <command>
+```
+
+This ensures the locally installed version of ngCorex is used.
+
+---
+
+## Commands
+
+---
+
+## `ngcorex init`
+
+Initializes ngCorex in the current project.
+
+```bash
+npx ngcorex init
+```
+
+### What it does
+
+- Creates a `tokens.json` file with production-ready starter tokens
+- Creates an `ngcorex.config.ts` file with default configuration
+- Does not modify existing source files
+
+### When to use
+
+- When setting up ngCorex for the first time
+- When scaffolding a new project
+
+### Notes
+
+- Existing files are not overwritten without warning
+- The generated tokens cover all supported categories
+
+---
+
+## `ngcorex build`
+
+Runs the token engine and generates CSS output.
+
+```bash
+npx ngcorex build
+```
+
+### What it does
+
+1. Reads `tokens.json`
+2. Normalizes token values
+3. Validates tokens
+4. Generates CSS variables
+
+### Output behavior
+
+- Errors stop the build
+- Warnings and info messages are displayed without blocking
+- Generated files are overwritten on each build
+
+---
+
+## `ngcorex build --watch`
+
+Runs the build in watch mode.
+
+```bash
+npx ngcorex build --watch
+```
+
+### What it does
+
+- Watches `tokens.json` for changes
+- Re-runs the build automatically
+- Outputs validation messages on each rebuild
+
+### When to use
+
+- During active design token iteration
+- While adjusting spacing, colors, or typography
+
+---
+
+## `ngcorex build --dry-run`
+
+Runs the build pipeline without writing output files.
+
+```bash
+npx ngcorex build --dry-run
+```
+
+### What it does
+
+- Executes normalization and validation
+- Displays all diagnostics
+- Does not generate CSS files
+
+### When to use
+
+- Validating tokens in CI
+- Testing changes safely
+- Inspecting diagnostics without affecting output
+
+---
+
+## `ngcorex version / ngcorex --version /ngcorex -v`
+
+Displays the installed ngCorex version.
+
+```bash
+npx ngcorex -v
+```
+
+### When to use
+
+- Verifying installed CLI version
+- Debugging environment differences
+
+---
+
+## Exit codes
+
+The CLI uses standard exit codes:
+
+- `0` – build completed successfully
+- non-zero – build failed due to errors
+
+Warnings and informational messages do not affect exit codes.
+
+---
+
+## Common usage patterns
+
+### Typical development workflow
+
+```bash
+npx ngcorex init
+npx ngcorex build --watch
+```
+
+Edit `tokens.json` while the watcher runs.
+
+---
+
+### CI validation
+
+```bash
+npx ngcorex build --dry-run
+```
+
+Fails the pipeline if token errors are present.
+
+---
+
+## Design principles
+
+The CLI is designed to:
+
+- be safe to run multiple times
+- produce deterministic output
+- avoid hidden side effects
+- minimize unnecessary noise
+
+If a command succeeds once, it should succeed again with the same input.
+
+---
+
+## Next steps
+
+To learn more:
+
+- [**Versioning & Stability**](./versioning-and-stability.mdx) - how ngCorex evolves safely
+- [**Roadmap**](./roadmap.mdx) - planned features and direction

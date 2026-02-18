@@ -1,0 +1,254 @@
+# Design Tokens
+
+Design tokens are the foundation of ngCorex.
+
+Every spacing value, color, font size, or shadow used by your application is defined as a token. These tokens form a shared design vocabulary that ngCorex can validate, normalize, and compile into CSS.
+
+---
+
+## What are design tokens?
+
+Design tokens are named values that represent design decisions.
+
+Instead of using raw values like `8px`, `#2563eb`, or `1.25rem` directly in styles, you define them once and reference them consistently.
+
+Examples:
+
+- `spacing.sm` instead of `8px`
+- `colors.primary.500` instead of `#2563eb`
+- `fontSize.md` instead of `1rem`
+
+This approach improves consistency, readability, and long-term maintainability.
+
+---
+
+## The `tokens.json` file
+
+All design tokens are defined in a single file: `tokens.json`.
+
+This file is:
+
+- the primary interface for most users
+- the single source of truth for design values
+- validated automatically during builds
+
+A minimal example:
+
+```json
+{
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "16px"
+  },
+  "colors": {
+    "primary": {
+      "100": "#dbeafe",
+      "500": "#3b82f6",
+      "900": "#1e3a8a"
+    }
+  }
+}
+```
+
+You are encouraged to expand this file as your design system grows.
+
+---
+
+## Supported token categories
+
+ngCorex supports the following token categories.
+
+Each category has its own validation rules and expected structure.
+
+---
+
+### Spacing
+
+Defines spacing values used for margins, padding, gaps, and layout.
+
+```json
+{
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "16px",
+    "lg": "24px"
+  }
+}
+```
+
+Spacing values must use supported units and formats.
+
+---
+
+### Colors
+
+Defines color palettes using nested objects.
+
+```json
+{
+  "colors": {
+    "primary": {
+      "100": "#dbeafe",
+      "500": "#3b82f6",
+      "900": "#1e3a8a"
+    },
+    "neutral": {
+      "50": "#fafafa",
+      "900": "#111827"
+    }
+  }
+}
+```
+
+Color scales are validated for format, consistency, and common industry patterns.
+
+---
+
+### Radius
+
+Defines border radius values.
+
+```json
+{
+  "radius": {
+    "sm": "2px",
+    "md": "4px",
+    "lg": "8px"
+  }
+}
+```
+
+---
+
+### Z-Index
+
+Defines layering values.
+
+```json
+{
+  "zIndex": {
+    "dropdown": 1000,
+    "modal": 1100,
+    "tooltip": 1200
+  }
+}
+```
+
+Z-index values are validated for type and format.
+
+---
+
+### Typography
+
+Defines typography-related tokens.
+
+```json
+{
+  "typography": {
+    "fontSize": {
+      "sm": "0.875rem",
+      "md": "1rem",
+      "lg": "1.25rem"
+    },
+    "fontWeight": {
+      "regular": 400,
+      "medium": 500,
+      "bold": 700
+    },
+    "lineHeight": {
+      "tight": "1.2",
+      "normal": "1.5"
+    }
+  }
+}
+```
+
+Each sub-category is validated independently.
+
+---
+
+### Shadows
+
+Defines box shadow values.
+
+```json
+{
+  "shadows": {
+    "sm": "0 1px 2px rgba(0,0,0,0.05)",
+    "md": "0 4px 6px rgba(0,0,0,0.1)"
+  }
+}
+```
+
+Shadow values are validated for structure and type.
+
+---
+
+## Naming and structure guidelines
+
+ngCorex does not enforce naming conventions, but the following guidelines are recommended:
+
+- Use descriptive, semantic names
+- Avoid embedding raw values in names
+- Keep scales consistent within a category
+
+Good:
+
+- `spacing.sm`, `spacing.md`
+- `colors.primary.500`
+
+Avoid:
+
+- `spacing.8px`
+- `colors.blueish`
+
+---
+
+## Validation and safety
+
+All tokens are validated during the build process.
+
+- Invalid values produce errors and block the build
+- Suspicious patterns produce warnings
+- Informational messages provide guidance without interruption
+
+This ensures incorrect or inconsistent values are caught early.
+
+Validation rules are designed to be deterministic: the same input will always produce the same results.
+
+---
+
+## Normalization (brief overview)
+
+Before generating CSS, ngCorex normalizes token values into a consistent internal format.
+
+Normalization:
+
+- does not change the meaning of values
+- ensures consistent output across categories
+- enables predictable CSS variable generation
+
+The details of this process are covered in the **Engine Pipeline** documentation.
+
+---
+
+## Recommended workflow
+
+1. Define or update values in `tokens.json`
+2. Run the build
+3. Review validation messages if any
+4. Import generated CSS into your application
+
+Design decisions should always be made at the token level, not in generated output.
+
+---
+
+## Next steps
+
+To continue learning:
+
+- [**Token Validation**](./token-validation.mdx) - understanding errors, warnings, and info messages
+- [**Engine Pipeline**](./engine-pipeline.mdx) - how tokens are normalized and compiled
+- [**CLI Reference**](./cli.mdx) - available commands and flags

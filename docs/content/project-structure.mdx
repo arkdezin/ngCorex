@@ -1,0 +1,141 @@
+# Project Structure
+
+This document explains the files and folders introduced by ngCorex and how they are intended to be used.
+
+The goal is to make it clear **what you should edit**, **what you usually should not edit**, and **why each file exists**.
+
+---
+
+## Overview
+
+After running:
+
+```bash
+npx ngcorex init
+```
+
+your project will typically include the following files:
+
+```txt
+tokens.json
+ngcorex.config.ts
+```
+
+Additional files may be generated during the build process.
+
+---
+
+## tokens.json
+
+This is the **most important file** in an ngCorex setup.
+
+All design decisions originate from this file.
+
+### What belongs here
+
+`tokens.json` contains design tokens such as:
+
+- spacing values
+- color palettes
+- typography scales
+- border radius values
+- z-index layers
+- shadow definitions
+
+These values define the visual language of your project.
+
+### How it is used
+
+During a build, ngCorex:
+
+1. reads `tokens.json`
+2. normalizes token values
+3. validates them against constraints
+4. uses them to generate CSS variables
+
+### How often should you edit it?
+
+Frequently.
+
+Most day-to-day changes in an ngCorex-based project involve adjusting values in `tokens.json`.
+
+---
+
+## ngcorex.config.ts
+
+This file wires the engine together.
+
+It tells ngCorex:
+
+- where tokens are located
+- where generated CSS should be written
+- which output layers are enabled
+
+### Do I need to edit this file?
+
+In most cases, **no**.
+
+The default configuration created by `ngcorex init` is designed to work without modification.
+
+This file exists to support:
+
+- advanced workflows
+- future extensibility
+- non-standard project layouts
+
+If you are unsure whether you need to change something here, you probably do not.
+
+---
+
+## Generated output
+
+When you run:
+
+```bash
+npx ngcorex build
+```
+
+ngCorex generates CSS output based on your tokens.
+
+### Important notes
+
+- Generated files should not be edited manually
+- Changes will be overwritten on the next build
+- Treat generated CSS as build artifacts
+
+You should always update tokens, not output.
+
+---
+
+## Recommended mental model
+
+A simple way to think about ngCorex is:
+
+- **tokens.json** → _design decisions_
+- **ngcorex.config.ts** → _engine wiring_
+- **generated CSS** → _compiled output_
+
+Each file has a single responsibility.
+
+This separation helps keep styling consistent and predictable as projects grow.
+
+---
+
+## Common mistakes to avoid
+
+- Editing generated CSS files directly
+- Duplicating design values outside of `tokens.json`
+- Adding arbitrary values to bypass validation
+- Treating ngCorex as a runtime styling tool
+
+ngCorex is intentionally strict to prevent accidental drift.
+
+---
+
+## Next steps
+
+Continue with:
+
+- [**Design Tokens**](./design-tokens.mdx) – token categories and structure
+- [**Token Validation**](./token-validation.mdx) – understanding errors, warnings, and info messages
+- [**Engine Pipeline**](./engine-pipeline.mdx) – a deeper look at the build process
