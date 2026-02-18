@@ -30,6 +30,8 @@ jobs:
       - run: npm test --if-present
 
       - name: Publish packages
+        env:
+          NODE_AUTH_TOKEN: ""
         run: |
           npm publish -w packages/css --access public --provenance --tag next
           npm publish -w packages/cli --access public --provenance --tag next
@@ -43,7 +45,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22.19.0"
           cache: "npm"
 
       - run: npm ci
