@@ -1,6 +1,6 @@
 {
     "name": "@ngcorex/css",
-    "version": "0.2.1-rc.0",
+    "version": "0.2.1-rc.1",
     "description": "Angular-native design token and utility CSS engine",
     "publishConfig": {
         "access": "public"
