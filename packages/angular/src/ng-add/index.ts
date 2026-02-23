@@ -1,82 +1,69 @@
-import { Rule, Tree } from '@angular-devkit/schematics';
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import {
+  Rule,
+  Tree,
+} from '@angular-devkit/schematics';
 
+import {
+  addPackageJsonDependency,
+  NodeDependencyType,
+} from '@schematics/angular/utility/dependencies';
+
+import packageJson from '../../package.json' with { type: 'json' };
+
+const NGCOREX_VERSION = `^${packageJson.version}`;
 const NGCOREX_STYLE_PATH = 'src/styles/ngcorex.css';
-
-function getNgCorexVersion(): string {
-  try {
-    const packageJsonPath = join(__dirname, '../../package.json');
-    const packageJson = JSON.parse(
-      readFileSync(packageJsonPath, 'utf-8')
-    );
-    return `^${packageJson.version}`;
-  } catch {
-    return '^0.0.0';
-  }
-}
 
 export function ngAdd(): Rule {
   return (tree: Tree) => {
-    addPackageJsonChanges(tree);
+    addDependencies(tree);
+    addScripts(tree);
     addAngularStyles(tree);
-
     return tree;
   };
 }
 
-function addPackageJsonChanges(tree: Tree) {
-  const packageJsonPath = '/package.json';
+function addDependencies(tree: Tree) {
+  addPackageJsonDependency(tree, {
+    type: NodeDependencyType.Dev,
+    name: '@ngcorex/css',
+    version: NGCOREX_VERSION,
+  });
 
-  if (!tree.exists(packageJsonPath)) {
-    console.log('❌ package.json not found');
-    return;
+  addPackageJsonDependency(tree, {
+    type: NodeDependencyType.Dev,
+    name: '@ngcorex/cli',
+    version: NGCOREX_VERSION,
+  });
+
+  console.log('✔ ngCorex dependencies added');
+}
+
+function addScripts(tree: Tree) {
+  const path = '/package.json';
+  if (!tree.exists(path)) return;
+
+  const pkg = JSON.parse(tree.read(path)!.toString());
+
+  pkg.scripts = pkg.scripts || {};
+
+  if (!pkg.scripts['ngcorex:init']) {
+    pkg.scripts['ngcorex:init'] = 'ngcorex init';
   }
 
-  const buffer = tree.read(packageJsonPath);
-  if (!buffer) return;
-
-  const packageJson = JSON.parse(buffer.toString());
-
-  // Scripts
-  packageJson.scripts = packageJson.scripts || {};
-
-  if (!packageJson.scripts['ngcorex:init']) {
-    packageJson.scripts['ngcorex:init'] = 'ngcorex init';
+  if (!pkg.scripts['ngcorex:build']) {
+    pkg.scripts['ngcorex:build'] = 'ngcorex build';
   }
 
-  if (!packageJson.scripts['ngcorex:build']) {
-    packageJson.scripts['ngcorex:build'] = 'ngcorex build';
-  }
+  tree.overwrite(path, JSON.stringify(pkg, null, 2));
 
-  // Dev dependency
-  packageJson.devDependencies = packageJson.devDependencies || {};
-
-  if (!packageJson.devDependencies['@ngcorex/css']) {
-    packageJson.devDependencies['@ngcorex/css'] = getNgCorexVersion();
-    console.log('✔ @ngcorex/css added as devDependency');
-  }
-
-  tree.overwrite(
-    packageJsonPath,
-    JSON.stringify(packageJson, null, 2)
-  );
-
-  console.log('✔ ngCorex scripts added to package.json');
+  console.log('✔ ngCorex scripts added');
 }
 
 function addAngularStyles(tree: Tree) {
-  const angularJsonPath = '/angular.json';
+  const path = '/angular.json';
+  if (!tree.exists(path)) return;
 
-  if (!tree.exists(angularJsonPath)) {
-    console.log('⚠ angular.json not found');
-    return;
-  }
-
-  const buffer = tree.read(angularJsonPath);
-  if (!buffer) return;
-
-  const angularJson = JSON.parse(buffer.toString());
+  const angularJson = JSON.parse(tree.read(path)!.toString());
 
   const defaultProject =
     angularJson.defaultProject ||
@@ -84,22 +71,13 @@ function addAngularStyles(tree: Tree) {
 
   const project = angularJson.projects[defaultProject];
 
-  if (
-    !project?.architect?.build?.options?.styles
-  ) {
-    console.log('⚠ Could not locate build styles array');
-    return;
-  }
+  if (!project?.architect?.build?.options?.styles) return;
 
   const styles = project.architect.build.options.styles;
 
   if (!styles.includes(NGCOREX_STYLE_PATH)) {
     styles.push(NGCOREX_STYLE_PATH);
-    console.log('✔ ngCorex style path added to angular.json');
+    tree.overwrite(path, JSON.stringify(angularJson, null, 2));
+    console.log('✔ ngCorex style path added');
   }
-
-  tree.overwrite(
-    angularJsonPath,
-    JSON.stringify(angularJson, null, 2)
-  );
 }
