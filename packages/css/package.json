@@ -1,6 +1,6 @@
 {
     "name": "@ngcorex/css",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "description": "Deterministic, governance-first design token engine with build-time CSS variable generation.",
     "publishConfig": {
         "access": "public"
