@@ -1,7 +1,7 @@
 {
   "name": "@ngcorex/cli",
   "version": "0.2.0",
-  "description": "CLI for ngCorex - Angular-native design token engine",
+  "description": "Build-time design token engine for Angular teams who want enforced consistency and architectural control.",
   "publishConfig": {
         "access": "public"
     },
