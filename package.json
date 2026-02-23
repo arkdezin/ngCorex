@@ -25,6 +25,8 @@
     "license": "MIT",
     "description": "Angular-native design token and utility CSS engine",
     "devDependencies": {
+        "@angular-devkit/core": "^21.1.4",
+        "@angular-devkit/schematics": "^21.1.4",
         "@types/node": "^25.0.9",
         "esbuild": "^0.27.2",
         "typescript": "^5.9.3"

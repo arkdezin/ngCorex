@@ -7,5 +7,6 @@ export default {
   "project-structure": "Project Structure",
   "token-validation": "Token Validation",
   "versioning-stability": "Versioning & Stability",
+  "angluar-integration": "Angular Integration",
   roadmap: "Roadmap"
 }

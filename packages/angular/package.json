@@ -1,0 +1,29 @@
+{
+  "name": "@ngcorex/angular",
+  "description": "Angular CLI integration for ngCorex - a deterministic, governance-first design token engine. Provides ng add support and build-time workflow wiring.",
+  "keywords": [
+  "ngcorex",
+  "angular",
+  "angular-cli",
+  "schematics",
+  "design-tokens",
+  "utility-css",
+  "build-time-css",
+  "governance",
+  "design-system",
+  "enterprise-css"
+],
+  "version": "0.2.0",
+  "type": "module",
+  "schematics": "./collection.json",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "collection.json"
+  ],
+  "dependencies": {
+    "@angular-devkit/schematics": "^17.0.0",
+    "@angular-devkit/core": "^17.0.0"
+  }
+}

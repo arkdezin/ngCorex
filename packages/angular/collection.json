@@ -1,0 +1,9 @@
+{
+  "schematics": {
+    "ng-add": {
+      "description": "Add ngCorex to an Angular project",
+      "factory": "./dist/ng-add/index.js#ngAdd",
+      "schema": "./src/ng-add/schema.json"
+    }
+  }
+}

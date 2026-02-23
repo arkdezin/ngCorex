@@ -1,0 +1,159 @@
+# Angular Integration
+
+ngCorex provides an Angular CLI integration layer via:
+
+```bash
+@ngcorex/angular
+```
+
+This package is a **thin adapter** that wires ngCorex into Angular projects using `ng add`.
+
+- It does not introduce runtime logic.
+- It does not modify Angular components.
+- It does not implement styling directives.
+
+All processing remains **build-time only**.
+
+---
+
+## Installation
+
+Inside an Angular project:
+
+```bash
+npx ng add @ngcorex/angular
+```
+
+---
+
+## What `ng add` Does
+
+The schematic performs the following deterministic actions:
+
+### 1. Adds devDependency
+
+```json
+"@ngcorex/css": "^<current-version>"
+```
+
+ngCorex runs at build-time only, so it is installed as a dev dependency.
+
+---
+
+### 2. Adds CLI Scripts
+
+```json
+"scripts": {
+  "ngcorex:init": "ngcorex init",
+  "ngcorex:build": "ngcorex build"
+}
+```
+
+These scripts expose the core CLI inside your Angular project.
+
+---
+
+### 3. Updates `angular.json`
+
+The schematic injects:
+
+```
+src/styles/ngcorex.css
+```
+
+into:
+
+```
+build.options.styles
+```
+
+This ensures generated CSS is automatically included in Angular builds.
+
+---
+
+## What It Does NOT Do
+
+The Angular adapter does **not**:
+
+- Generate tokens automatically
+- Duplicate CLI logic
+- Parse Angular templates
+- Add runtime services
+- Introduce directives
+- Modify components
+
+All token generation and validation is handled by `@ngcorex/css`.
+
+---
+
+## First-Time Setup
+
+After installation:
+
+```bash
+npm run ngcorex:init
+npm run ngcorex:build
+ng serve
+```
+
+This will:
+
+1. Generate `ngcorex.config.ts`
+2. Generate `tokens.json`
+3. Generate `src/styles/ngcorex.css`
+4. Serve Angular with ngCorex styles included
+
+---
+
+## Architecture
+
+The dependency direction is intentional:
+
+```
+Angular Project
+    ↓
+@ngcorex/angular
+    ↓
+@ngcorex/css
+```
+
+The core engine never depends on Angular.
+
+The Angular adapter exists purely to:
+
+- Automate setup
+- Reinforce workflow
+- Align build output
+
+---
+
+## Version Alignment Policy
+
+The Angular adapter minor version matches the core engine minor version.
+
+Example:
+
+```
+@ngcorex/css@0.2.x
+@ngcorex/angular@0.2.x
+```
+
+This ensures:
+
+- Compatibility
+- Predictable behavior
+- Deterministic installation
+
+---
+
+## Philosophy
+
+ngCorex in Angular remains:
+
+- Build-time only
+- Token-driven
+- Deterministic
+- Governance-first
+- Framework-agnostic at core
+
+Angular integration is reinforcement - not transformation.

@@ -2,376 +2,140 @@
 
 ![NPM License](https://img.shields.io/npm/l/%40ngcorex%2Fcli?style=flat-square)
 
-## What is ngCorex?
+ngCorex is a deterministic, governance-first design token engine and utility CSS generator.
 
-**ngCorex** is a **design token and utility CSS engine** built for **Angular teams**.
+It is built for enterprise-scale systems that require:
 
-It generates **CSS variables at build time** from structured design tokens, with strong TypeScript guarantees and enterprise-friendly constraints.
+- Strong token constraints
+- Predictable output
+- Build-time processing
+- Clear architectural boundaries
 
-It is inspired by ideas from Tailwind, but it is **not a Tailwind clone**, **not a component library**, and **not React-focused**.
+ngCorex is not a component library.
+It is not a runtime styling framework.
+It is not CSS-in-JS.
 
-ngCorex is built for **Angular teams**, **design systems**, and **enterprise-scale governance**.
-
----
-
-## What ngCorex Is
-
-- A design token engine
-- A CLI-driven build tool
-- Framework-agnostic at runtime
-
-ngCorex focuses on:
-
-- 🎨 **Design tokens** (spacing, colors, etc.)
-- 🧭 **Constraints & governance** (rules that enforce consistency)
-- ⚙️ **CLI tooling** (`ngcorex build`, watch mode, dry runs)
-- 🅰️ **Angular-centric workflows**
-- 🏢 **Enterprise readiness** (predictable, auditable CSS output)
-
-ngCorex generates **CSS variables**, not components.
-
----
-
-## What ngCorex Is NOT
-
-ngCorex is **not**:
-
-- ❌ a component library
-- ❌ a Tailwind replacement
-- ❌ React-oriented
-- ❌ runtime-dependent in the browser
-
-All work happens **at build time**.
-
----
-
-## Repository Structure
-
-```txt
-ngcorex/
-├─ packages/
-│  ├─ css/        → Core engine (@ngcorex/css)
-│  └─ cli/        → CLI tool   (@ngcorex/cli)
-├─ ngcorex.config.ts   → User config (dev-only)
-├─ package.json        → Root (private)
-├─ tsconfig.base.json
-├─ tsconfig.json
-└─ .gitignore
-```
-
-### Important Notes
-
-- `dist/` folders are **gitignored**
-- Source code lives in `src/`
-- Builds happen **before publishing**
-- The repo is designed to be **clean and publishable**
+All processing happens at build time.
 
 ---
 
 ## Packages
 
-### `@ngcorex/css`
+ngCorex is structured as a layered ecosystem:
 
-![NPM Downloads](https://img.shields.io/npm/dm/%40ngcorex%2Fcss?style=flat-square&logo=npm&logoColor=%23ffffff&labelColor=%23D50100&color=%23000)
+### Core Engine
 
-Core engine package.
-
-Responsibilities:
-
-- Design token definitions
-- Token normalization
-- Constraint validation
-- CSS variable generation
-- Optional CSS `@layer` output
-
-Exports:
-
-```ts
-buildCssFromConfig(config)
-defineNgCorexConfig(config)
+```
+@ngcorex/css
 ```
 
----
+Build-time token normalization, validation, and CSS variable generation.
 
-### `@ngcorex/cli`
-
-![NPM Downloads](https://img.shields.io/npm/dm/%40ngcorex%2Fcli?style=flat-square&logo=npm&logoColor=%23ffffff&labelColor=%23D50100&color=%23000)
-
-Command-line interface.
-
-Available commands:
+Includes CLI commands:
 
 ```bash
 ngcorex init
 ngcorex build
-ngcorex build --watch
-ngcorex build --dry-run
-ngcorex version / --version / -v
-ngcorex --help / -h
 ```
 
 ---
 
-## How ngCorex Works (High Level)
+### Angular Integration
 
-1. You write `ngcorex.config.ts`
-2. CLI transpiles the config using **esbuild**
-3. Config is loaded from a temporary `.mjs` file
-4. Engine:
-
-   - normalizes tokens
-   - applies constraints
-   - generates CSS variables
-5. CSS is written to the output file
-
-All of this happens **before your app runs**.
-
----
-
-## Config Rules (VERY IMPORTANT)
-
-Your `ngcorex.config.ts` **must only import from npm packages**.
-
-### ✅ Correct
-
-```ts
-import { defineNgCorexConfig } from '@ngcorex/css';
+```
+@ngcorex/angular
 ```
 
-### ❌ Incorrect
-
-```ts
-import { defineNgCorexConfig } from './packages/css/dist';
-```
-
-Why?
-
-- Config is transpiled and loaded dynamically
-- Relative imports break in this environment
-- This rule is **strictly enforced**
-
----
-
-## Requirements
-
-Make sure you have **all of the following installed**:
-
-### 1. Node.js
-
-- Version: **22.x**
-- Check with:
+Angular CLI adapter that provides:
 
 ```bash
-node -v
+npx ng add @ngcorex/angular
 ```
 
-### 2. npm
+This integration:
 
-Comes with Node.
+- Adds `@ngcorex/css` as a devDependency
+- Adds CLI scripts
+- Injects generated CSS into `angular.json`
+- Keeps all processing build-time
 
-Check with:
+No runtime logic is introduced.
+
+---
+
+## Quick Start (Angular)
 
 ```bash
-npm -v
+npx ng add @ngcorex/angular
+npm run ngcorex:init
+npm run ngcorex:build
+ng serve
 ```
 
 ---
 
-## Clone the Repository
+## Philosophy
 
-```bash
-git clone https://github.com/<your-username>/ngcorex.git
-cd ngcorex
-```
+ngCorex is:
 
-> Replace `<your-username>` with your actual GitHub username.
+- Deterministic
+- Constraint-driven
+- Governance-first
+- Build-time only
+- Framework-agnostic at its core
 
----
-
-## Install Dependencies
-
-From the **repo root**, run:
-
-```bash
-npm install
-```
-
-This installs dependencies for:
-
-- root
-  - `@ngcorex/css`
-  - `@ngcorex/cli`
+The Angular adapter exists only to reinforce workflow — not to alter architecture.
 
 ---
 
-## Build the Packages
+## Architecture
 
-### 1. Build the CSS engine
+Dependency direction:
 
-```bash
-cd packages/css
-npm run build
+```
+Angular Project
+    ↓
+@ngcorex/angular
+    ↓
+@ngcorex/css
 ```
 
-You should see:
-
-- TypeScript compilation succeed
-- `dist/` folder generated (but ignored by git)
+The core engine never depends on Angular.
 
 ---
 
-### 2. Build the CLI
+## Documentation
 
-```bash
-cd ../cli
-npm run build
-```
+Full documentation:
 
-This produces the CLI executable in `dist/`.
+[https://ngcorex-docs.vercel.app](https://ngcorex-docs.vercel.app)
 
 ---
 
-### 3. Go back to root
+## Versioning
 
-```bash
-cd ../..
+ngCorex follows semantic versioning.
+
+Angular adapter minor version aligns with core minor version to guarantee compatibility.
+
+Example:
+
+```
+@ngcorex/css@0.2.x
+@ngcorex/angular@0.2.x
 ```
 
 ---
 
-## Test the CLI Locally
+## Roadmap
 
-### Link the CLI globally (temporary)
-
-```bash
-npm link ./packages/cli
-```
-
-Now test:
-
-```bash
-ngcorex version
-```
-
-You should see the CLI version printed.
+- Core governance expansion
+- Constraint tooling
+- Visualization tooling
+- Enterprise governance layer (private)
 
 ---
 
-## Run a Build
+## License
 
-From the repo root:
-
-```bash
-ngcorex build
-```
-
-What happens:
-
-- `ngcorex.config.ts` is loaded
-- Tokens are validated
-- Constraints are applied
-- CSS is generated and written to output
-
----
-
-## Watch Mode
-
-```bash
-ngcorex build --watch
-```
-
-- Watches `ngcorex.config.ts`
-- Rebuilds on change
-- Errors do **not** crash the process
-
----
-
-## Dry Run Mode
-
-```bash
-ngcorex build --dry-run
-```
-
-- Runs the full pipeline
-- **Does not write files**
-- Useful for debugging configs
-
----
-
-## Constraint System (Current)
-
-### Implemented Constraints
-
-#### Spacing
-
-- Auto-px fallback
-- Configurable severity:
-
-  - `error`
-  - `warning`
-  - `off`
-
-#### Colors
-
-- Validates:
-
-  - `hex`
-  - `rgb`
-  - `rgba`
-- Shade keys must be **numeric**
-- No enforced semantic ordering (by design)
-
----
-
-## Publishing (Dry Run)
-
-Before publishing, always test:
-
-```bash
-npm publish --dry-run
-```
-
-Run this inside each package:
-
-```bash
-cd packages/css
-npm publish --dry-run
-
-cd ../cli
-npm publish --dry-run
-```
-
-This verifies:
-
-- package.json correctness
-- files included
-- entry points resolve
-
----
-
-## Design Philosophy
-
-- Incremental development
-- Clarity over cleverness
-- Explicit configuration
-- Build-time guarantees
-- Angular-first thinking
-
-No Angular integration is planned **until the core engine is stable**.
-
----
-
-## Status
-
-- ✅ Engine works
-- ✅ CLI works
-- ✅ Watch mode works
-- ✅ Constraints implemented
-- 🧪 npm install / publish flow under validation
-- 🚧 Angular integration planned later
-
-## Contributing & Security
-
-- See [CONTRIBUTING.md](./CONTRIBUTING.md) for contribution guidelines
-- See [SECURITY.md](./SECURITY.md) for reporting security issues
-- See [ROADMAP.md](./ROADMAP.md) for immediate roadmap
+MIT
