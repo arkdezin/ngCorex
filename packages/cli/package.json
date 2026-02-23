@@ -1,7 +1,7 @@
 {
   "name": "@ngcorex/cli",
-  "version": "0.2.0",
-  "description": "Build-time design token engine for Angular teams who want enforced consistency and architectural control.",
+  "version": "0.2.1",
+  "description": "CLI for ngCorex - a deterministic, governance-first design token engine with build-time CSS generation.",
   "publishConfig": {
         "access": "public"
     },
@@ -44,6 +44,5 @@
     "url": "https://github.com/arkdezin/ngCorex",
     "directory": "packages/cli"
   },
-
   "homepage": "https://ngcorex-docs.vercel.app/"
 }

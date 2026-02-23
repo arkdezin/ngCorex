@@ -1,7 +1,7 @@
 {
     "name": "@ngcorex/css",
-    "version": "0.2.0",
-    "description": "Angular-native design token and utility CSS engine",
+    "version": "0.2.1",
+    "description": "Deterministic, governance-first design token engine with build-time CSS variable generation.",
     "publishConfig": {
         "access": "public"
     },
@@ -15,7 +15,9 @@
         "theming",
         "enterprise-css",
         "typescript",
-        "ngcorex"
+        "ngcorex",
+        "governance",
+        "design-system"
     ],
     "license": "MIT",
     "type": "module",
@@ -41,5 +43,5 @@
         "directory": "packages/css"
     },
 
-  "homepage": "https://ngcorex-docs.vercel.app/"
+    "homepage": "https://ngcorex-docs.vercel.app/"
 }
