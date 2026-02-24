@@ -28,9 +28,7 @@ npx ng add @ngcorex/angular
 
 The schematic performs the following deterministic actions:
 
-### 1. Automatically Installs Dependencies
-
-The schematic automatically installs the following packages via npm:
+### 1. Adds devDependencies
 
 ```json
 "@ngcorex/cli": "^<version>"
@@ -40,7 +38,7 @@ The schematic automatically installs the following packages via npm:
 
 ngCorex runs at build-time only, so packages are installed as dev dependencies.
 
-> Note: No manual `npm install` is required. Dependencies are installed automatically when you run `ng add @ngcorex/angular`.
+> Note: Dependencies are added to package.json but not installed automatically. Run `npm run ngcorex:setup` to install dependencies and complete setup.
 
 ---
 
@@ -101,15 +99,16 @@ After installation, you have two options:
 ### Quick Setup (Recommended)
 
 ```bash
-npm run ngcorex:start
+npm run ngcorex:setup
 ```
 
 This will:
 
 1. Generate `ngcorex.config.ts`
 2. Generate `tokens.json`
-3. Generate `src/styles/ngcorex.css`
-4. Start the Angular dev server with ngCorex styles included
+3. Install ngCorex dependencies
+4. Generate `src/styles/ngcorex.css`
+5. Start the Angular dev server with ngCorex styles included
 
 Alternatively, you can use the watch mode for development:
 

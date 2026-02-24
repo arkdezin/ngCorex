@@ -1,6 +1,6 @@
 {
   "name": "@ngcorex/cli",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "CLI for ngCorex - a deterministic, governance-first design token engine with build-time CSS generation.",
   "keywords": [
     "design-tokens",

@@ -10,6 +10,32 @@ This project follows semantic versioning:
 
 ---
 
+## 0.2.7 - 2026-02-24
+
+### Fixed
+
+- **Dependency Installation** - Fixed dependency installation by adding npm install to setup scripts
+  - Restored `addDependencies()` function to add packages to package.json
+  - Added `npm install` to `ngcorex:setup` script
+  - Added `npm install` to `ngcorex:dev` script
+  - Added `npm install` to `ngcorex:start` script
+  - Updated documentation to reflect the new setup flow
+
+### Changed
+
+- **Setup Flow** - Users now run `npm run ngcorex:setup` which includes `npm install`
+  - No need to manually run `npm install` after `ng add`
+  - Setup scripts handle installation automatically
+  - More reliable than relying on `externalDependencies`
+
+### Notes
+
+- The `externalDependencies` mechanism in Angular CLI is not reliable for automatic installation
+- Setup scripts now include `npm install` to ensure dependencies are properly installed
+- This provides a more predictable and reliable user experience
+
+---
+
 ## 0.2.6 - 2026-02-24
 
 ### Fixed

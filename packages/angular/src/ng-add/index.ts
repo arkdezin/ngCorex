@@ -15,7 +15,7 @@ const NGCOREX_STYLE_PATH = 'src/styles/ngcorex.css';
 
 export function ngAdd(): Rule {
   return (tree: Tree) => {
-    // addDependencies(tree); // already handled by collection.json, but left here for future use when we have a separate ngCorex CLI package 
+    addDependencies(tree);
     addScripts(tree);
     addAngularStyles(tree);
     
@@ -25,7 +25,7 @@ export function ngAdd(): Rule {
     return tree;
   };
 }
-/* For future use when we have a separate ngCorex CLI package
+
 function addDependencies(tree: Tree) {
 
   addPackageJsonDependency(tree, {
@@ -36,7 +36,7 @@ function addDependencies(tree: Tree) {
 
   console.log('✔ ngCorex dependencies added');
 }
-*/
+
 function addScripts(tree: Tree) {
   const path = '/package.json';
   if (!tree.exists(path)) return;
@@ -57,11 +57,11 @@ function addScripts(tree: Tree) {
   }
 
   if (!pkg.scripts['ngcorex:setup']) {
-    pkg.scripts['ngcorex:setup'] = 'ngcorex init && ngcorex build';
+    pkg.scripts['ngcorex:setup'] = 'ngcorex init && npm install && ngcorex build';
   }
 
   if (!pkg.scripts['ngcorex:dev']) {
-    pkg.scripts['ngcorex:dev'] = 'ngcorex init && ngcorex build --watch';
+    pkg.scripts['ngcorex:dev'] = 'ngcorex init && npm install && ngcorex build --watch';
   }
 
   // Smart override: only modify start if it's exactly "ng serve"
@@ -74,7 +74,7 @@ function addScripts(tree: Tree) {
 
   // Always add ngcorex:start as a fallback
   if (!pkg.scripts['ngcorex:start']) {
-    pkg.scripts['ngcorex:start'] = 'ngcorex init && ngcorex build && ng serve';
+    pkg.scripts['ngcorex:start'] = 'ngcorex init && npm install && ngcorex build && ng serve';
   }
 
   tree.overwrite(path, JSON.stringify(pkg, null, 2));
