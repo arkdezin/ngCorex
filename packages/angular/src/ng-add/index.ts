@@ -65,6 +65,19 @@ function addScripts(tree: Tree) {
     pkg.scripts['ngcorex:dev'] = 'ngcorex init && ngcorex build --watch';
   }
 
+  // Smart override: only modify start if it's exactly "ng serve"
+  if (pkg.scripts['start'] === 'ng serve') {
+    pkg.scripts['start'] = 'ngcorex init && ngcorex build && ng serve';
+    console.log('✔ Modified "start" script to include ngCorex commands');
+  } else if (pkg.scripts['start']) {
+    console.log('⚠ Custom "start" script detected - not modified');
+  }
+
+  // Always add ngcorex:start as a fallback
+  if (!pkg.scripts['ngcorex:start']) {
+    pkg.scripts['ngcorex:start'] = 'ngcorex init && ngcorex build && ng serve';
+  }
+
   tree.overwrite(path, JSON.stringify(pkg, null, 2));
 
   console.log('✔ ngCorex scripts added');

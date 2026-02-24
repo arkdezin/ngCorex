@@ -26,13 +26,14 @@ npx ng add @ngcorex/angular
 
 The schematic performs the following deterministic actions:
 
-### 1. Adds devDependency
+### 1. Adds devDependencies
 
 ```json
-"@ngcorex/css": "^<version>"
+"@ngcorex/css": "^<version>",
+"@ngcorex/cli": "^<version>"
 ```
 
-ngCorex runs at build-time only, so it is installed as a dev dependency.
+ngCorex runs at build-time only, so both packages are installed as dev dependencies.
 
 ---
 
@@ -44,7 +45,8 @@ ngCorex runs at build-time only, so it is installed as a dev dependency.
   "ngcorex:build": "ngcorex build",
   "ngcorex:watch": "ngcorex build --watch",
   "ngcorex:setup": "ngcorex init && ngcorex build",
-  "ngcorex:dev": "ngcorex init && ngcorex build --watch"
+  "ngcorex:dev": "ngcorex init && ngcorex build --watch",
+  "ngcorex:start": "ngcorex init && ngcorex build && ng serve"
 }
 ```
 
@@ -55,6 +57,15 @@ These scripts provide convenient workflows:
 - `ngcorex:watch` - Watches for changes and auto-rebuilds CSS
 - `ngcorex:setup` - Combines init + build for quick setup
 - `ngcorex:dev` - Combines init + build with watch mode for development
+- `ngcorex:start` - Combines init + build + ng serve for complete startup
+
+**Smart `start` Script Modification:**
+
+The schematic intelligently modifies the existing `start` script:
+
+- If `start` is exactly `"ng serve"`, it becomes `"ngcorex init && ngcorex build && ng serve"`
+- If `start` has a custom value, it remains unchanged
+- `ngcorex:start` is always added as a fallback
 
 ---
 
@@ -81,6 +92,19 @@ This ensures generated CSS is included in Angular builds.
 After installation, you have two options:
 
 ### Quick Setup (Recommended)
+
+```bash
+npm run ngcorex:start
+```
+
+This will:
+
+1. Generate `ngcorex.config.ts`
+2. Generate `tokens.json`
+3. Generate `src/styles/ngcorex.css`
+4. Start the Angular dev server with ngCorex styles included
+
+Alternatively, you can use the watch mode for development:
 
 ```bash
 npm run ngcorex:dev
@@ -124,11 +148,13 @@ Angular Project
 @ngcorex/angular
     ↓
 @ngcorex/css
+    ↓
+@ngcorex/cli
 ```
 
 The core engine never depends on Angular.
 
-This adapter exists only to reinforce workflow.
+This adapter exists only to reinforce workflow and CLI integration.
 
 ---
 
