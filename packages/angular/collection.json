@@ -3,7 +3,11 @@
     "ng-add": {
       "description": "Add ngCorex to an Angular project",
       "factory": "./dist/ng-add/index.js#ngAdd",
-      "schema": "./dist/ng-add/schema.json"
+      "schema": "./dist/ng-add/schema.json",
+      "externalDependencies": [
+        "@ngcorex/cli",
+        "@ngcorex/css"
+      ]
     }
   }
 }
