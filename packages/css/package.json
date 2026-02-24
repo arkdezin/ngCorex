@@ -1,6 +1,6 @@
 {
     "name": "@ngcorex/css",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "description": "Deterministic, governance-first design token engine with build-time CSS variable generation.",
     "keywords": [
         "design-tokens",
@@ -44,5 +44,5 @@
 
     "homepage": "https://ngcorex-docs.vercel.app/",
     "license": "MIT",
-    "author": "Ajay Sharma"
+    "author": "arkdezin"
 }

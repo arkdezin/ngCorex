@@ -18,6 +18,11 @@ export function ngAdd(): Rule {
     addDependencies(tree);
     addScripts(tree);
     addAngularStyles(tree);
+    
+    console.log('\n✅ ngCorex has been configured!');
+    console.log('📦 Please run: npm install');
+    console.log('🚀 Then run: npm run ngcorex:setup\n');
+    
     return tree;
   };
 }
