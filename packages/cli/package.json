@@ -1,10 +1,7 @@
 {
   "name": "@ngcorex/cli",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "CLI for ngCorex - a deterministic, governance-first design token engine with build-time CSS generation.",
-  "publishConfig": {
-        "access": "public"
-    },
   "keywords": [
     "design-tokens",
     "css-cli",
@@ -22,6 +19,9 @@
     "design-system",
     "theming"
   ],
+  "publishConfig": {
+        "access": "public"
+    },
   "license": "MIT",
   "type": "module",
   "bin": {

@@ -53,6 +53,17 @@ function addScripts(tree: Tree) {
   if (!pkg.scripts['ngcorex:build']) {
     pkg.scripts['ngcorex:build'] = 'ngcorex build';
   }
+  if (!pkg.scripts['ngcorex:watch']) {
+    pkg.scripts['ngcorex:watch'] = 'ngcorex build --watch';
+  }
+
+  if (!pkg.scripts['ngcorex:setup']) {
+    pkg.scripts['ngcorex:setup'] = 'ngcorex init && ngcorex build';
+  }
+
+  if (!pkg.scripts['ngcorex:dev']) {
+    pkg.scripts['ngcorex:dev'] = 'ngcorex init && ngcorex build --watch';
+  }
 
   tree.overwrite(path, JSON.stringify(pkg, null, 2));
 

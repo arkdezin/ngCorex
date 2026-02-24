@@ -67,10 +67,17 @@ No runtime logic is introduced.
 
 ```bash
 npx ng add @ngcorex/angular
-npm run ngcorex:init
-npm run ngcorex:build
+npm run ngcorex:dev
 ng serve
 ```
+
+The `ngcorex:dev` command automatically:
+
+- Creates `tokens.json` and `ngcorex.config.ts`
+- Generates initial CSS
+- Watches for changes and auto-rebuilds
+
+> **Alternative:** After running `ng add`, you can use `npm run ngcorex:setup` for a one-time setup, then `npm run ngcorex:watch` in a separate terminal for automatic rebuilds during development.
 
 ---
 

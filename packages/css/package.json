@@ -1,10 +1,7 @@
 {
     "name": "@ngcorex/css",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "description": "Deterministic, governance-first design token engine with build-time CSS variable generation.",
-    "publishConfig": {
-        "access": "public"
-    },
     "keywords": [
         "design-tokens",
         "css-variables",
@@ -19,6 +16,9 @@
         "governance",
         "design-system"
     ],
+    "publishConfig": {
+        "access": "public"
+    },
     "license": "MIT",
     "type": "module",
     "main": "dist/index.js",
