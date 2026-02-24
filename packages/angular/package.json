@@ -24,9 +24,10 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json && copy src\\ng-add\\schema.json dist\\ng-add\\schema.json"
-  },"engines": {
-  "node": ">=18"
-},
+  },
+  "engines": {
+     "node": ">=18"
+  },
   "dependencies": {
     "@angular-devkit/core": "^17.0.0",
     "@angular-devkit/schematics": "^17.0.0",

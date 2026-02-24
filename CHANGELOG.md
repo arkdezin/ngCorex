@@ -10,6 +10,69 @@ This project follows semantic versioning:
 
 ---
 
+## Update
+
+- Changelog updated.
+- code of conduct added.
+- engine added to package.json
+
+## 0.2.5 - 2026-02-24
+
+### Fixed
+
+- **Angular Installation Flow** - Improved ng-add installation flow for better user experience
+- **Package Documentation** - Updated README and package version for v0.2.4 release
+
+---
+
+## 0.2.4 - 2026-02-24
+
+### Added
+
+- **Angular Workflow Scripts** - Added setup, dev, and watch scripts for streamlined development workflow
+- **Documentation Updates** - Updated Angular package documentation with latest ng-add changes
+
+### Fixed
+
+- **CLI Manual Installation** - Fixed Angular manual install for CLI package
+
+---
+
+## 0.2.3 - 2026-02-23
+
+### Added
+
+- **Angular Package Installation** - Implemented Angular package installation functionality
+- **Error Handling** - Fixed Angular package installation error handling
+
+### Fixed
+
+- **Docs Build Error** - Fixed documentation build errors
+
+---
+
+## 0.2.1 - 2026-02-23
+
+### Added
+
+- **Angular Adapter MVP** - Complete Angular adapter with ng-add support and documentation
+- **Package Descriptions** - Standardized package descriptions across the ecosystem
+- **Documentation URLs** - Added documentation URLs to packages and GitHub repository
+
+### Changed
+
+- **CI/CD Improvements** - Enhanced CI/CD pipeline with OIDC publishing support
+- **Package Publishing** - Added publishConfig with public access for npm publishing
+- **Node Version Check** - Updated node version check for OIDC publishing
+
+### Notes
+
+- This release introduces the Angular adapter for ngCorex
+- Improved package publishing workflow with OIDC provenance
+- Better documentation integration across all packages
+
+---
+
 ## 0.2.0 - 2026-02-07
 
 ### Highlights
@@ -37,6 +100,7 @@ This project follows semantic versioning:
 This release marks a stability milestone for ngCorex, establishing a reliable foundation for future expansion.
 
 ---
+
 ## 0.1.7 - 2026-02-06
 
 ### Added
