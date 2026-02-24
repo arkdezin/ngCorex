@@ -5,8 +5,7 @@
       "factory": "./dist/ng-add/index.js#ngAdd",
       "schema": "./dist/ng-add/schema.json",
       "externalDependencies": [
-        "@ngcorex/cli",
-        "@ngcorex/css"
+        "@ngcorex/cli"
       ]
     }
   }

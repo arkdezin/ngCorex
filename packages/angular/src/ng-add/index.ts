@@ -15,24 +15,18 @@ const NGCOREX_STYLE_PATH = 'src/styles/ngcorex.css';
 
 export function ngAdd(): Rule {
   return (tree: Tree) => {
-    addDependencies(tree);
+    // addDependencies(tree); // already handled by collection.json, but left here for future use when we have a separate ngCorex CLI package 
     addScripts(tree);
     addAngularStyles(tree);
     
     console.log('\n✅ ngCorex has been configured!');
-    console.log('📦 Please run: npm install');
-    console.log('🚀 Then run: npm run ngcorex:setup\n');
+    console.log('🚀 Run: npm run ngcorex:setup\n');
     
     return tree;
   };
 }
-
+/* For future use when we have a separate ngCorex CLI package
 function addDependencies(tree: Tree) {
-  addPackageJsonDependency(tree, {
-    type: NodeDependencyType.Dev,
-    name: '@ngcorex/css',
-    version: NGCOREX_VERSION,
-  });
 
   addPackageJsonDependency(tree, {
     type: NodeDependencyType.Dev,
@@ -42,7 +36,7 @@ function addDependencies(tree: Tree) {
 
   console.log('✔ ngCorex dependencies added');
 }
-
+*/
 function addScripts(tree: Tree) {
   const path = '/package.json';
   if (!tree.exists(path)) return;

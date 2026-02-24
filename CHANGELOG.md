@@ -10,7 +10,26 @@ This project follows semantic versioning:
 
 ---
 
-## Update
+## 0.2.6 - 2026-02-24
+
+### Fixed
+
+- **Automatic npm install** - Fixed ng-add schematic to automatically install dependencies
+  - Removed `addDependencies()` function that was conflicting with `externalDependencies`
+  - Now relies solely on `externalDependencies` in collection.json for automatic installation
+  - Users no longer need to manually run `npm install` after `ng add @ngcorex/angular`
+  - `@ngcorex/cli` is now the only external dependency (includes `@ngcorex/css` as transitive dependency)
+
+### Changed
+
+- **Simplified dependency management** - Reduced externalDependencies to only `@ngcorex/cli`
+  - `@ngcorex/css` is automatically installed as a transitive dependency
+  - Cleaner package.json with fewer direct dependencies
+  - Better alignment with npm's dependency resolution
+
+---
+
+## 0.2.5 - 2026-02-24 Update
 
 - Changelog updated.
 - code of conduct added.

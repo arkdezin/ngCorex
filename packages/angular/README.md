@@ -28,14 +28,19 @@ npx ng add @ngcorex/angular
 
 The schematic performs the following deterministic actions:
 
-### 1. Adds devDependencies
+### 1. Automatically Installs Dependencies
+
+The schematic automatically installs the following packages via npm:
 
 ```json
-"@ngcorex/css": "^<version>",
 "@ngcorex/cli": "^<version>"
 ```
 
-ngCorex runs at build-time only, so both packages are installed as dev dependencies.
+`@ngcorex/css` is automatically installed as a transitive dependency of `@ngcorex/cli`.
+
+ngCorex runs at build-time only, so packages are installed as dev dependencies.
+
+> Note: No manual `npm install` is required. Dependencies are installed automatically when you run `ng add @ngcorex/angular`.
 
 ---
 
