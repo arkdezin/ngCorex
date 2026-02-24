@@ -22,13 +22,12 @@
   "publishConfig": {
         "access": "public"
     },
-  "license": "MIT",
   "type": "module",
   "bin": {
     "ngcorex": "dist/bin.js"
   },
   "dependencies": {
-    "@ngcorex/css": "^0.1.0",
+    "@ngcorex/css": "^0.2.0",
     "esbuild": "^0.20.0"
   },
   "files": [
@@ -39,10 +38,15 @@
   "scripts": {
     "build": "tsc -p tsconfig.json"
   },
+  "engines": {
+  "node": ">=18"
+},
   "repository": {
     "type": "git",
     "url": "https://github.com/arkdezin/ngCorex",
     "directory": "packages/cli"
   },
-  "homepage": "https://ngcorex-docs.vercel.app/"
+  "homepage": "https://ngcorex-docs.vercel.app/",
+  "license": "MIT",
+  "author": "Ajay Sharma"
 }

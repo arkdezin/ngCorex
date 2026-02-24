@@ -19,7 +19,6 @@
     "publishConfig": {
         "access": "public"
     },
-    "license": "MIT",
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -43,5 +42,7 @@
         "directory": "packages/css"
     },
 
-    "homepage": "https://ngcorex-docs.vercel.app/"
+    "homepage": "https://ngcorex-docs.vercel.app/",
+    "license": "MIT",
+    "author": "Ajay Sharma"
 }

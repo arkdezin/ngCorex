@@ -1,5 +1,7 @@
 # @ngcorex/angular
 
+![NPM Version](https://img.shields.io/npm/v/%40ngcorex%2Fangular?style=flat-square&logo=npm&labelColor=%23D50100&color=%23000) ![NPM License](https://img.shields.io/npm/l/%40ngcorex%2Fangular?style=flat-square) ![Static Badge](https://img.shields.io/badge/Github-Repo-blue?style=flat-square&logo=github) ![NPM Downloads](https://img.shields.io/npm/dm/%40ngcorex%2Fangular?style=flat-square&logo=npm&logoColor=%23ffffff&labelColor=%23D50100&color=%23000) ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/arkdezin/ngcorex)
+
 Angular CLI integration for ngCorex - a deterministic, governance-first design token engine with build-time CSS generation.
 
 This package provides `ng add` support and workflow wiring for Angular projects.
