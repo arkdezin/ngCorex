@@ -18,10 +18,11 @@ export function ngAdd(): Rule {
     addDependencies(tree);
     addScripts(tree);
     addAngularStyles(tree);
-    
+
     console.log('\n✅ ngCorex has been configured!');
-    console.log('🚀 Run: npm run ngcorex:setup\n');
-    
+    console.log('🚀 Run: npm run ngcorex:setup. This is only for first time setup\n');
+    console.log('🚀 Run: npm start. This is to build and run the project\n');
+
     return tree;
   };
 }
@@ -57,16 +58,16 @@ function addScripts(tree: Tree) {
   }
 
   if (!pkg.scripts['ngcorex:setup']) {
-    pkg.scripts['ngcorex:setup'] = 'ngcorex init && npm install && ngcorex build';
+    pkg.scripts['ngcorex:setup'] = 'npm install && ngcorex init && ngcorex build';
   }
 
   if (!pkg.scripts['ngcorex:dev']) {
-    pkg.scripts['ngcorex:dev'] = 'ngcorex init && npm install && ngcorex build --watch';
+    pkg.scripts['ngcorex:dev'] = 'npm install && ngcorex init && ngcorex build --watch';
   }
 
   // Smart override: only modify start if it's exactly "ng serve"
   if (pkg.scripts['start'] === 'ng serve') {
-    pkg.scripts['start'] = 'ngcorex init && ngcorex build && ng serve';
+    pkg.scripts['start'] = 'ngcorex build && ng serve';
     console.log('✔ Modified "start" script to include ngCorex commands');
   } else if (pkg.scripts['start']) {
     console.log('⚠ Custom "start" script detected - not modified');
@@ -74,7 +75,7 @@ function addScripts(tree: Tree) {
 
   // Always add ngcorex:start as a fallback
   if (!pkg.scripts['ngcorex:start']) {
-    pkg.scripts['ngcorex:start'] = 'ngcorex init && npm install && ngcorex build && ng serve';
+    pkg.scripts['ngcorex:start'] = 'npm install && ngcorex init && ngcorex build && ng serve';
   }
 
   tree.overwrite(path, JSON.stringify(pkg, null, 2));

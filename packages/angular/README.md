@@ -49,9 +49,9 @@ ngCorex runs at build-time only, so packages are installed as dev dependencies.
   "ngcorex:init": "ngcorex init",
   "ngcorex:build": "ngcorex build",
   "ngcorex:watch": "ngcorex build --watch",
-  "ngcorex:setup": "ngcorex init && ngcorex build",
-  "ngcorex:dev": "ngcorex init && ngcorex build --watch",
-  "ngcorex:start": "ngcorex init && ngcorex build && ng serve"
+  "ngcorex:setup": "npm install && ngcorex init && ngcorex build",
+  "ngcorex:dev": "npm install && ngcorex init && ngcorex build --watch",
+  "ngcorex:start": "npm install && ngcorex init && ngcorex build && ng serve"
 }
 ```
 
@@ -60,15 +60,15 @@ These scripts provide convenient workflows:
 - `ngcorex:init` - Creates `tokens.json` and `ngcorex.config.ts`
 - `ngcorex:build` - Generates CSS from tokens (one-time)
 - `ngcorex:watch` - Watches for changes and auto-rebuilds CSS
-- `ngcorex:setup` - Combines init + build for quick setup
-- `ngcorex:dev` - Combines init + build with watch mode for development
-- `ngcorex:start` - Combines init + build + ng serve for complete startup
+- `ngcorex:setup` - Installs dependencies + init + build for quick setup
+- `ngcorex:dev` - Installs dependencies + init + build with watch mode for development
+- `ngcorex:start` - Installs dependencies + init + build + ng serve for complete startup
 
 **Smart `start` Script Modification:**
 
 The schematic intelligently modifies the existing `start` script:
 
-- If `start` is exactly `"ng serve"`, it becomes `"ngcorex init && ngcorex build && ng serve"`
+- If `start` is exactly `"ng serve"`, it becomes `"ngcorex build && ng serve"`
 - If `start` has a custom value, it remains unchanged
 - `ngcorex:start` is always added as a fallback
 
@@ -104,11 +104,10 @@ npm run ngcorex:setup
 
 This will:
 
-1. Generate `ngcorex.config.ts`
-2. Generate `tokens.json`
-3. Install ngCorex dependencies
+1. Install ngCorex dependencies
+2. Generate `ngcorex.config.ts`
+3. Generate `tokens.json`
 4. Generate `src/styles/ngcorex.css`
-5. Start the Angular dev server with ngCorex styles included
 
 Alternatively, you can use the watch mode for development:
 
@@ -119,8 +118,9 @@ ng serve
 
 This will:
 
-1. Generate `ngcorex.config.ts`
-2. Generate `tokens.json`
+1. Install ngCorex dependencies
+2. Generate `ngcorex.config.ts`
+3. Generate `tokens.json`
 3. Generate `src/styles/ngcorex.css`
 4. Start watching for changes to `tokens.json` and `ngcorex.config.ts`
 5. Auto-rebuild CSS whenever tokens are modified
