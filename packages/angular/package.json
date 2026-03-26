@@ -1,6 +1,6 @@
 {
   "name": "@ngcorex/angular",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Angular CLI integration for ngCorex - deterministic, governance-first design token engine with build-time CSS generation. Provides ng add support and build-time workflow wiring.",
   "keywords": [
     "ngcorex",
@@ -26,12 +26,12 @@
     "build": "tsc -p tsconfig.json && copy src\\ng-add\\schema.json dist\\ng-add\\schema.json"
   },
   "engines": {
-     "node": ">=18"
+    "node": ">=18"
   },
   "dependencies": {
-    "@angular-devkit/core": "^17.0.0",
-    "@angular-devkit/schematics": "^17.0.0",
-    "@schematics/angular": "^17.3.17"
+    "@angular-devkit/core": "^21.2.3",
+    "@angular-devkit/schematics": "^21.2.3",
+    "@schematics/angular": "^21.2.3"
   },
   "repository": {
     "type": "git",
