@@ -124,6 +124,7 @@ export interface ConstraintsConfig {
 export interface OutputConfig {
   file?: string;
   layer?: string;
+  format?: 'css' | 'scss-variables' | 'scss-map'; 
 }
 
 export interface NgCorexConfig {

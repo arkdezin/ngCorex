@@ -8,7 +8,7 @@ import { NgCorexError, NgCorexErrorCode } from '../errors/ngcorex-error.js';
 import { deepMerge } from '../utils/deep-merge.js';
 import { runConstraints } from '../constraints/run-constraints.js';
 import { wrapCss } from '../output/wrap-css.js';
-
+import { generateScssVariables, generateScssMap } from '../tokens/generate-scss.js';
 
 
 /**
@@ -157,9 +157,19 @@ if (tokens.icons) {
   );
 }
 
-// 13. Generate CSS  ← was step 9, renumber
-const css = generateCssVariables(allTokens);
+// 13. Generate CSS & SCSS ← was step 9, renumber
+const format = config.output?.format ?? 'css';
 
+if (format === 'scss-variables') {
+  return generateScssVariables(allTokens);
+}
+
+if (format === 'scss-map') {
+  return generateScssMap(allTokens);
+}
+
+// default: css
+const css = generateCssVariables(allTokens);
 return wrapCss(css, config.output?.layer);
 
 }
