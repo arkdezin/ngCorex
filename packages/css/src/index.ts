@@ -22,6 +22,8 @@ export { generateCssVariables } from './tokens/generate-css.js';
 
 export { buildCssFromConfig } from './engine/build-css.js';
 
+export { buildUtilitiesFromConfig } from './engine/build-utilities.js';
+
 export { presetRegistry } from './presets/index.js';
 
 export { NgCorexError } from './errors/ngcorex-error.js';

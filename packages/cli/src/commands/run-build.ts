@@ -3,7 +3,7 @@ import path from 'node:path';
 import { resolveConfigPath } from '../config/resolve-path.js';
 import { loadConfig } from '../config/load-config.js';
 import { writeCss } from '../output/write-css.js';
-import { buildCssFromConfig, runValidations, printValidationResults, hasValidationResults, hasValidationErrors, hasValidationWarnings, resolveExtends, deepMerge, type TokensForValidation } from '@ngcorex/css';
+import { buildCssFromConfig, buildUtilitiesFromConfig, runValidations, printValidationResults, hasValidationResults, hasValidationErrors, hasValidationWarnings, resolveExtends, deepMerge, type TokensForValidation } from '@ngcorex/css';
 import { resolve } from 'node:path';
 import { BuildSummary, success, info, warning, error, section } from '../utils/logger.js';
 
@@ -407,6 +407,16 @@ export async function runBuild(
   buildSummary.setOutputFile(outputFile);
 
   writeCss(outputPath, css, { dryRun: options.dryRun });
+
+  if (effectiveConfig.utilities?.enabled) {
+    const utilityCss = buildUtilitiesFromConfig(effectiveConfig);
+    const utilityOutputFile = effectiveConfig.utilities.output ?? 'src/styles/ngcorex.utilities.css';
+    const utilityOutputPath = resolve(process.cwd(), utilityOutputFile);
+    writeCss(utilityOutputPath, utilityCss, { dryRun: options.dryRun });
+    if (!options.dryRun) {
+      success(`Utilities written to ${utilityOutputFile}`);
+    }
+  }
 
   if (!options.dryRun) {
     success(`Output written to ${outputFile}`);

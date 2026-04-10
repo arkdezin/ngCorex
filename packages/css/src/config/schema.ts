@@ -88,21 +88,51 @@ export interface TokensConfig {
 }
 
 export interface UtilitiesConfig {
-    spacing?: {
-        margin?: boolean;
-        padding?: boolean;
-        gap?: boolean;
-    };
-    color?: {
-        text?: string[];
-        background?: string[];
-        border?: string[];
-    };
-    layout?: {
-        display?: boolean;
-        flex?: boolean;
-        grid?: boolean;
-    };
+  enabled?: boolean;
+  output?: string; // output file path, default 'src/styles/ngcorex.utilities.css'
+
+  spacing?: {
+    margin?: boolean;  // generates .m-{s}, .mt-{s}, .mr-{s}, .mb-{s}, .ml-{s}, .mx-{s}, .my-{s}
+    padding?: boolean; // generates .p-{s}, .pt-{s}, .pr-{s}, .pb-{s}, .pl-{s}, .px-{s}, .py-{s}
+    gap?: boolean;     // generates .gap-{s}
+    width?: boolean;   // generates .w-{s}
+    height?: boolean;  // generates .h-{s}
+  };
+
+  color?: {
+    text?: string[];        // palette names e.g. ['primary', 'neutral'] → .text-primary-500
+    background?: string[];  // palette names → .bg-primary-500
+    border?: string[];      // palette names → .border-primary-500
+  };
+
+  layout?: {
+    display?: boolean; // .flex .inline-flex .block .inline-block .inline .hidden
+    flex?: boolean;    // .flex-row .flex-col .flex-wrap .items-center .justify-center .justify-between
+    grid?: boolean;    // .grid .grid-cols-{1-12}
+  };
+
+  typography?: {
+    fontSize?: boolean;   // .text-{s} → font-size
+    fontWeight?: boolean; // .font-{s} → font-weight
+    lineHeight?: boolean; // .leading-{s} → line-height
+  };
+
+  radius?: boolean;    // .rounded-{s} → border-radius
+  shadows?: boolean;   // .shadow-{s} → box-shadow
+  opacity?: boolean;   // .opacity-{s} → opacity
+
+  borders?: {
+    width?: boolean; // .border-w-{s} → border-width
+    style?: boolean; // .border-style-{s} → border-style
+  };
+
+  gradients?: boolean; // .bg-gradient-{s} → background
+  icons?: boolean;     // .icon-{s} → width + height
+
+  container?: {
+    enabled?: boolean;
+    maxWidth?: string; // default '1280px'
+  };
 }
 
 export type ConstraintSeverity = 'error' | 'warning' | 'info';
