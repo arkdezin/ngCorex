@@ -3,7 +3,7 @@ import path from 'node:path';
 import { resolveConfigPath } from '../config/resolve-path.js';
 import { loadConfig } from '../config/load-config.js';
 import { writeCss } from '../output/write-css.js';
-import { buildCssFromConfig, runValidations, printValidationResults, hasValidationResults, hasValidationErrors, hasValidationWarnings, type TokensForValidation } from '@ngcorex/css';
+import { buildCssFromConfig, runValidations, printValidationResults, hasValidationResults, hasValidationErrors, hasValidationWarnings, resolveExtends, deepMerge, type TokensForValidation } from '@ngcorex/css';
 import { resolve } from 'node:path';
 import { BuildSummary, success, info, warning, error, section } from '../utils/logger.js';
 
@@ -19,7 +19,8 @@ export async function runBuild(
   const buildSummary = new BuildSummary();
   
   const configPath = resolveConfigPath();
-  const config = await loadConfig(configPath);
+  const rawConfig = await loadConfig(configPath);
+  const config = await resolveExtends(rawConfig, configPath);
 
   success('Loaded ngcorex.config.ts');
 
@@ -352,7 +353,7 @@ export async function runBuild(
   const effectiveConfig = fileTokens
     ? {
         ...config,
-        tokens: fileTokens
+        tokens: deepMerge(config.tokens ?? {}, fileTokens as object) 
       }
     : config;
   

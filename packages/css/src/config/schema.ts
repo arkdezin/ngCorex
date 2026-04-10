@@ -133,6 +133,7 @@ export interface SemanticTokensConfig {
 }
 
 export interface NgCorexConfig {
+  extends?: string | string[];  // NEW — path(s) to base tokens.json files
   tokens?: TokensConfig;
   semantic?: SemanticTokensConfig;
   utilities?: UtilitiesConfig;

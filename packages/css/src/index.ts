@@ -28,6 +28,10 @@ export { NgCorexError } from './errors/ngcorex-error.js';
 
 export { runConstraints } from './constraints/run-constraints.js';
 
+export { deepMerge } from './utils/deep-merge.js';
+
+export { resolveExtends } from './engine/resolve-extends.js';
+
 // Validation API
 export {
   runValidations,
