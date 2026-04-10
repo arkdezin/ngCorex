@@ -9,7 +9,7 @@ import { deepMerge } from '../utils/deep-merge.js';
 import { runConstraints } from '../constraints/run-constraints.js';
 import { wrapCss } from '../output/wrap-css.js';
 import { generateScssVariables, generateScssMap } from '../tokens/generate-scss.js';
-
+import { normalizeSemanticTokens } from '../tokens/normalize-semantic.js';
 
 /**
  * Build CSS variables from ngCorex config
@@ -157,7 +157,15 @@ if (tokens.icons) {
   );
 }
 
-// 13. Generate CSS & SCSS ← was step 9, renumber
+// 13. Normalize semantic tokens (must run after all primitives)
+if (config.semantic) {
+  Object.assign(
+    allTokens,
+    normalizeSemanticTokens(config.semantic, allTokens)
+  );
+}
+
+// 14. Generate CSS & SCSS ← was step 9, renumber
 const format = config.output?.format ?? 'css';
 
 if (format === 'scss-variables') {

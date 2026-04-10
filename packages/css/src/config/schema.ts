@@ -127,10 +127,16 @@ export interface OutputConfig {
   format?: 'css' | 'scss-variables' | 'scss-map'; 
 }
 
+// Add this new type
+export interface SemanticTokensConfig {
+  [category: string]: Record<string, string>;
+}
+
 export interface NgCorexConfig {
-    tokens?: TokensConfig;
-    utilities?: UtilitiesConfig;
-    constraints?: ConstraintConfig;
-    presets?: string[];
-    output?: OutputConfig;
+  tokens?: TokensConfig;
+  semantic?: SemanticTokensConfig;
+  utilities?: UtilitiesConfig;
+  constraints?: ConstraintConfig;
+  presets?: string[];
+  output?: OutputConfig;
 }
