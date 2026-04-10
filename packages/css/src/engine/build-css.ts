@@ -118,9 +118,48 @@ if (config.tokens) {
     );
   }
 
-  // 9. Generate CSS
-  const css = generateCssVariables(allTokens);
+  // 9. Normalize opacity
+if (tokens.opacity) {
+  Object.assign(
+    allTokens,
+    normalizeTokenScale('opacity', tokens.opacity)
+  );
+}
 
-  return wrapCss(css, config.output?.layer);
+// 10. Normalize borders
+if (tokens.borders) {
+  if (tokens.borders.width) {
+    Object.assign(
+      allTokens,
+      normalizeTokenScale('border-width', tokens.borders.width)
+    );
+  }
+  if (tokens.borders.style) {
+    Object.assign(
+      allTokens,
+      normalizeTokenScale('border-style', tokens.borders.style)
+    );
+  }
+}
+// 11. Normalize gradients
+if (tokens.gradients) {
+  Object.assign(
+    allTokens,
+    normalizeTokenScale('gradient', tokens.gradients)
+  );
+}
+
+// 12. Normalize icons
+if (tokens.icons) {
+  Object.assign(
+    allTokens,
+    normalizeTokenScale('icon', tokens.icons)
+  );
+}
+
+// 13. Generate CSS  ← was step 9, renumber
+const css = generateCssVariables(allTokens);
+
+return wrapCss(css, config.output?.layer);
 
 }

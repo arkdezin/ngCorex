@@ -40,20 +40,51 @@ export interface ConstraintConfig {
     format?: ConstraintLevel;
     type?: ConstraintLevel;
   };
+   opacity?: {
+    format?: ConstraintLevel;
+    type?: ConstraintLevel;
+  };
+  borders?: {
+    width?: {
+      unit?: ConstraintLevel;
+      format?: ConstraintLevel;
+      type?: ConstraintLevel;
+    };
+    style?: {
+      format?: ConstraintLevel;
+      type?: ConstraintLevel;
+    };
+  };
+  gradients?: {
+    format?: ConstraintLevel;
+    type?: ConstraintLevel;
+  };
+  icons?: {
+    unit?: ConstraintLevel;
+    format?: ConstraintLevel;
+    type?: ConstraintLevel;
+  };
 }
 
 
 export interface TokensConfig {
-    spacing?: TokenScale;
-    colors?: NestedTokenScale;
-    radius?: TokenScale;
-    zIndex?: TokenScale;
-    typography?: {
-        fontSize?: TokenScale;
-        fontWeight?: TokenScale;
-        lineHeight?: TokenScale;
-    };
-    shadows?: TokenScale;
+  spacing?: TokenScale;
+  colors?: NestedTokenScale;
+  radius?: TokenScale;
+  zIndex?: TokenScale;
+  typography?: {
+      fontSize?: TokenScale;
+      fontWeight?: TokenScale;
+      lineHeight?: TokenScale;
+  };
+  shadows?: TokenScale;
+    opacity?: TokenScale;
+  borders?: {
+    width?: TokenScale;
+    style?: TokenScale;
+  };
+  gradients?: TokenScale;
+  icons?: TokenScale;
 }
 
 export interface UtilitiesConfig {
