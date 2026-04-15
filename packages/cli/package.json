@@ -1,6 +1,6 @@
 {
   "name": "@ngcorex/cli",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "description": "CLI for ngCorex - a deterministic, governance-first design token engine with build-time CSS generation.",
   "keywords": [
     "design-tokens",
@@ -43,8 +43,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/arkdezin/ngCorex",
+    "url": "https://github.com/BuildMinimal/ngCorex",
     "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/BuildMinimal/ngCorex/issues"
   },
   "homepage": "https://ngcorex-docs.vercel.app/",
   "license": "MIT",

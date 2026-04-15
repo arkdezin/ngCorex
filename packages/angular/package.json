@@ -1,6 +1,6 @@
 {
   "name": "@ngcorex/angular",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "description": "Angular CLI integration for ngCorex - deterministic, governance-first design token engine with build-time CSS generation. Provides ng add support and build-time workflow wiring.",
   "keywords": [
     "ngcorex",
@@ -35,11 +35,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/arkdezin/ngCorex",
+    "url": "https://github.com/BuildMinimal/ngCorex",
     "directory": "packages/angular"
   },
   "bugs": {
-    "url": "https://github.com/arkdezin/ngCorex/issues"
+    "url": "https://github.com/BuildMinimal/ngCorex/issues"
   },
   "homepage": "https://ngcorex-docs.vercel.app/angular-integration",
   "license": "MIT",

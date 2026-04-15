@@ -11,7 +11,7 @@ export default {
   roadmap: "Roadmap",
   utilities: "Utilities",
   presets: "Presets",
-  extends: "Extends",
+  "token-extends": "Extends",
   "semantic-tokens": "Semantic Tokens",
   "output-formats": "Output Formats"
 }
