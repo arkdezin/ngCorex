@@ -1,0 +1,420 @@
+# Semantic Tokens
+
+Semantic tokens are named aliases that map to your primitive design tokens, providing meaningful, context-specific names for your design system.
+
+---
+
+## What are semantic tokens?
+
+Semantic tokens give meaningful names to your primitive tokens, making your design system more maintainable and easier to understand.
+
+Instead of using generic names like `primary-500` or `neutral-700`, you can use semantic names like:
+
+- `text-primary` - for primary text color
+- `background-surface` - for surface backgrounds
+- `border-default` - for default borders
+- `text-error` - for error messages
+
+These semantic names map to your primitive tokens, creating a layer of abstraction.
+
+---
+
+## Why use semantic tokens?
+
+### Better communication
+
+Semantic names communicate **intent**, not just appearance:
+
+```css
+/* Without semantic tokens */
+.button-primary {
+  background: var(--color-primary-500);
+  color: var(--color-neutral-0);
+}
+
+/* With semantic tokens */
+.button-primary {
+  background: var(--background-primary);
+  color: var(--text-on-primary);
+}
+```
+
+The semantic version is clearer about the button's purpose.
+
+### Easier updates
+
+When design changes, you only update the mapping:
+
+```typescript
+// Before design change
+{
+  "semantic": {
+    "text-primary": "color-primary-500"
+  }
+}
+
+// After design change - only update mapping
+{
+  "semantic": {
+    "text-primary": "color-primary-600"
+  }
+}
+```
+
+All components using `text-primary` automatically get the new color.
+
+### Consistent theming
+
+Semantic tokens make it easier to support multiple themes:
+
+```typescript
+// Light theme
+{
+  "semantic": {
+    "background-surface": "color-neutral-0",
+    "text-primary": "color-neutral-900"
+  }
+}
+
+// Dark theme
+{
+  "semantic": {
+    "background-surface": "color-neutral-900",
+    "text-primary": "color-neutral-0"
+  }
+}
+```
+
+---
+
+## Defining semantic tokens
+
+### Basic configuration
+
+Add semantic tokens to your `ngcorex.config.ts`:
+
+```typescript
+import { defineConfig } from "@ngcorex/css";
+
+export default defineConfig({
+  tokens: {
+    colors: {
+      primary: {
+        500: "#3b82f6",
+      },
+      neutral: {
+        0: "#ffffff",
+        900: "#171717",
+      },
+    },
+  },
+  semantic: {
+    "text-primary": "color-primary-500",
+    "text-on-primary": "color-neutral-0",
+    "background-primary": "color-primary-500",
+    "background-surface": "color-neutral-0",
+    "text-on-surface": "color-neutral-900",
+  },
+});
+```
+
+### Generated CSS
+
+ngCorex generates CSS variables for both primitive and semantic tokens:
+
+```css
+:root {
+  /* Primitive tokens */
+  --color-primary-500: #3b82f6;
+  --color-neutral-0: #ffffff;
+  --color-neutral-900: #171717;
+
+  /* Semantic tokens */
+  --text-primary: var(--color-primary-500);
+  --text-on-primary: var(--color-neutral-0);
+  --background-primary: var(--color-primary-500);
+  --background-surface: var(--color-neutral-0);
+  --text-on-surface: var(--color-neutral-900);
+}
+```
+
+---
+
+## Using semantic tokens
+
+### In CSS
+
+Use semantic variables in your stylesheets:
+
+```css
+.button {
+  background: var(--background-primary);
+  color: var(--text-on-primary);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+}
+
+.card {
+  background: var(--background-surface);
+  color: var(--text-on-surface);
+  border: 1px solid var(--border-default);
+  box-shadow: var(--shadow-md);
+}
+
+.alert-error {
+  background: var(--background-error);
+  color: var(--text-on-error);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+}
+```
+
+### In components
+
+Semantic tokens make components more readable:
+
+```css
+/* Without semantic tokens */
+.header {
+  background: var(--color-neutral-900);
+  color: var(--color-neutral-0);
+}
+
+/* With semantic tokens */
+.header {
+  background: var(--background-header);
+  color: var(--text-on-header);
+}
+```
+
+---
+
+## Semantic token patterns
+
+### Text colors
+
+```typescript
+{
+  "semantic": {
+    "text-primary": "color-neutral-900",
+    "text-secondary": "color-neutral-700",
+    "text-tertiary": "color-neutral-500",
+    "text-inverse": "color-neutral-0",
+    "text-primary-on-primary": "color-neutral-0",
+    "text-error": "color-error-500",
+    "text-success": "color-success-500",
+    "text-warning": "color-warning-500"
+  }
+}
+```
+
+### Background colors
+
+```typescript
+{
+  "semantic": {
+    "background-surface": "color-neutral-0",
+    "background-surface-alt": "color-neutral-100",
+    "background-primary": "color-primary-500",
+    "background-error": "color-error-100",
+    "background-success": "color-success-100",
+    "background-warning": "color-warning-100"
+  }
+}
+```
+
+### Border colors
+
+```typescript
+{
+  "semantic": {
+    "border-default": "color-neutral-300",
+    "border-strong": "color-neutral-500",
+    "border-primary": "color-primary-500",
+    "border-error": "color-error-500"
+  }
+}
+```
+
+### Spacing
+
+```typescript
+{
+  "semantic": {
+    "spacing-component": "spacing-md",
+    "spacing-section": "spacing-lg",
+    "spacing-page": "spacing-xl"
+  }
+}
+```
+
+---
+
+## Best practices
+
+### 1. Use descriptive names
+
+Good:
+
+- `text-primary` - clearly indicates it's for primary text
+- `background-surface` - indicates it's for surface backgrounds
+- `border-default` - indicates it's the default border
+
+Bad:
+
+- `text-1` - doesn't indicate purpose
+- `bg-2` - unclear meaning
+- `border-a` - meaningless
+
+### 2. Group by purpose
+
+Organize semantic tokens by their use case:
+
+```typescript
+{
+  "semantic": {
+    // Text
+    "text-primary": "...",
+    "text-secondary": "...",
+
+    // Backgrounds
+    "background-surface": "...",
+    "background-primary": "...",
+
+    // Borders
+    "border-default": "...",
+    "border-strong": "..."
+  }
+}
+```
+
+### 3. Use consistent prefixes
+
+Use prefixes to group related tokens:
+
+- `text-*` for text colors
+- `background-*` for backgrounds
+- `border-*` for borders
+- `spacing-*` for spacing
+- `radius-*` for border radius
+
+### 4. Document your semantic tokens
+
+Keep a reference of what each semantic token represents:
+
+```typescript
+{
+  "semantic": {
+    // Primary action elements (buttons, links)
+    "background-primary": "color-primary-500",
+
+    // Main content areas
+    "background-surface": "color-neutral-0",
+
+    // Primary text on light backgrounds
+    "text-primary": "color-neutral-900"
+  }
+}
+```
+
+### 5. Keep semantic tokens stable
+
+Avoid changing semantic token names. If you need to change the underlying value, update the mapping instead:
+
+```typescript
+// Don't do this - breaks all references
+// "text-primary-old" -> "color-primary-500"
+// "text-primary" -> "color-primary-600"
+
+// Do this - keeps references intact
+// "text-primary" -> "color-primary-600" (was "color-primary-500")
+```
+
+---
+
+## Advanced patterns
+
+### Theme switching
+
+Use semantic tokens with multiple themes:
+
+```typescript
+// light-theme.json
+{
+  "colors": {
+    "neutral": { "0": "#ffffff", "900": "#171717" },
+    "primary": { "500": "#3b82f6" }
+  },
+  "semantic": {
+    "background-surface": "color-neutral-0",
+    "text-primary": "color-neutral-900"
+  }
+}
+
+// dark-theme.json
+{
+  "colors": {
+    "neutral": { "0": "#171717", "900": "#ffffff" },
+    "primary": { "500": "#60a5fa" }
+  },
+  "semantic": {
+    "background-surface": "color-neutral-0",
+    "text-primary": "color-neutral-900"
+  }
+}
+```
+
+Switch themes by loading different config files.
+
+### Component-specific semantics
+
+Create semantic tokens for specific components:
+
+```typescript
+{
+  "semantic": {
+    // Button
+    "button-primary-bg": "color-primary-500",
+    "button-primary-text": "color-neutral-0",
+
+    // Card
+    "card-bg": "color-neutral-0",
+    "card-border": "color-neutral-300",
+
+    // Alert
+    "alert-error-bg": "color-error-100",
+    "alert-error-text": "color-error-700"
+  }
+}
+```
+
+---
+
+## When to use semantic tokens
+
+Semantic tokens are most useful when:
+
+- **Building large applications** - Provides consistent naming across components
+- **Working with a team** - Makes design intent clear to everyone
+- **Planning for theming** - Makes theme switching easier
+- **Documenting design decisions** - Creates a design vocabulary
+
+---
+
+## When to skip semantic tokens
+
+You might not need semantic tokens when:
+
+- **Building simple projects** - Primitive tokens may be sufficient
+- **Rapid prototyping** - Skip the extra layer initially
+- **Using utilities heavily** - Utility classes may provide enough abstraction
+
+---
+
+## Next steps
+
+To learn more:
+
+- [**Design Tokens**](./design-tokens.mdx) - understanding primitive tokens
+- [**Utilities**](./utilities.mdx) - using semantic tokens with utilities
+- [**Configuration**](./project-structure.mdx) - configuring semantic tokens

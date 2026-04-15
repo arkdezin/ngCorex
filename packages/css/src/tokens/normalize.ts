@@ -1,4 +1,4 @@
-import type { TokenScale, NormalizedToken, NormalizedTokenGroup } from './types.ts';
+import type { TokenScale, NormalizedTokenGroup } from './types.ts';
 import { NgCorexError, NgCorexErrorCode } from '../errors/ngcorex-error.js';
 
 
@@ -33,7 +33,7 @@ export function normalizeTokenScale(
     const name = `${category}-${key}`;
     const cssVariable = `--${CSS_VAR_PREFIX}-${name}`;
 
-    result[key] = {
+    result[name] = {
       name,
       cssVariable,
       value

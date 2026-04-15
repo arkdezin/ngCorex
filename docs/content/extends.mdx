@@ -1,0 +1,364 @@
+# Extends
+
+The `extends` feature allows you to inherit tokens from base token files, making it easy to share design tokens across multiple projects.
+
+---
+
+## What is extends?
+
+`extends` lets you reference one or more base token files in your configuration. These base tokens are merged with your project's tokens, giving you a foundation to build upon.
+
+This is useful for:
+
+- **Sharing design systems** across multiple projects
+- **Creating token libraries** that can be versioned and distributed
+- **Maintaining consistency** across related applications
+- **Layering design decisions** - foundation → brand → project
+
+---
+
+## Basic usage
+
+### Extending from a single file
+
+To extend from a base token file, add the `extends` field to your `ngcorex.config.ts`:
+
+```typescript
+import { defineConfig } from "@ngcorex/css";
+
+export default defineConfig({
+  extends: "./base-tokens.json",
+  tokens: {
+    // Your project-specific tokens
+  },
+});
+```
+
+### Extending from multiple files
+
+You can extend from multiple base files:
+
+```typescript
+import { defineConfig } from "@ngcorex/css";
+
+export default defineConfig({
+  extends: ["./foundation-tokens.json", "./brand-tokens.json"],
+  tokens: {
+    // Your project-specific tokens
+  },
+});
+```
+
+---
+
+## How extends works
+
+### Path resolution
+
+Paths in `extends` are resolved relative to your `ngcorex.config.ts` file.
+
+```
+project/
+├── ngcorex.config.ts
+├── tokens/
+│   ├── foundation-tokens.json
+│   └── brand-tokens.json
+└── src/
+```
+
+Configuration:
+
+```typescript
+export default defineConfig({
+  extends: ["./tokens/foundation-tokens.json", "./tokens/brand-tokens.json"],
+});
+```
+
+### Merge order
+
+Tokens are merged in this order:
+
+1. First base file
+2. Second base file
+3. ...
+4. Your project's tokens
+
+Later sources override earlier ones.
+
+Example:
+
+```json
+// foundation-tokens.json
+{
+  "spacing": {
+    "sm": "0.5rem",
+    "md": "1rem",
+    "lg": "1.5rem"
+  },
+  "colors": {
+    "primary": {
+      "500": "#2563eb"
+    }
+  }
+}
+```
+
+```json
+// brand-tokens.json
+{
+  "colors": {
+    "primary": {
+      "500": "#3b82f6" // Overrides foundation's primary-500
+    },
+    "accent": {
+      "500": "#10b981"
+    }
+  }
+}
+```
+
+```typescript
+// ngcorex.config.ts
+export default defineConfig({
+  extends: ["./foundation-tokens.json", "./brand-tokens.json"],
+  tokens: {
+    colors: {
+      primary: {
+        900: "#1e3a8a", // Adds to primary palette
+      },
+    },
+  },
+});
+```
+
+Result:
+
+```json
+{
+  "spacing": {
+    "sm": "0.5rem",
+    "md": "1rem",
+    "lg": "1.5rem"
+  },
+  "colors": {
+    "primary": {
+      "500": "#3b82f6", // From brand (overrode foundation)
+      "900": "#1e3a8a" // From project tokens
+    },
+    "accent": {
+      "500": "#10b981" // From brand
+    }
+  }
+}
+```
+
+### Deep merge
+
+ngCorex uses a deep merge strategy, meaning nested objects are merged intelligently:
+
+```json
+// base-tokens.json
+{
+  "colors": {
+    "primary": {
+      "100": "#dbeafe",
+      "500": "#3b82f6",
+      "900": "#1e3a8a"
+    }
+  }
+}
+```
+
+```json
+// Your project tokens
+{
+  "colors": {
+    "primary": {
+      "500": "#2563eb" // Only overrides this value
+    }
+  }
+}
+```
+
+Result:
+
+```json
+{
+  "colors": {
+    "primary": {
+      "100": "#dbeafe", // Preserved from base
+      "500": "#2563eb", // Overridden
+      "900": "#1e3a8a" // Preserved from base
+    }
+  }
+}
+```
+
+---
+
+## Use cases
+
+### Shared design system
+
+Create a shared design system package:
+
+```
+@my-company/design-tokens/
+├── package.json
+├── foundation.json
+├── brand-a.json
+└── brand-b.json
+```
+
+Install in multiple projects:
+
+```bash
+npm install @my-company/design-tokens
+```
+
+Use in project:
+
+```typescript
+// project-a/ngcorex.config.ts
+import { defineConfig } from "@ngcorex/css";
+
+export default defineConfig({
+  extends: [
+    "@my-company/design-tokens/foundation.json",
+    "@my-company/design-tokens/brand-a.json",
+  ],
+});
+```
+
+```typescript
+// project-b/ngcorex.config.ts
+import { defineConfig } from "@ngcorex/css";
+
+export default defineConfig({
+  extends: [
+    "@my-company/design-tokens/foundation.json",
+    "@my-company/design-tokens/brand-b.json",
+  ],
+});
+```
+
+### Layered design decisions
+
+Organize tokens by layer:
+
+```json
+// foundation-tokens.json
+{
+  "spacing": {
+    /* base scale */
+  },
+  "colors": {
+    "neutral": {
+      /* neutral palette */
+    }
+  }
+}
+```
+
+```json
+// brand-tokens.json
+{
+  "colors": {
+    "primary": {
+      /* brand colors */
+    }
+  }
+}
+```
+
+```json
+// project-tokens.json
+{
+  "colors": {
+    "primary": {
+      /* project overrides */
+    }
+  }
+}
+```
+
+### Environment-specific tokens
+
+Use extends with environment variables:
+
+```typescript
+import { defineConfig } from "@ngcorex/css";
+
+const brand = process.env.BRAND || "default";
+
+export default defineConfig({
+  extends: `./tokens/${brand}-tokens.json`,
+});
+```
+
+---
+
+## Best practices
+
+1. **Keep base files focused** - Each base file should have a clear purpose
+2. **Document your layers** - Make it clear what each base file provides
+3. **Version your base files** - Track changes as your design evolves
+4. **Use semantic naming** - Make it obvious what each file contains
+5. **Avoid circular dependencies** - Don't have files that extend from each other
+
+---
+
+## Limitations
+
+- **Only JSON files are supported** - You cannot extend from `ngcorex.config.ts` files
+- **Paths are relative to config** - All paths are resolved from `ngcorex.config.ts` location
+- **No circular references** - A file cannot extend from itself or create circular dependencies
+
+---
+
+## Common patterns
+
+### Foundation + Brand pattern
+
+```typescript
+export default defineConfig({
+  extends: [
+    "./tokens/foundation.json", // Base design system
+    "./tokens/brand.json", // Brand-specific tokens
+  ],
+});
+```
+
+### Foundation + Brand + Project pattern
+
+```typescript
+export default defineConfig({
+  extends: [
+    "./tokens/foundation.json", // Base design system
+    "./tokens/brand.json", // Brand-specific tokens
+  ],
+  tokens: {
+    // Project-specific overrides
+  },
+});
+```
+
+### Multi-brand pattern
+
+```typescript
+const brand = process.env.BRAND || "default";
+
+export default defineConfig({
+  extends: ["./tokens/foundation.json", `./tokens/brands/${brand}.json`],
+});
+```
+
+---
+
+## Next steps
+
+To learn more:
+
+- [**Design Tokens**](./design-tokens.mdx) - understanding token structure
+- [**Presets**](./presets.mdx) - using pre-configured token sets
+- [**Configuration**](./project-structure.mdx) - configuring extends in ngcorex.config.ts

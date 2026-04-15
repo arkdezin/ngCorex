@@ -81,6 +81,65 @@ The `ngcorex:dev` command automatically:
 
 ---
 
+## Features
+
+### Design Tokens
+
+Define your design system once, use it everywhere:
+
+- **Spacing** - Margins, padding, gaps, and layout dimensions
+- **Colors** - Palettes with nested scales
+- **Typography** - Font sizes, weights, and line heights
+- **Radius** - Border radius values
+- **Shadows** - Box shadow definitions
+- **Z-Index** - Layer management
+- **Opacity** - Transparency values
+- **Borders** - Border widths and styles
+- **Gradients** - Gradient definitions
+- **Icons** - Icon sizing
+
+### Utilities System
+
+Generate utility classes from your tokens:
+
+- **Spacing utilities** - `.m-{s}`, `.p-{s}`, `.gap-{s}`, `.w-{s}`, `.h-{s}`
+- **Color utilities** - `.text-{color}`, `.bg-{color}`, `.border-{color}`
+- **Layout utilities** - `.flex`, `.grid`, `.items-center`, `.justify-between`
+- **Typography utilities** - `.text-{s}`, `.font-{s}`, `.leading-{s}`
+- **Radius utilities** - `.rounded-{s}`
+- **Shadow utilities** - `.shadow-{s}`
+- **Opacity utilities** - `.opacity-{s}`
+- **Border utilities** - `.border-w-{s}`, `.border-style-{s}`
+- **Gradient utilities** - `.bg-gradient-{s}`
+- **Icon utilities** - `.icon-{s}`
+- **Container utility** - `.container` with configurable max-width
+
+### Presets
+
+Start quickly with pre-configured token sets:
+
+- **Default preset** - Common spacing and color scales
+- **Extensible** - Create custom presets for your design system
+- **Composable** - Combine multiple presets with your own tokens
+
+### Extends
+
+Inherit and extend from base token files:
+
+- Share tokens across multiple projects
+- Create design system foundations
+- Override specific values as needed
+
+### Output Formats
+
+Choose your preferred output format:
+
+- **CSS variables** (default) - Standard CSS custom properties
+- **SCSS variables** - SCSS variable syntax
+- **SCSS map** - SCSS map format for advanced usage
+
+---
+
 ## Philosophy
 
 ngCorex is:

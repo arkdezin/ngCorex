@@ -19,6 +19,8 @@ your project will typically include the following files:
 ```txt
 tokens.json
 ngcorex.config.ts
+src/styles/ngcorex.css
+src/styles/ngcorex.utilities.css (optional)
 ```
 
 Additional files may be generated during the build process.
@@ -70,6 +72,9 @@ It tells ngCorex:
 - where tokens are located
 - where generated CSS should be written
 - which output layers are enabled
+- whether utilities should be generated
+- which presets to use
+- which base token files to extend from
 
 ### Do I need to edit this file?
 
@@ -82,6 +87,9 @@ This file exists to support:
 - advanced workflows
 - future extensibility
 - non-standard project layouts
+- utilities configuration
+- preset selection
+- token inheritance via extends
 
 If you are unsure whether you need to change something here, you probably do not.
 
@@ -92,16 +100,58 @@ If you are unsure whether you need to change something here, you probably do not
 When you run:
 
 ```bash
-npx ngcorex build
+ngcorex build
 ```
 
 ngCorex generates CSS output based on your tokens.
+
+### CSS Variables File
+
+The main output file contains CSS variables for all your tokens.
+
+By default, this is written to:
+
+```
+src/styles/ngcorex.css
+```
+
+You can configure this in `ngcorex.config.ts`:
+
+```typescript
+export default defineConfig({
+  output: {
+    file: "src/styles/my-tokens.css",
+  },
+});
+```
+
+### Utilities File (optional)
+
+If utilities are enabled, a separate file is generated with utility classes.
+
+By default, this is written to:
+
+```
+src/styles/ngcorex.utilities.css
+```
+
+You can configure this in `ngcorex.config.ts`:
+
+```typescript
+export default defineConfig({
+  utilities: {
+    enabled: true,
+    output: "src/styles/utilities.css",
+  },
+});
+```
 
 ### Important notes
 
 - Generated files should not be edited manually
 - Changes will be overwritten on the next build
 - Treat generated CSS as build artifacts
+- Utilities are generated in a separate file to keep them optional
 
 You should always update tokens, not output.
 
@@ -112,8 +162,9 @@ You should always update tokens, not output.
 A simple way to think about ngCorex is:
 
 - **tokens.json** → _design decisions_
-- **ngcorex.config.ts** → _engine wiring_
+- **ngcorex.config.ts** → _engine wiring and configuration_
 - **generated CSS** → _compiled output_
+- **generated utilities** → _utility classes (optional)_
 
 Each file has a single responsibility.
 
@@ -127,6 +178,8 @@ This separation helps keep styling consistent and predictable as projects grow.
 - Duplicating design values outside of `tokens.json`
 - Adding arbitrary values to bypass validation
 - Treating ngCorex as a runtime styling tool
+- Forgetting to import the utilities file when using utilities
+- Overriding utility classes with custom CSS instead of adjusting tokens
 
 ngCorex is intentionally strict to prevent accidental drift.
 

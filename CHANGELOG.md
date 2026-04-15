@@ -10,6 +10,65 @@ This project follows semantic versioning:
 
 ---
 
+## 0.2.9 - 2026-04-14
+
+### Added
+
+- **Utilities System** - Comprehensive utility CSS generator with full configuration support
+  - Spacing utilities: margin, padding, gap, width, height
+  - Color utilities: text, background, border color
+  - Layout utilities: display, flex, grid with common variants
+  - Typography utilities: fontSize, fontWeight, lineHeight
+  - Radius, shadows, opacity utilities
+  - Border width and style utilities
+  - Gradient and icon utilities
+  - Container utility with configurable max-width
+- **New Token Categories** - Expanded token support:
+  - `opacity` - Opacity values (0-1 scale)
+  - `borders` - Border width and style tokens
+  - `gradients` - Gradient definitions
+  - `icons` - Icon sizing tokens
+- **Presets System** - Pre-configured token sets for quick setup
+  - `default` preset with common spacing and color scales
+  - Extensible preset registry for custom presets
+- **Extends Feature** - Token inheritance from base token files
+  - Support for extending from multiple base token files
+  - Configurable merge order (last wins)
+  - Path resolution relative to ngcorex.config.ts
+- **Semantic Tokens** - Mapping system for semantic token names
+  - Define semantic aliases for primitive tokens
+  - Reference semantic tokens in CSS output
+- **Output Formats** - Multiple CSS output format support
+  - `css` - Standard CSS variables (default)
+  - `scss-variables` - SCSS variable syntax
+  - `scss-map` - SCSS map format
+- **Deep Merge Utility** - Robust token configuration merging
+  - Handles nested object merging
+  - Preserves array values
+  - Used throughout the engine for token resolution
+
+### Changed
+
+- **Engine Pipeline** - Updated to support utilities generation
+  - Added utilities generation stage after CSS variable generation
+  - Presets are resolved before user tokens
+  - Semantic tokens are normalized after all primitives
+- **Configuration Schema** - Extended with new options
+  - `utilities` configuration section
+  - `presets` array for preset selection
+  - `extends` field for token inheritance
+  - `semantic` section for semantic token mappings
+  - `output.format` for format selection
+
+### Notes
+
+- The utilities system is opt-in via configuration
+- Utilities are generated in a separate output file
+- All new token categories follow existing validation patterns
+- Presets can be combined with user tokens for customization
+
+---
+
 ## 0.2.7 - 2026-02-24
 
 ### Fixed

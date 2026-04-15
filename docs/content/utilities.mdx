@@ -1,0 +1,794 @@
+# Utilities
+
+ngCorex can generate utility classes from your design tokens.
+
+Utilities are CSS classes that apply a single style property, making it easy to build UIs quickly while staying consistent with your design system.
+
+---
+
+## What are utilities?
+
+Utilities are CSS classes like `.p-4`, `.text-primary-500`, or `.flex` that map directly to your design tokens.
+
+Instead of writing custom CSS:
+
+```css
+.my-component {
+  padding: 1rem;
+  background: #3b82f6;
+  display: flex;
+  align-items: center;
+}
+```
+
+You can use utilities:
+
+```html
+<div class="p-md bg-primary-500 flex items-center">My component</div>
+```
+
+The utilities are generated from your tokens, so they always stay in sync with your design system.
+
+---
+
+## Enabling utilities
+
+Utilities are opt-in. To enable them, add the `utilities` configuration to your [`ngcorex.config.ts`](./project-structure.mdx):
+
+```typescript
+import { defineConfig } from "@ngcorex/css";
+
+export default defineConfig({
+  utilities: {
+    enabled: true,
+    output: "src/styles/ngcorex.utilities.css",
+    // ... other utility options
+  },
+});
+```
+
+When you run `ngcorex build`, utilities will be generated in the specified output file.
+
+---
+
+## Spacing utilities
+
+Spacing utilities are generated from your `spacing` tokens.
+
+### Configuration
+
+```typescript
+utilities: {
+  spacing: {
+    margin: true,    // generates .m-{s}, .mt-{s}, .mr-{s}, .mb-{s}, .ml-{s}, .mx-{s}, .my-{s}
+    padding: true,   // generates .p-{s}, .pt-{s}, .pr-{s}, .pb-{s}, .pl-{s}, .px-{s}, .py-{s}
+    gap: true,       // generates .gap-{s}
+    width: true,     // generates .w-{s}
+    height: true     // generates .h-{s}
+  }
+}
+```
+
+### Generated classes
+
+With spacing tokens like:
+
+```json
+{
+  "spacing": {
+    "sm": "0.5rem",
+    "md": "1rem",
+    "lg": "1.5rem"
+  }
+}
+```
+
+You get:
+
+```css
+/* Spacing — Margin */
+.m-sm {
+  margin: var(--spacing-sm);
+}
+.m-md {
+  margin: var(--spacing-md);
+}
+.m-lg {
+  margin: var(--spacing-lg);
+}
+.mt-sm {
+  margin-top: var(--spacing-sm);
+}
+.mt-md {
+  margin-top: var(--spacing-md);
+}
+.mt-lg {
+  margin-top: var(--spacing-lg);
+}
+/* ... and so on for mr, mb, ml, mx, my */
+
+/* Spacing — Padding */
+.p-sm {
+  padding: var(--spacing-sm);
+}
+.p-md {
+  padding: var(--spacing-md);
+}
+.p-lg {
+  padding: var(--spacing-lg);
+}
+/* ... and so on for pt, pr, pb, pl, px, py */
+
+/* Spacing — Gap */
+.gap-sm {
+  gap: var(--spacing-sm);
+}
+.gap-md {
+  gap: var(--spacing-md);
+}
+.gap-lg {
+  gap: var(--spacing-lg);
+}
+
+/* Spacing — Width */
+.w-sm {
+  width: var(--spacing-sm);
+}
+.w-md {
+  width: var(--spacing-md);
+}
+.w-lg {
+  width: var(--spacing-lg);
+}
+
+/* Spacing — Height */
+.h-sm {
+  height: var(--spacing-sm);
+}
+.h-md {
+  height: var(--spacing-md);
+}
+.h-lg {
+  height: var(--spacing-lg);
+}
+```
+
+---
+
+## Color utilities
+
+Color utilities are generated from your `colors` tokens.
+
+### Configuration
+
+```typescript
+utilities: {
+  color: {
+    text: ['primary', 'neutral'],      // generates .text-primary-500, .text-neutral-500, etc.
+    background: ['primary', 'neutral'], // generates .bg-primary-500, .bg-neutral-500, etc.
+    border: ['primary', 'neutral']     // generates .border-primary-500, .border-neutral-500, etc.
+  }
+}
+```
+
+### Generated classes
+
+With color tokens like:
+
+```json
+{
+  "colors": {
+    "primary": {
+      "100": "#dbeafe",
+      "500": "#3b82f6",
+      "900": "#1e3a8a"
+    }
+  }
+}
+```
+
+You get:
+
+```css
+/* Color — Text */
+.text-primary-100 {
+  color: var(--color-primary-100);
+}
+.text-primary-500 {
+  color: var(--color-primary-500);
+}
+.text-primary-900 {
+  color: var(--color-primary-900);
+}
+
+/* Color — Background */
+.bg-primary-100 {
+  background-color: var(--color-primary-100);
+}
+.bg-primary-500 {
+  background-color: var(--color-primary-500);
+}
+.bg-primary-900 {
+  background-color: var(--color-primary-900);
+}
+
+/* Color — Border */
+.border-primary-100 {
+  border-color: var(--color-primary-100);
+}
+.border-primary-500 {
+  border-color: var(--color-primary-500);
+}
+.border-primary-900 {
+  border-color: var(--color-primary-900);
+}
+```
+
+---
+
+## Layout utilities
+
+Layout utilities provide common layout patterns.
+
+### Configuration
+
+```typescript
+utilities: {
+  layout: {
+    display: true,  // .flex, .inline-flex, .block, .inline-block, .inline, .hidden
+    flex: true,     // .flex-row, .flex-col, .flex-wrap, .items-center, .justify-center, etc.
+    grid: true      // .grid, .grid-cols-1 through .grid-cols-12
+  }
+}
+```
+
+### Generated classes
+
+```css
+/* Layout — Display */
+.flex {
+  display: flex;
+}
+.inline-flex {
+  display: inline-flex;
+}
+.block {
+  display: block;
+}
+.inline-block {
+  display: inline-block;
+}
+.inline {
+  display: inline;
+}
+.hidden {
+  display: none;
+}
+
+/* Layout — Flex */
+.flex-row {
+  flex-direction: row;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+.items-start {
+  align-items: flex-start;
+}
+.items-center {
+  align-items: center;
+}
+.items-end {
+  align-items: flex-end;
+}
+.justify-start {
+  justify-content: flex-start;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.justify-around {
+  justify-content: space-around;
+}
+
+/* Layout — Grid */
+.grid {
+  display: grid;
+}
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+/* ... up to .grid-cols-12 */
+```
+
+---
+
+## Typography utilities
+
+Typography utilities are generated from your `typography` tokens.
+
+### Configuration
+
+```typescript
+utilities: {
+  typography: {
+    fontSize: true,   // generates .text-{s} → font-size
+    fontWeight: true, // generates .font-{s} → font-weight
+    lineHeight: true  // generates .leading-{s} → line-height
+  }
+}
+```
+
+### Generated classes
+
+With typography tokens like:
+
+```json
+{
+  "typography": {
+    "fontSize": {
+      "sm": "0.875rem",
+      "md": "1rem",
+      "lg": "1.25rem"
+    },
+    "fontWeight": {
+      "regular": 400,
+      "medium": 500,
+      "bold": 700
+    },
+    "lineHeight": {
+      "tight": "1.2",
+      "normal": "1.5"
+    }
+  }
+}
+```
+
+You get:
+
+```css
+/* Typography — Font Size */
+.text-sm {
+  font-size: var(--fontSize-sm);
+}
+.text-md {
+  font-size: var(--fontSize-md);
+}
+.text-lg {
+  font-size: var(--fontSize-lg);
+}
+
+/* Typography — Font Weight */
+.font-regular {
+  font-weight: var(--fontWeight-regular);
+}
+.font-medium {
+  font-weight: var(--fontWeight-medium);
+}
+.font-bold {
+  font-weight: var(--fontWeight-bold);
+}
+
+/* Typography — Line Height */
+.leading-tight {
+  line-height: var(--lineHeight-tight);
+}
+.leading-normal {
+  line-height: var(--lineHeight-normal);
+}
+```
+
+---
+
+## Radius utilities
+
+Radius utilities are generated from your `radius` tokens.
+
+### Configuration
+
+```typescript
+utilities: {
+  radius: true; // generates .rounded-{s} → border-radius
+}
+```
+
+### Generated classes
+
+With radius tokens like:
+
+```json
+{
+  "radius": {
+    "sm": "2px",
+    "md": "4px",
+    "lg": "8px"
+  }
+}
+```
+
+You get:
+
+```css
+/* Radius */
+.rounded-sm {
+  border-radius: var(--radius-sm);
+}
+.rounded-md {
+  border-radius: var(--radius-md);
+}
+.rounded-lg {
+  border-radius: var(--radius-lg);
+}
+```
+
+---
+
+## Shadow utilities
+
+Shadow utilities are generated from your `shadows` tokens.
+
+### Configuration
+
+```typescript
+utilities: {
+  shadows: true; // generates .shadow-{s} → box-shadow
+}
+```
+
+### Generated classes
+
+With shadow tokens like:
+
+```json
+{
+  "shadows": {
+    "sm": "0 1px 2px rgba(0,0,0,0.05)",
+    "md": "0 4px 6px rgba(0,0,0,0.1)"
+  }
+}
+```
+
+You get:
+
+```css
+/* Shadows */
+.shadow-sm {
+  box-shadow: var(--shadows-sm);
+}
+.shadow-md {
+  box-shadow: var(--shadows-md);
+}
+```
+
+---
+
+## Opacity utilities
+
+Opacity utilities are generated from your `opacity` tokens.
+
+### Configuration
+
+```typescript
+utilities: {
+  opacity: true; // generates .opacity-{s} → opacity
+}
+```
+
+### Generated classes
+
+With opacity tokens like:
+
+```json
+{
+  "opacity": {
+    "0": "0",
+    "50": "0.5",
+    "100": "1"
+  }
+}
+```
+
+You get:
+
+```css
+/* Opacity */
+.opacity-0 {
+  opacity: var(--opacity-0);
+}
+.opacity-50 {
+  opacity: var(--opacity-50);
+}
+.opacity-100 {
+  opacity: var(--opacity-100);
+}
+```
+
+---
+
+## Border utilities
+
+Border utilities are generated from your `borders` tokens.
+
+### Configuration
+
+```typescript
+utilities: {
+  borders: {
+    width: true,  // generates .border-w-{s} → border-width
+    style: true   // generates .border-style-{s} → border-style
+  }
+}
+```
+
+### Generated classes
+
+With border tokens like:
+
+```json
+{
+  "borders": {
+    "width": {
+      "thin": "1px",
+      "medium": "2px"
+    },
+    "style": {
+      "solid": "solid",
+      "dashed": "dashed"
+    }
+  }
+}
+```
+
+You get:
+
+```css
+/* Borders — Width */
+.border-w-thin {
+  border-width: var(--border-width-thin);
+}
+.border-w-medium {
+  border-width: var(--border-width-medium);
+}
+
+/* Borders — Style */
+.border-style-solid {
+  border-style: var(--border-style-solid);
+}
+.border-style-dashed {
+  border-style: var(--border-style-dashed);
+}
+```
+
+---
+
+## Gradient utilities
+
+Gradient utilities are generated from your `gradients` tokens.
+
+### Configuration
+
+```typescript
+utilities: {
+  gradients: true; // generates .bg-gradient-{s} → background
+}
+```
+
+### Generated classes
+
+With gradient tokens like:
+
+```json
+{
+  "gradients": {
+    "primary": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+  }
+}
+```
+
+You get:
+
+```css
+/* Gradients */
+.bg-gradient-primary {
+  background: var(--gradient-primary);
+}
+```
+
+---
+
+## Icon utilities
+
+Icon utilities are generated from your `icons` tokens.
+
+### Configuration
+
+```typescript
+utilities: {
+  icons: true; // generates .icon-{s} → width + height
+}
+```
+
+### Generated classes
+
+With icon tokens like:
+
+```json
+{
+  "icons": {
+    "sm": "1rem",
+    "md": "1.5rem",
+    "lg": "2rem"
+  }
+}
+```
+
+You get:
+
+```css
+/* Icons */
+.icon-sm {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+}
+.icon-md {
+  width: var(--icon-md);
+  height: var(--icon-md);
+}
+.icon-lg {
+  width: var(--icon-lg);
+  height: var(--icon-lg);
+}
+```
+
+---
+
+## Container utility
+
+The container utility provides a centered, max-width constrained container.
+
+### Configuration
+
+```typescript
+utilities: {
+  container: {
+    enabled: true,
+    maxWidth: '1280px'  // optional, defaults to '1280px'
+  }
+}
+```
+
+### Generated class
+
+```css
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+```
+
+---
+
+## Complete configuration example
+
+Here's a complete utilities configuration:
+
+```typescript
+import { defineConfig } from "@ngcorex/css";
+
+export default defineConfig({
+  utilities: {
+    enabled: true,
+    output: "src/styles/ngcorex.utilities.css",
+
+    spacing: {
+      margin: true,
+      padding: true,
+      gap: true,
+      width: true,
+      height: true,
+    },
+
+    color: {
+      text: ["primary", "neutral", "success", "error"],
+      background: ["primary", "neutral", "success", "error"],
+      border: ["primary", "neutral"],
+    },
+
+    layout: {
+      display: true,
+      flex: true,
+      grid: true,
+    },
+
+    typography: {
+      fontSize: true,
+      fontWeight: true,
+      lineHeight: true,
+    },
+
+    radius: true,
+    shadows: true,
+    opacity: true,
+
+    borders: {
+      width: true,
+      style: true,
+    },
+
+    gradients: true,
+    icons: true,
+
+    container: {
+      enabled: true,
+      maxWidth: "1280px",
+    },
+  },
+});
+```
+
+---
+
+## Using utilities in your project
+
+1. **Import the utilities file** in your main stylesheet or component:
+
+```css
+@import "./ngcorex.utilities.css";
+```
+
+2. **Use utility classes** in your HTML or templates:
+
+```html
+<div class="container p-md">
+  <header class="flex items-center justify-between mb-lg">
+    <h1 class="text-lg font-bold text-primary-500">My App</h1>
+    <nav class="flex gap-md">
+      <a href="#" class="text-neutral-500 hover:text-primary-500">Home</a>
+      <a href="#" class="text-neutral-500 hover:text-primary-500">About</a>
+    </nav>
+  </header>
+  <main class="grid grid-cols-3 gap-md">
+    <div class="p-md rounded-md shadow-sm bg-neutral-100">Card 1</div>
+    <div class="p-md rounded-md shadow-sm bg-neutral-100">Card 2</div>
+    <div class="p-md rounded-md shadow-sm bg-neutral-100">Card 3</div>
+  </main>
+</div>
+```
+
+---
+
+## Best practices
+
+1. **Use tokens first** - Define your design system in tokens, then generate utilities
+2. **Be selective** - Only enable the utilities you need to keep output small
+3. **Combine with custom CSS** - Use utilities for common patterns, custom CSS for unique components
+4. **Stay consistent** - Follow naming conventions from your tokens
+5. **Test responsive** - Combine utilities with media queries for responsive design
+
+---
+
+## Next steps
+
+To learn more:
+
+- [**Design Tokens**](./design-tokens.mdx) - defining tokens that utilities are generated from
+- [**CLI Reference**](./cli.mdx) - running builds and generating utilities
+- [**Configuration**](./project-structure.mdx) - configuring utilities in ngcorex.config.ts

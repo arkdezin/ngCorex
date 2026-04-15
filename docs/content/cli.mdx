@@ -58,16 +58,38 @@ npx ngcorex build
 
 ### What it does
 
-1. Reads `tokens.json`
-2. Normalizes token values
-3. Validates tokens
-4. Generates CSS variables
+1. Reads `ngcorex.config.ts`
+2. Resolves extends and applies presets
+3. Reads `tokens.json`
+4. Normalizes token values
+5. Validates tokens
+6. Generates CSS variables
+7. Generates utilities (if enabled)
 
 ### Output behavior
 
 - Errors stop the build
 - Warnings and info messages are displayed without blocking
 - Generated files are overwritten on each build
+- Utilities are generated in a separate file if enabled
+
+### Output formats
+
+ngCorex supports multiple output formats:
+
+- **css** (default) - Standard CSS custom properties
+- **scss-variables** - SCSS variable syntax
+- **scss-map** - SCSS map format
+
+Configure output format in `ngcorex.config.ts`:
+
+```typescript
+export default defineConfig({
+  output: {
+    format: "scss-variables", // or 'css', 'scss-map'
+  },
+});
+```
 
 ---
 
@@ -81,14 +103,16 @@ npx ngcorex build --watch
 
 ### What it does
 
-- Watches `tokens.json` for changes
+- Watches `tokens.json` and `ngcorex.config.ts` for changes
 - Re-runs the build automatically
 - Outputs validation messages on each rebuild
+- Regenerates both CSS variables and utilities
 
 ### When to use
 
 - During active design token iteration
 - While adjusting spacing, colors, or typography
+- When developing with utilities
 
 ---
 

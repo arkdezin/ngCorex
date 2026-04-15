@@ -8,5 +8,10 @@ export default {
   "angular-integration": "Angular Integration",
   cli: "CLI",
   "versioning-stability": "Versioning & Stability",
-  roadmap: "Roadmap"
+  roadmap: "Roadmap",
+  utilities: "Utilities",
+  presets: "Presets",
+  extends: "Extends",
+  "semantic-tokens": "Semantic Tokens",
+  "output-formats": "Output Formats"
 }

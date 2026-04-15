@@ -1,0 +1,380 @@
+# Output Formats
+
+ngCorex supports multiple output formats for your design tokens, allowing you to choose the format that best fits your project's needs.
+
+---
+
+## Available formats
+
+### CSS (default)
+
+Standard CSS custom properties (CSS variables).
+
+```css
+:root {
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --color-primary-500: #3b82f6;
+  --radius-md: 4px;
+}
+```
+
+**Use when:**
+
+- You want standard CSS variables
+- You're building for modern browsers
+- You need runtime theme switching
+- You want maximum browser support (CSS variables are well-supported)
+
+**Browser support:**
+
+- Chrome 49+
+- Firefox 31+
+- Safari 9.1+
+- Edge 15+
+
+### SCSS Variables
+
+SCSS variable syntax for use with Sass/SCSS projects.
+
+```scss
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$color-primary-500: #3b82f6;
+$radius-md: 4px;
+```
+
+**Use when:**
+
+- You're using Sass or SCSS in your project
+- You need to use tokens in SCSS functions or mixins
+- You want to compile tokens with your SCSS
+- You need to use tokens in calculations
+
+**Configuration:**
+
+```typescript
+import { defineConfig } from "@ngcorex/css";
+
+export default defineConfig({
+  output: {
+    format: "scss-variables",
+  },
+});
+```
+
+### SCSS Map
+
+SCSS map format for advanced Sass usage.
+
+```scss
+$ngcorex-tokens: (
+  "spacing-sm": 0.5rem,
+  "spacing-md": 1rem,
+  "color-primary-500": #3b82f6,
+  "radius-md": 4px,
+);
+```
+
+**Use when:**
+
+- You want to iterate over tokens in SCSS
+- You need to access tokens dynamically by key
+- You're building SCSS mixins or functions
+- You want to use Sass's `map-get()` function
+
+**Configuration:**
+
+```typescript
+import { defineConfig } from "@ngcorex/css";
+
+export default defineConfig({
+  output: {
+    format: "scss-map",
+  },
+});
+```
+
+---
+
+## Configuring output format
+
+### In ngcorex.config.ts
+
+```typescript
+import { defineConfig } from "@ngcorex/css";
+
+export default defineConfig({
+  output: {
+    format: "scss-variables", // 'css' | 'scss-variables' | 'scss-map'
+    file: "src/styles/tokens.scss",
+  },
+});
+```
+
+### Output file extension
+
+The output file extension should match your format:
+
+| Format         | Recommended extension |
+| -------------- | --------------------- |
+| css            | `.css`                |
+| scss-variables | `.scss`               |
+| scss-map       | `.scss`               |
+
+---
+
+## Format comparison
+
+| Feature         | CSS       | SCSS Variables       | SCSS Map             |
+| --------------- | --------- | -------------------- | -------------------- |
+| Standard CSS    | ✅        | ❌                   | ❌                   |
+| Browser support | Excellent | Requires compilation | Requires compilation |
+| Runtime theming | ✅        | ❌                   | ❌                   |
+| SCSS functions  | ❌        | ✅                   | ✅                   |
+| SCSS mixins     | ❌        | ✅                   | ✅                   |
+| Dynamic access  | ❌        | ❌                   | ✅                   |
+| Iteration       | ❌        | ❌                   | ✅                   |
+
+---
+
+## Usage examples
+
+### Using CSS variables
+
+```css
+.button {
+  background: var(--color-primary-500);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+}
+
+.card {
+  background: var(--color-neutral-0);
+  color: var(--color-neutral-900);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+}
+```
+
+### Using SCSS variables
+
+```scss
+.button {
+  background: $color-primary-500;
+  padding: $spacing-md;
+  border-radius: $radius-md;
+}
+
+.card {
+  background: $color-neutral-0;
+  color: $color-neutral-900;
+  padding: $spacing-lg;
+  border-radius: $radius-lg;
+}
+```
+
+### Using SCSS map
+
+```scss
+// Access individual token
+.button {
+  background: map-get($ngcorex-tokens, "color-primary-500");
+  padding: map-get($ngcorex-tokens, "spacing-md");
+  border-radius: map-get($ngcorex-tokens, "radius-md");
+}
+
+// Iterate over tokens
+@each $name, $value in $ngcorex-tokens {
+  .token-#{$name} {
+    value: #{$value};
+  }
+}
+
+// Use in mixins
+@mixin button-style($color-token) {
+  background: map-get($ngcorex-tokens, $color-token);
+  padding: map-get($ngcorex-tokens, "spacing-md");
+}
+
+.button-primary {
+  @include button-style("color-primary-500");
+}
+```
+
+---
+
+## Advanced patterns
+
+### Theme switching with CSS
+
+CSS variables support runtime theme switching:
+
+```css
+:root {
+  --color-primary-500: #3b82f6;
+  --background-surface: #ffffff;
+  --text-primary: #171717;
+}
+
+[data-theme="dark"] {
+  --color-primary-500: #60a5fa;
+  --background-surface: #171717;
+  --text-primary: #ffffff;
+}
+```
+
+Switch themes by changing data attribute:
+
+```javascript
+function setTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+}
+```
+
+### Token fallbacks with CSS
+
+CSS variables support fallbacks:
+
+```css
+.button {
+  background: var(--color-primary-500, #3b82f6);
+  padding: var(--spacing-md, 1rem);
+}
+```
+
+### SCSS token functions
+
+Create helper functions for tokens:
+
+```scss
+@function token($name) {
+  @return map-get($ngcorex-tokens, $name);
+}
+
+.button {
+  background: token("color-primary-500");
+  padding: token("spacing-md");
+}
+```
+
+### SCSS token mixins
+
+Create mixins for common patterns:
+
+```scss
+@mixin spacing($spacing-token) {
+  padding: map-get($ngcorex-tokens, $spacing-token);
+  margin: map-get($ngcorex-tokens, $spacing-token);
+}
+
+.card {
+  @include spacing("spacing-md");
+}
+```
+
+---
+
+## Choosing the right format
+
+### Choose CSS when:
+
+- You want maximum browser support
+- You need runtime theme switching
+- You're not using Sass/SCSS
+- You want the simplest setup
+
+### Choose SCSS Variables when:
+
+- You're using Sass/SCSS
+- You need tokens in SCSS calculations
+- You want to use tokens in mixins
+- You prefer `$variable` syntax
+
+### Choose SCSS Map when:
+
+- You need dynamic token access
+- You want to iterate over tokens
+- You're building SCSS utilities
+- You need `map-get()` functionality
+
+---
+
+## Migration guide
+
+### From CSS to SCSS Variables
+
+1. Update configuration:
+
+```typescript
+output: {
+  format: "scss-variables";
+}
+```
+
+2. Update file extension:
+
+```typescript
+output: {
+  format: 'scss-variables',
+  file: 'src/styles/tokens.scss'
+}
+```
+
+3. Update CSS usage:
+
+```css
+/* Before */
+.button {
+  background: var(--color-primary-500);
+}
+
+/* After */
+.button {
+  background: $color-primary-500;
+}
+```
+
+### From CSS to SCSS Map
+
+1. Update configuration:
+
+```typescript
+output: {
+  format: "scss-map";
+}
+```
+
+2. Update CSS usage:
+
+```css
+/* Before */
+.button {
+  background: var(--color-primary-500);
+}
+
+/* After */
+.button {
+  background: map-get($ngcorex-tokens, "color-primary-500");
+}
+```
+
+---
+
+## Best practices
+
+1. **Match format to your stack** - Use SCSS formats only if you're using Sass
+2. **Consider browser support** - CSS variables have excellent support
+3. **Think about theming** - CSS variables enable runtime theme switching
+4. **Document your choice** - Make it clear which format your project uses
+5. **Stay consistent** - Don't mix formats across your project
+
+---
+
+## Next steps
+
+To learn more:
+
+- [**Design Tokens**](./design-tokens.mdx) - understanding token structure
+- [**Configuration**](./project-structure.mdx) - configuring output format
+- [**CLI Reference**](./cli.mdx) - running builds with different formats

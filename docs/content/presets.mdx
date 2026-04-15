@@ -1,0 +1,310 @@
+# Presets
+
+Presets are pre-configured token sets that provide a quick starting point for your design system.
+
+They allow you to bootstrap a design system with sensible defaults, then customize as needed.
+
+---
+
+## What are presets?
+
+Presets are collections of design tokens that you can apply to your configuration.
+
+Instead of defining every token from scratch, you can:
+
+1. Start with a preset
+2. Override specific values
+3. Add your own tokens
+
+This approach saves time while maintaining the flexibility to customize.
+
+---
+
+## Available presets
+
+### Default preset
+
+The `default` preset provides a minimal but complete starting point:
+
+```json
+{
+  "spacing": {
+    "xs": "0.25rem",
+    "sm": "0.5rem",
+    "md": "1rem",
+    "lg": "1.5rem",
+    "xl": "2rem"
+  },
+  "colors": {
+    "neutral": {
+      "0": "#ffffff",
+      "100": "#f5f5f5",
+      "300": "#d4d4d4",
+      "500": "#737373",
+      "700": "#404040",
+      "900": "#171717"
+    },
+    "primary": {
+      "500": "#2563eb"
+    }
+  }
+}
+```
+
+This preset includes:
+
+- A 5-step spacing scale
+- A neutral color palette with 6 shades
+- A primary color for emphasis
+
+---
+
+## Using presets
+
+### Basic usage
+
+To use a preset, add it to your `ngcorex.config.ts`:
+
+```typescript
+import { defineConfig } from "@ngcorex/css";
+
+export default defineConfig({
+  presets: ["default"],
+  tokens: {
+    // Your custom tokens here
+  },
+});
+```
+
+### Combining with custom tokens
+
+Your custom tokens will override preset tokens:
+
+```typescript
+import { defineConfig } from "@ngcorex/css";
+
+export default defineConfig({
+  presets: ["default"],
+  tokens: {
+    spacing: {
+      xs: "0.5rem", // Overrides default's xs
+      sm: "1rem", // Overrides default's sm
+      md: "1.5rem", // Overrides default's md
+      lg: "2rem", // Overrides default's lg
+      xl: "3rem", // Overrides default's xl
+    },
+    colors: {
+      primary: {
+        100: "#dbeafe",
+        500: "#3b82f6", // Overrides default's primary-500
+        900: "#1e3a8a",
+      },
+    },
+  },
+});
+```
+
+### Adding new categories
+
+You can add token categories that aren't in the preset:
+
+```typescript
+import { defineConfig } from "@ngcorex/css";
+
+export default defineConfig({
+  presets: ["default"],
+  tokens: {
+    spacing: {
+      // Override preset spacing
+    },
+    colors: {
+      // Override preset colors
+    },
+    // Add new categories
+    radius: {
+      sm: "2px",
+      md: "4px",
+      lg: "8px",
+    },
+    shadows: {
+      sm: "0 1px 2px rgba(0,0,0,0.05)",
+      md: "0 4px 6px rgba(0,0,0,0.1)",
+    },
+  },
+});
+```
+
+---
+
+## Multiple presets
+
+You can combine multiple presets (when available):
+
+```typescript
+import { defineConfig } from "@ngcorex/css";
+
+export default defineConfig({
+  presets: ["default", "accessibility"],
+  tokens: {
+    // Your custom tokens
+  },
+});
+```
+
+Presets are applied in order, with later presets overriding earlier ones.
+
+---
+
+## How presets work
+
+### Merge order
+
+When you use presets, tokens are merged in this order:
+
+1. Preset tokens (in order specified)
+2. Your custom tokens
+
+Your tokens always win, allowing you to override any preset value.
+
+### Deep merge
+
+ngCorex uses a deep merge strategy:
+
+```typescript
+// Preset provides
+{
+  colors: {
+    primary: { 500: '#2563eb' }
+  }
+}
+
+// You provide
+{
+  colors: {
+    primary: { 500: '#3b82f6', 900: '#1e3a8a' }
+  }
+}
+
+// Result
+{
+  colors: {
+    primary: { 500: '#3b82f6', 900: '#1e3a8a' }
+  }
+}
+```
+
+This means you can override specific values without losing the rest of the preset.
+
+---
+
+## Creating custom presets
+
+You can create your own presets for sharing across projects.
+
+### Preset structure
+
+A preset is simply a configuration object:
+
+```typescript
+// my-preset.ts
+import type { NgCorexConfig } from "@ngcorex/css";
+
+export const presetMyBrand: NgCorexConfig = {
+  tokens: {
+    spacing: {
+      xs: "0.25rem",
+      sm: "0.5rem",
+      md: "1rem",
+      lg: "1.5rem",
+      xl: "2rem",
+      "2xl": "3rem",
+    },
+    colors: {
+      brand: {
+        50: "#f0f9ff",
+        100: "#e0f2fe",
+        200: "#bae6fd",
+        300: "#7dd3fc",
+        400: "#38bdf8",
+        500: "#0ea5e9",
+        600: "#0284c7",
+        700: "#0369a1",
+        800: "#075985",
+        900: "#0c4a6e",
+      },
+    },
+    radius: {
+      sm: "0.25rem",
+      md: "0.5rem",
+      lg: "1rem",
+      full: "9999px",
+    },
+  },
+};
+```
+
+### Registering a custom preset
+
+To make your preset available, register it in the preset registry:
+
+```typescript
+// packages/css/src/presets/my-preset.ts
+import { presetRegistry } from "./index.js";
+import { presetMyBrand } from "./my-preset.js";
+
+presetRegistry["my-brand"] = presetMyBrand;
+```
+
+Then use it like any other preset:
+
+```typescript
+import { defineConfig } from "@ngcorex/css";
+
+export default defineConfig({
+  presets: ["my-brand"],
+  tokens: {
+    // Your overrides
+  },
+});
+```
+
+---
+
+## When to use presets
+
+Presets are useful when:
+
+- **Starting a new project** - Get up and running quickly
+- **Following design guidelines** - Use company or brand presets
+- **Learning the system** - See working examples of token structures
+- **Sharing standards** - Distribute consistent design tokens across teams
+
+---
+
+## When to avoid presets
+
+Consider not using presets when:
+
+- **You have existing tokens** - Migrate your current design system directly
+- **You need full control** - Define everything from scratch
+- **Your design is unique** - Presets may not match your aesthetic
+
+---
+
+## Preset best practices
+
+1. **Start with presets, then customize** - Don't feel locked into preset values
+2. **Document your overrides** - Keep track of why you changed specific values
+3. **Version your custom presets** - Track changes as your design evolves
+4. **Share across teams** - Use custom presets to maintain consistency
+5. **Combine with extends** - Use presets for base tokens, extends for project-specific tokens
+
+---
+
+## Next steps
+
+To learn more:
+
+- [**Design Tokens**](./design-tokens.mdx) - understanding token categories and structure
+- [**Extends**](./extends.mdx) - inheriting from base token files
+- [**Configuration**](./project-structure.mdx) - configuring presets in ngcorex.config.ts
