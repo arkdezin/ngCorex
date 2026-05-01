@@ -19,7 +19,7 @@ All processing remains build-time only.
 Inside an Angular project:
 
 ```bash
-npx ng add @ngcorex/angular
+ng add @ngcorex/angular
 ```
 
 ---
@@ -92,7 +92,7 @@ This ensures generated CSS is included in Angular builds.
 
 ---
 
-## First-Time Setup
+## Initialize Package
 
 After installation, you have two options:
 
@@ -113,7 +113,6 @@ Alternatively, you can use the watch mode for development:
 
 ```bash
 npm run ngcorex:dev
-ng serve
 ```
 
 This will:
@@ -121,9 +120,9 @@ This will:
 1. Install ngCorex dependencies
 2. Generate `ngcorex.config.ts`
 3. Generate `tokens.json`
-3. Generate `src/styles/ngcorex.css`
-4. Start watching for changes to `tokens.json` and `ngcorex.config.ts`
-5. Auto-rebuild CSS whenever tokens are modified
+4. Generate `src/styles/ngcorex.css`
+5. Start watching for changes to `tokens.json` and `ngcorex.config.ts`
+6. Auto-rebuild CSS whenever tokens are modified
 
 ### Manual Setup
 
