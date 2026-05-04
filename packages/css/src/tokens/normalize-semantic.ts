@@ -2,10 +2,10 @@ import type { NormalizedTokenGroup } from './types.js';
 import type { SemanticTokensConfig } from '../config/schema.js';
 import { NgCorexError, NgCorexErrorCode } from '../errors/ngcorex-error.js';
 
-const CSS_VAR_PREFIX = 'nx';
+const CSS_VAR_PREFIX = 'crx';
 
 /**
- * Resolve a token reference like "$colors.primary.500" to "var(--nx-color-primary-500)"
+ * Resolve a token reference like "$colors.primary.500" to "var(--crx-color-primary-500)"
  *
  * Strategy: convert the reference path to a dash-separated name, then search
  * allTokens for a token whose `name` field matches. Handles the colors → color
@@ -65,7 +65,7 @@ Example: "$colors.primary.500" requires colors.primary.500 to be defined.`
  *   { surface: { background: '$colors.neutral.50' } }
  *
  * Output:
- *   { 'surface-background': { name: 'surface-background', cssVariable: '--nx-surface-background', value: 'var(--nx-color-neutral-50)' } }
+ *   { 'surface-background': { name: 'surface-background', cssVariable: '--crx-surface-background', value: 'var(--crx-color-neutral-50)' } }
  */
 export function normalizeSemanticTokens(
   semantic: SemanticTokensConfig,

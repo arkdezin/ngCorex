@@ -10,8 +10,8 @@ export default defineNgCorexConfig({
     file: 'src/styles/ngcorex.css',
 
     // Output format. Options: 'css' (default) | 'scss-variables' | 'scss-map'
-    // - 'css'            → standard CSS custom properties (:root { --nx-spacing-sm: ... })
-    // - 'scss-variables' → SCSS variables ($nx-spacing-sm: ...)
+    // - 'css'            → standard CSS custom properties (:root { --crx-spacing-sm: ... })
+    // - 'scss-variables' → SCSS variables ($crx-spacing-sm: ...)
     // - 'scss-map'       → SCSS map ($ngcorex-tokens: ('spacing-sm': ...))
     // format: 'css',
 

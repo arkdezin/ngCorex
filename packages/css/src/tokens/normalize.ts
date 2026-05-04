@@ -2,7 +2,7 @@ import type { TokenScale, NormalizedTokenGroup } from './types.ts';
 import { NgCorexError, NgCorexErrorCode } from '../errors/ngcorex-error.js';
 
 
-const CSS_VAR_PREFIX = 'nx';
+const CSS_VAR_PREFIX = 'crx';
 
 /**
  * Normalize a single token scale (e.g. spacing, radius)

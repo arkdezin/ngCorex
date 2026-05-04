@@ -2,7 +2,7 @@ import type { NormalizedTokenGroup } from './types.js';
 
 /**
  * Convert CSS variable name to SCSS variable name
- * --nx-spacing-sm → $nx-spacing-sm
+ * --crx-spacing-sm → $crx-spacing-sm
  */
 function toScssVar(cssVariable: string): string {
   return cssVariable.replace(/^--/, '$');
@@ -12,8 +12,8 @@ function toScssVar(cssVariable: string): string {
  * Generate SCSS variables from normalized tokens
  *
  * Output:
- * $nx-spacing-sm: 8px;
- * $nx-color-primary-500: #3b82f6;
+ * $crx-spacing-sm: 8px;
+ * $crx-color-primary-500: #3b82f6;
  */
 export function generateScssVariables(
   tokens: NormalizedTokenGroup

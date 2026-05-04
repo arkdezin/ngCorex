@@ -351,51 +351,51 @@ Example output:
 @layer tokens {
   :root {
     /* Spacing */
-    --nx-spacing-xs: 0.25rem;
-    --nx-spacing-sm: 0.5rem;
-    --nx-spacing-md: 1rem;
-    --nx-spacing-lg: 1.5rem;
-    --nx-spacing-xl: 2rem;
+    --crx-spacing-xs: 0.25rem;
+    --crx-spacing-sm: 0.5rem;
+    --crx-spacing-md: 1rem;
+    --crx-spacing-lg: 1.5rem;
+    --crx-spacing-xl: 2rem;
 
     /* Colors */
-    --nx-color-neutral-0: #ffffff;
-    --nx-color-neutral-100: #f5f5f5;
-    --nx-color-neutral-500: #737373;
-    --nx-color-neutral-900: #171717;
-    --nx-color-primary-500: #2563eb;
+    --crx-color-neutral-0: #ffffff;
+    --crx-color-neutral-100: #f5f5f5;
+    --crx-color-neutral-500: #737373;
+    --crx-color-neutral-900: #171717;
+    --crx-color-primary-500: #2563eb;
 
     /* Radius */
-    --nx-radius-sm: 0.25rem;
-    --nx-radius-md: 0.5rem;
-    --nx-radius-lg: 0.75rem;
-    --nx-radius-xl: 1rem;
-    --nx-radius-full: 9999px;
+    --crx-radius-sm: 0.25rem;
+    --crx-radius-md: 0.5rem;
+    --crx-radius-lg: 0.75rem;
+    --crx-radius-xl: 1rem;
+    --crx-radius-full: 9999px;
 
     /* Z-Index */
-    --nx-zIndex-base: 0;
-    --nx-zIndex-dropdown: 1000;
-    --nx-zIndex-modal: 1050;
-    --nx-zIndex-tooltip: 1070;
+    --crx-zIndex-base: 0;
+    --crx-zIndex-dropdown: 1000;
+    --crx-zIndex-modal: 1050;
+    --crx-zIndex-tooltip: 1070;
 
     /* Typography */
-    --nx-fontSize-xs: 0.75rem;
-    --nx-fontSize-base: 1rem;
-    --nx-fontSize-xl: 1.25rem;
-    --nx-fontSize-3xl: 1.875rem;
-    --nx-fontWeight-normal: 400;
-    --nx-fontWeight-bold: 700;
-    --nx-lineHeight-normal: 1.5;
-    --nx-lineHeight-loose: 2;
+    --crx-fontSize-xs: 0.75rem;
+    --crx-fontSize-base: 1rem;
+    --crx-fontSize-xl: 1.25rem;
+    --crx-fontSize-3xl: 1.875rem;
+    --crx-fontWeight-normal: 400;
+    --crx-fontWeight-bold: 700;
+    --crx-lineHeight-normal: 1.5;
+    --crx-lineHeight-loose: 2;
 
     /* Shadows */
-    --nx-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --nx-shadow-base:
+    --crx-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --crx-shadow-base:
       0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --nx-shadow-md:
+    --crx-shadow-md:
       0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --nx-shadow-lg:
+    --crx-shadow-lg:
       0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --nx-shadow-xl:
+    --crx-shadow-xl:
       0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   }
 }

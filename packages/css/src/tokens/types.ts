@@ -7,7 +7,7 @@ export type NestedTokenScale = Record<string, TokenScale>;
 // Normalized token structure
 export interface NormalizedToken {
   name: string;        // e.g. color-primary-500
-  cssVariable: string; // e.g. --nx-color-primary-500
+  cssVariable: string; // e.g. --crx-color-primary-500
   value: string;       // e.g. #6366f1
 }
 
