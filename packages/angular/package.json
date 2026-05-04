@@ -23,7 +23,15 @@
     "collection.json"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json && copy src\\ng-add\\schema.json dist\\ng-add\\schema.json"
+    "build": "tsc -p tsconfig.json && copy src\\ng-add\\schema.json dist\\ng-add\\schema.json && copy src\\ng-update\\schema.json dist\\ng-update\\schema.json"
+  },
+  "ng-update": {
+    "packageGroup": [
+      "@ngcorex/angular",
+      "@ngcorex/cli",
+      "@ngcorex/css"
+    ],
+    "migrations": "./collection.json"
   },
   "engines": {
     "node": ">=18"

@@ -7,6 +7,11 @@
       "externalDependencies": [
         "@ngcorex/cli"
       ]
+    },
+    "ng-update": {
+      "description": "Update ngCorex to the latest version",
+      "factory": "./dist/ng-update/index.js#ngUpdate",
+      "schema": "./dist/ng-update/schema.json"
     }
   }
 }

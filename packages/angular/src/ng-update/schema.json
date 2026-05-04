@@ -1,0 +1,17 @@
+{
+  "$id": "ngcorex-ng-update",
+  "title": "ngCorex ng-update options",
+  "type": "object",
+  "properties": {
+    "skipInstall": {
+      "type": "boolean",
+      "default": false,
+      "description": "Skip running npm install after updating dependencies"
+    },
+    "skipBuild": {
+      "type": "boolean",
+      "default": false,
+      "description": "Skip running ngcorex build after update"
+    }
+  }
+}
