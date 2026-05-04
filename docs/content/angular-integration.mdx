@@ -21,7 +21,7 @@ All processing remains **build-time only**.
 Inside an Angular project:
 
 ```bash
-npx ng add @ngcorex/angular
+ng add @ngcorex/angular
 ```
 
 ---
@@ -130,7 +130,6 @@ Alternatively, you can use the watch mode for development:
 
 ```bash
 npm run ngcorex:dev
-ng serve
 ```
 
 This will:
@@ -138,16 +137,15 @@ This will:
 1. Install ngCorex dependencies
 2. Generate `ngcorex.config.ts`
 3. Generate `tokens.json`
-3. Generate `src/styles/ngcorex.css`
-4. Start watching for changes to `tokens.json` and `ngcorex.config.ts`
-5. Auto-rebuild CSS whenever tokens are modified
+4. Generate `src/styles/ngcorex.css`
+5. Start watching for changes to `tokens.json` and `ngcorex.config.ts`
+6. Auto-rebuild CSS whenever tokens are modified
 
 ### Manual Setup
 
 ```bash
 npm run ngcorex:init
 npm run ngcorex:build
-ng serve
 ```
 
 This will:
@@ -193,8 +191,8 @@ The Angular adapter minor version matches the core engine minor version.
 Example:
 
 ```
-@ngcorex/css@0.2.x
-@ngcorex/angular@0.2.x
+@ngcorex/css@0.3.x
+@ngcorex/angular@0.3.x
 ```
 
 This ensures:

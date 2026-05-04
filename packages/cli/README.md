@@ -1,6 +1,6 @@
 # @ngcorex/cli
 
-![NPM Version](https://img.shields.io/npm/v/%40ngcorex%2Fcli?style=flat-square&logo=npm&labelColor=%23D50100&color=%23000) ![NPM License](https://img.shields.io/npm/l/%40ngcorex%2Fcli?style=flat-square) ![Static Badge](https://img.shields.io/badge/Github-Repo-blue?style=flat-square&logo=github) ![NPM Downloads](https://img.shields.io/npm/dm/%40ngcorex%2Fcli?style=flat-square&logo=npm&logoColor=%23ffffff&labelColor=%23D50100&color=%23000) ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/arkdezin/ngcorex)
+![NPM Version](https://img.shields.io/npm/v/%40ngcorex%2Fcli?style=flat-square&logo=npm&labelColor=%23D50100&color=%23000) ![NPM License](https://img.shields.io/npm/l/%40ngcorex%2Fcli?style=flat-square) ![Static Badge](https://img.shields.io/badge/Github-Repo-blue?style=flat-square&logo=github) ![NPM Downloads](https://img.shields.io/npm/dm/%40ngcorex%2Fcli?style=flat-square&logo=npm&logoColor=%23ffffff&labelColor=%23D50100&color=%23000) ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/arkdezin/ngcorex) [![Socket Badge](https://badge.socket.dev/npm/package/@ngcorex/cli/0.3.0)](https://badge.socket.dev/npm/package/@ngcorex/cli/0.3.0)
 
 Command-line interface for **ngCorex**.
 
@@ -54,7 +54,7 @@ This will create:
 
 If the files already exist, they will not be overwritten.
 
-***Or Create files manually:***
+**_Or Create files manually:_**
 
 ### Create tokens.json
 
@@ -142,70 +142,70 @@ Create a `tokens.json` file at your project root:
 
 ngCorex supports the following design token categories:
 
-| Category | Description | Example Values |
-| ---------- | ------------- | ---------------- |
-| `spacing` | Spacing scale for margins, padding, gaps | `"4px"`, `"1rem"`, `"0.5em"` |
-| `colors` | Color palette with nested shades | `"#f3f4f6"`, `"rgb(37, 99, 235)"` |
-| `radius` | Border radius values | `"4px"`, `"8px"`, `"16px"`, `"full"` |
-| `zIndex` | Z-index layer values | `"1000"`, `"2000"`, `"3000"` |
-| `typography` | Font properties (fontSize, fontWeight, lineHeight) | See below |
-| `shadows` | Box shadow values | `"0 1px 2px 0 rgba(0,0,0,0.05)"` |
+| Category     | Description                                        | Example Values                       |
+| ------------ | -------------------------------------------------- | ------------------------------------ |
+| `spacing`    | Spacing scale for margins, padding, gaps           | `"4px"`, `"1rem"`, `"0.5em"`         |
+| `colors`     | Color palette with nested shades                   | `"#f3f4f6"`, `"rgb(37, 99, 235)"`    |
+| `radius`     | Border radius values                               | `"4px"`, `"8px"`, `"16px"`, `"full"` |
+| `zIndex`     | Z-index layer values                               | `"1000"`, `"2000"`, `"3000"`         |
+| `typography` | Font properties (fontSize, fontWeight, lineHeight) | See below                            |
+| `shadows`    | Box shadow values                                  | `"0 1px 2px 0 rgba(0,0,0,0.05)"`     |
 
 #### Typography Sub-categories
 
-| Sub-category | Description | Example Values |
-| ------------- | ------------- | ---------------- |
-| `fontSize` | Font size values | `"0.75rem"`, `"16px"`, `"1.25em"` |
+| Sub-category | Description        | Example Values                      |
+| ------------ | ------------------ | ----------------------------------- |
+| `fontSize`   | Font size values   | `"0.75rem"`, `"16px"`, `"1.25em"`   |
 | `fontWeight` | Font weight values | `"400"`, `"500"`, `"bold"`, `"700"` |
-| `lineHeight` | Line height values | `"1.25"`, `"1.5"`, `"1.75"` |
+| `lineHeight` | Line height values | `"1.25"`, `"1.5"`, `"1.75"`         |
 
 ### Constraint Configuration
 
 You can configure constraint levels in your `ngcorex.config.ts`:
 
 ```ts
-import { defineNgCorexConfig } from '@ngcorex/css';
+import { defineNgCorexConfig } from "@ngcorex/css";
 
 export default defineNgCorexConfig({
   constraints: {
     spacing: {
-      unit: 'warning',  // Warn about unitless numbers
-      format: 'error',   // Error on invalid formats
-      type: 'error'      // Error on wrong types
+      unit: "warning", // Warn about unitless numbers
+      format: "error", // Error on invalid formats
+      type: "error", // Error on wrong types
     },
     colors: {
-      format: 'error',
-      shadeKey: 'error',
-      type: 'error'
+      format: "error",
+      shadeKey: "error",
+      type: "error",
     },
     radius: {
-      unit: 'warning',
-      format: 'error',
-      type: 'error'
+      unit: "warning",
+      format: "error",
+      type: "error",
     },
     zIndex: {
-      format: 'error',
-      type: 'error'
+      format: "error",
+      type: "error",
     },
     typography: {
       fontSize: {
-        format: 'error',
-        type: 'error'
+        format: "error",
+        type: "error",
       },
       fontWeight: {
-        format: 'error',
-        type: 'error'
+        format: "error",
+        type: "error",
       },
       lineHeight: {
-        format: 'error',
-        type: 'error'
-      }
+        format: "error",
+        type: "error",
+      },
     },
     shadows: {
-      format: 'error',
-      type: 'error'
-    }
-  }
+      format: "error",
+      type: "error",
+    },
+  },
 });
 ```
 
@@ -216,13 +216,13 @@ Available constraint levels: `'error'`, `'warning'`, `'off'`.
 You can optionally wrap generated CSS in a CSS layer for better organization and specificity control:
 
 ```ts
-import { defineNgCorexConfig } from '@ngcorex/css';
+import { defineNgCorexConfig } from "@ngcorex/css";
 
 export default defineNgCorexConfig({
   output: {
-    layer: 'tokens',  // Wraps CSS in @layer tokens { ... }
-    file: 'src/styles/ngcorex.css'
-  }
+    layer: "tokens", // Wraps CSS in @layer tokens { ... }
+    file: "src/styles/ngcorex.css",
+  },
 });
 ```
 
@@ -235,12 +235,12 @@ The CLI expects a file named:
 Create a `ngcorex.config.ts` file at your project root:
 
 ```ts
-import { defineNgCorexConfig } from '@ngcorex/css';
+import { defineNgCorexConfig } from "@ngcorex/css";
 
 export default defineNgCorexConfig({
   output: {
-    file: 'src/styles/ngcorex.css'
-  }
+    file: "src/styles/ngcorex.css",
+  },
 });
 ```
 
@@ -250,9 +250,9 @@ In case you want to output in layer
 ```ts
 export default defineNgCorexConfig({
   output: {
-    layer: 'layer-name',
-    file: 'src/styles/ngcorex.css'
-  }
+    layer: "layer-name",
+    file: "src/styles/ngcorex.css",
+  },
 });
 ```
 
@@ -389,10 +389,14 @@ Example output:
 
     /* Shadows */
     --nx-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --nx-shadow-base: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --nx-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --nx-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --nx-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --nx-shadow-base:
+      0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --nx-shadow-md:
+      0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --nx-shadow-lg:
+      0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --nx-shadow-xl:
+      0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   }
 }
 ```

@@ -17,7 +17,7 @@ const navbar = (
     // ... Your additional navbar options
   />
 )
-const footer = <Footer>MIT {new Date().getFullYear()} © ngCorex. All rights reserved.</Footer>
+const footer = <Footer>MIT {new Date().getFullYear()} &copy; ngCorex. All rights reserved.</Footer>
  
 export default async function RootLayout({ children }) {
   return (
