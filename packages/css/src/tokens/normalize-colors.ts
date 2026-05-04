@@ -4,7 +4,7 @@ import type {
 } from './types.js';
 import { NgCorexError, NgCorexErrorCode } from '../errors/ngcorex-error.js';
 
-const CSS_VAR_PREFIX = 'nx';
+const CSS_VAR_PREFIX = 'crx';
 
 /**
  * Normalize nested color tokens (e.g. primary.500)
